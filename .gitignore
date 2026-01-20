@@ -53,6 +53,9 @@
 !.config/scripts/
 !.config/scripts/install.sh
 
+# README
+!.config/README.md
+
 # ============================================
 # ALWAYS IGNORED (Security & Privacy)
 # ============================================

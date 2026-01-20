@@ -1,0 +1,63 @@
+[user]
+	name = Alesana Eteuati Jr
+	email = junior.eteuati@gmail.com
+[fetch]
+	prune = true
+[alias]
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  st = status -s
+  ad = add
+  aa = add -A
+  au = add -u
+  co = commit -m
+  cam = commit -am
+  ca = commit --amend
+  sw = switch
+  swc = switch -c
+  br = branch
+  d = diff --word-diff
+  dc = diff --cached
+  diff = diff --word-diff
+	cleanup = !git fetch origin && git reset --hard origin/main && git clean -f -d
+  ps = push
+  pu = pull
+  pf = push --force
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = input
+[push]
+	autoSetupRemote = true
+[safe]
+	directory = /opt/flutter
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[add "interactive"]
+	useBuiltin = false
+[include]
+    path = ./config.local
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

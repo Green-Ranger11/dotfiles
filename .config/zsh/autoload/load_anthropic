@@ -1,0 +1,16 @@
+unlock_bw_if_locked() {
+  if [[ -z $BW_SESSION ]] ; then
+    >&2 echo 'bw locked - unlocking into a new session'
+    export BW_SESSION="$(bw unlock --raw)"
+  fi
+}
+
+load_anthropic() {
+  unlock_bw_if_locked
+  local -r anthropic_id='1c382f2b-8423-4f7b-81fb-b28e0013a9dc'
+  local anthropic_key
+  anthropic_key="$(bw get notes $anthropic_id)"
+  export ANTHROPIC_API_KEY="$anthropic_key"
+}
+
+load_anthropic "$@"

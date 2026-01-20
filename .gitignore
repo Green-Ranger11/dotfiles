@@ -1,0 +1,117 @@
+# Dotfiles .gitignore - Whitelist approach
+# Ignore everything by default, explicitly whitelist tracked configs
+
+# Ignore everything
+*
+
+# ============================================
+# WHITELISTED CONFIGS
+# ============================================
+
+# This gitignore file
+!.gitignore
+
+# Tier 1 - Critical
+!.config/
+!.config/zsh/
+!.config/zsh/.zshrc
+!.config/zsh/autoload/
+!.config/zsh/autoload/**
+!.config/starship.toml
+!.config/git/
+!.config/git/config
+!.config/nvim/
+!.config/nvim/**
+!.config/kitty/
+!.config/kitty/**
+
+# Tier 2 - Desktop Environment
+!.config/hypr/
+!.config/hypr/**
+!.config/i3/
+!.config/i3/**
+!.config/waybar/
+!.config/waybar/**
+!.config/rofi/
+!.config/rofi/**
+!.config/dunst/
+!.config/dunst/dunstrc
+
+# Tier 3 - Tools
+!.config/tmux/
+!.config/tmux/tmux.conf
+!.config/yazi/
+!.config/yazi/**
+!.config/btop/
+!.config/btop/**
+!.config/fastfetch/
+!.config/fastfetch/**
+!.config/bottom/
+!.config/bottom/bottom.toml
+
+# Install script
+!.config/scripts/
+!.config/scripts/install.sh
+
+# ============================================
+# ALWAYS IGNORED (Security & Privacy)
+# ============================================
+
+# SSH keys and config
+.ssh/
+
+# GPG keys
+.gnupg/
+
+# Credentials and secrets
+**/*credentials*
+**/*secret*
+**/*.pem
+**/*.key
+**/*.env
+**/.env*
+
+# Browser data
+.mozilla/
+.config/chromium/
+.config/google-chrome/
+.config/BraveSoftware/
+
+# Cache directories
+.cache/
+**/.cache/
+**/cache/
+**/*cache*/
+
+# History files
+.*_history
+.bash_history
+.zsh_history
+.python_history
+.node_repl_history
+
+# Tokens and auth
+**/*token*
+**/.auth*
+**/auth.json
+
+# Package managers
+node_modules/
+.npm/
+.yarn/
+.cargo/
+.rustup/
+.local/
+.gem/
+
+# IDE/Editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+*.orig

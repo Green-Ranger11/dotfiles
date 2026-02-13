@@ -1,0 +1,77 @@
+# skhd Configuration
+# Migrated from Hyprland/AeroSpace keybindings
+# Using ctrl + alt as main modifier (equivalent to SUPER on Linux)
+
+# ===== Window Management =====
+ctrl + alt - q : yabai -m window --close
+ctrl + alt - v : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
+
+# ===== Focus Movement (vim keys) =====
+ctrl + alt - h : yabai -m window --focus west
+ctrl + alt - j : yabai -m window --focus south
+ctrl + alt - k : yabai -m window --focus north
+ctrl + alt - l : yabai -m window --focus east
+
+# ===== Focus Movement (arrow keys) =====
+ctrl + alt - left  : yabai -m window --focus west
+ctrl + alt - down  : yabai -m window --focus south
+ctrl + alt - up    : yabai -m window --focus north
+ctrl + alt - right : yabai -m window --focus east
+
+# ===== Move Windows (vim keys) =====
+ctrl + alt + shift - h : yabai -m window --swap west
+ctrl + alt + shift - j : yabai -m window --swap south
+ctrl + alt + shift - k : yabai -m window --swap north
+ctrl + alt + shift - l : yabai -m window --swap east
+
+# ===== Switch Spaces =====
+ctrl + alt - 1 : yabai -m space --focus 1
+ctrl + alt - 2 : yabai -m space --focus 2
+ctrl + alt - 3 : yabai -m space --focus 3
+ctrl + alt - 4 : yabai -m space --focus 4
+ctrl + alt - 5 : yabai -m space --focus 5
+ctrl + alt - 6 : yabai -m space --focus 6
+ctrl + alt - 7 : yabai -m space --focus 7
+ctrl + alt - 8 : yabai -m space --focus 8
+ctrl + alt - 9 : yabai -m space --focus 9
+ctrl + alt - 0 : yabai -m space --focus 10
+
+# ===== Move Window to Space and Follow =====
+ctrl + alt + shift - 1 : yabai -m window --space 1; yabai -m space --focus 1
+ctrl + alt + shift - 2 : yabai -m window --space 2; yabai -m space --focus 2
+ctrl + alt + shift - 3 : yabai -m window --space 3; yabai -m space --focus 3
+ctrl + alt + shift - 4 : yabai -m window --space 4; yabai -m space --focus 4
+ctrl + alt + shift - 5 : yabai -m window --space 5; yabai -m space --focus 5
+ctrl + alt + shift - 6 : yabai -m window --space 6; yabai -m space --focus 6
+ctrl + alt + shift - 7 : yabai -m window --space 7; yabai -m space --focus 7
+ctrl + alt + shift - 8 : yabai -m window --space 8; yabai -m space --focus 8
+ctrl + alt + shift - 9 : yabai -m window --space 9; yabai -m space --focus 9
+ctrl + alt + shift - 0 : yabai -m window --space 10; yabai -m space --focus 10
+
+# ===== Layout Controls =====
+ctrl + alt - 0x2F : yabai -m space --layout bsp    # / key - BSP layout
+ctrl + alt - 0x2B : yabai -m space --layout stack  # , key - Stack layout
+
+# ===== Resize Mode (using direct keys) =====
+ctrl + alt - r : skhd -k "escape"; \
+                 yabai -m window --resize left:-50:0 2>/dev/null || \
+                 yabai -m window --resize right:-50:0
+
+# Resize with = and -
+ctrl + alt - 0x18 : yabai -m window --resize right:50:0 2>/dev/null || \
+                    yabai -m window --resize left:50:0   # = key
+ctrl + alt - 0x1B : yabai -m window --resize left:-50:0 2>/dev/null || \
+                    yabai -m window --resize right:-50:0 # - key
+
+# ===== Rotate/Balance =====
+ctrl + alt - e : yabai -m space --balance
+ctrl + alt - t : yabai -m space --rotate 270
+
+# ===== Service Commands =====
+ctrl + alt + shift - r : yabai --restart-service; skhd --restart-service
+
+# ===== Fullscreen =====
+ctrl + alt - f : yabai -m window --toggle zoom-fullscreen
+
+# ===== Toggle Split Direction =====
+ctrl + alt - s : yabai -m window --toggle split

@@ -1,0 +1,68 @@
+#!/usr/bin/env sh
+
+# Yabai Configuration
+# Migrated from Hyprland/AeroSpace config
+
+# ===== Scripting Addition =====
+# For advanced features (requires SIP partially disabled)
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# ===== Tiling Settings =====
+yabai -m config layout bsp
+yabai -m config auto_balance off
+
+# ===== Window Settings =====
+yabai -m config window_placement second_child
+yabai -m config split_ratio 0.50
+
+# ===== Animations (Hyprland-style) =====
+# Smooth window frame animation (move/resize) — requires SIP disabled + Screen Recording
+yabai -m config window_animation_duration 0.30
+yabai -m config window_animation_easing ease_out_quint
+
+# Opacity (disabled — no transparency)
+yabai -m config window_opacity off
+
+# Window shadows for depth
+yabai -m config window_shadow float
+
+# ===== Gaps (matching Hyprland: gaps_in=10, gaps_out=20) =====
+# yabai -m config top_padding 10 # Extra for sketchybar
+# yabai -m config bottom_padding 30
+yabai -m config left_padding 35
+yabai -m config right_padding 35
+yabai -m config window_gap 25
+yabai -m config external_bar all:60:20
+
+# ===== Mouse Settings =====
+yabai -m config mouse_follows_focus on
+yabai -m config focus_follows_mouse autofocus
+yabai -m config mouse_modifier ctrl
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
+
+# ===== Window Rules =====
+# Float system preferences and other non-tileable apps
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^Simulator$" manage=off
+yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add app="^Alfred Preferences$" manage=off
+yabai -m rule --add app="^1Password$" manage=off
+
+# ===== Signals for SketchyBar =====
+# Notify sketchybar when space or window changes
+yabai -m signal --add event=space_changed action="sketchybar --trigger space_change"
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+# ===== Borders (using JankyBorders) =====
+borders active_color=0xffb4befe inactive_color=0xff313244 width=6.0 &
+
+echo "yabai configuration loaded..."

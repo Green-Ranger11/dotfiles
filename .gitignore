@@ -37,6 +37,19 @@
 !.config/dunst/
 !.config/dunst/dunstrc
 
+# Tier 2b - macOS Desktop Environment
+!.config/yabai/
+!.config/yabai/yabairc
+!.config/sketchybar/
+!.config/sketchybar/**
+!.config/skhd/
+!.config/skhd/skhdrc
+!.config/borders/
+!.config/borders/bordersrc
+
+# Exclude compiled binaries in sketchybar
+.config/sketchybar/helpers/menus/bin/
+
 # Tier 3 - Tools
 !.config/tmux/
 !.config/tmux/tmux.conf

@@ -67,7 +67,7 @@
 !.config/scripts/install.sh
 
 # README
-!.config/README.md
+!README.md
 
 # ============================================
 # ALWAYS IGNORED (Security & Privacy)

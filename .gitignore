@@ -36,6 +36,8 @@
 !.config/rofi/**
 !.config/dunst/
 !.config/dunst/dunstrc
+!.config/swaync/
+!.config/swaync/**
 
 # Tier 2b - macOS Desktop Environment
 !.config/yabai/

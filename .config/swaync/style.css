@@ -1,0 +1,401 @@
+/* catppuccin mocha */
+
+@define-color rosewater     #f5e0dc;
+@define-color flamingo      #f2cdcd;
+@define-color pink          #f5c2e7;
+@define-color mauve         #cba6f7;
+@define-color red           #f38ba8;
+@define-color maroon        #eba0ac;
+@define-color peach         #fab387;
+@define-color yellow        #f9e2af;
+@define-color green         #a6e3a1;
+@define-color teal          #94e2d5;
+@define-color sky           #89dceb;
+@define-color sapphire      #74c7ec;
+@define-color blue          #89b4fa;
+@define-color lavender      #b4befe;
+@define-color text          #cdd6f4;
+@define-color subtext1      #bac2de;
+@define-color subtext0      #a6adc8;
+@define-color overlay2      #9399b2;
+@define-color overlay1      #7f849c;
+@define-color overlay0      #6c7086;
+@define-color surface2      #585b70;
+@define-color surface1      #45475a;
+@define-color surface0      #313244;
+@define-color base          #1e1e2e;
+@define-color mantle        #181825;
+@define-color crust         #11111b;
+
+/* semantic aliases */
+
+@define-color accent        @mauve;
+@define-color center-bg     alpha(@base, 0.9);
+@define-color bg            @base;
+@define-color bg-alt        @mantle;
+@define-color fg            @text;
+@define-color fg-alt        @overlay1;
+@define-color selected      alpha(@mauve, 0.4);
+@define-color hover         alpha(@mauve, 0.2);
+@define-color urgent        @red;
+
+/*
+    Spacing matches Hyprland:
+    gaps_out = 20, gaps_in = 10, border_size = 2, rounding = 1
+*/
+
+* {
+    font-family: "CommitMono Nerd Font", "Symbols Nerd Font", monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: @fg;
+    transition: 200ms;
+}
+
+/* --------------------
+    popup notifications
+-------------------- */
+
+.notification-background {
+    background: @bg;
+    border: 2px solid @accent;
+    border-radius: 1px;
+    box-shadow: none;
+    margin: 30px 30px 10px 20px;
+}
+
+.notification {
+    background: transparent;
+    padding: 0 5px;
+    border-radius: 1px;
+    border: none;
+    color: @fg;
+}
+
+.notification-row .inline-reply-entry {
+    padding: 5px 10px;
+    background: @bg-alt;
+    border-radius: 1px;
+}
+
+.notification-row .inline-reply-button {
+    padding: 5px 10px;
+    border-radius: 1px;
+    background: @hover;
+}
+
+.notification-row .inline-reply .inline-reply-button:hover {
+    background: @selected;
+}
+
+.notification .notification-content {
+    margin: 10px;
+}
+
+.notification-content .text-box {
+    margin: 0 0 0 15px;
+}
+
+.notification-content .time {
+    font-size: 0.95rem;
+    padding: 2px 0;
+    font-weight: 800;
+}
+
+.notification .summary {
+    font-weight: 800;
+    margin-bottom: 2px;
+    padding: 2px 0;
+    font-size: 1rem;
+}
+
+.notification .body {
+    color: @fg-alt;
+    font-size: 0.8rem;
+}
+
+.notification.critical .notification-background,
+.notification.critical {
+    border-color: @urgent;
+}
+
+.notification.low progress,
+.notification.normal progress,
+.notification.critical progress {
+    background: @selected;
+}
+
+.notification-background .close-button {
+    margin: 6px;
+    padding: 2px;
+    border-radius: 1px;
+    background: transparent;
+}
+
+.notification-background .close-button:hover {
+    background: @hover;
+}
+
+.notification > *:last-child > * {
+    min-height: 3.2em;
+}
+
+.notification > *:last-child > * .notification-action {
+    background: @hover;
+    margin: 0 6px 9px 6px;
+    border-radius: 1px;
+}
+
+.notification > *:last-child > * .notification-action:hover {
+    background: @selected;
+}
+
+.notification > *:last-child > * .notification-action:active {
+    background: @selected;
+}
+
+/* --------------------
+    control center
+-------------------- */
+
+.control-center {
+    background: @center-bg;
+    border: 2px solid @accent;
+    border-radius: 1px;
+    margin: 30px 30px 80px 20px;
+    padding: 12px;
+}
+
+.control-center .notification-background {
+    background: @bg-alt;
+    border: 2px solid @surface1;
+    border-radius: 1px;
+    margin: 10px 0;
+}
+
+.control-center .notification-background .close-button,
+.notification-group-close-button {
+    opacity: 0;
+}
+
+.notification-group {
+    margin: 0px 8px;
+}
+
+.notification-group-headers {
+    font-weight: bold;
+    color: @fg;
+}
+
+.notification-group-headers > label {
+    margin: 0 3px;
+    font-size: 1rem;
+}
+
+.notification-group-icon {
+    color: @fg;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+    background: transparent;
+    color: @fg;
+    margin: 4px;
+    border-radius: 1px;
+    padding: 4px;
+}
+
+/* --------------------
+    dnd toggle
+-------------------- */
+
+.widget-dnd {
+    padding: 8px 14px;
+    border-radius: 1px;
+    margin: 10px 0 5px 0;
+    color: @fg;
+    background: @bg-alt;
+    border: 2px solid @surface1;
+}
+
+.widget-dnd > label {
+    font-size: 1rem;
+}
+
+.widget-dnd switch {
+    background: @hover;
+    border-radius: 1px;
+    box-shadow: none;
+    padding: 2px;
+}
+
+.widget-dnd switch slider {
+    background: @fg;
+    border-radius: 1px;
+}
+
+/* --------------------
+    volume / backlight
+-------------------- */
+
+.widget-volume,
+.widget-backlight {
+    padding: 8px 14px;
+    margin: 5px 0;
+    border-radius: 1px;
+    color: @fg;
+    font-weight: 800;
+    background: @bg-alt;
+    border: 2px solid @surface1;
+}
+
+.widget-volume label,
+.widget-backlight label {
+    font-size: 1.1rem;
+    font-family: "CommitMono Nerd Font", "Symbols Nerd Font", monospace;
+}
+
+.widget-volume slider,
+.widget-backlight slider {
+    margin: -8px;
+    background: @fg;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), 0 4px 4px rgba(0, 0, 0, 0.4);
+    opacity: 1;
+}
+
+.widget-volume trough,
+.widget-backlight trough {
+    background: @hover;
+    margin-left: 8px;
+    border-radius: 1px;
+}
+
+.widget-volume highlight,
+.widget-backlight highlight {
+    padding: 3.5px;
+    border-radius: 1px;
+    background: @fg;
+}
+
+/* --------------------
+    hover states
+-------------------- */
+
+.widget-dnd switch:hover,
+.widget-buttons-grid button:hover,
+.control-center .notification-group-collapse-button:hover,
+.control-center .notification-group-close-all-button:hover {
+    background: @hover;
+}
+
+/* --------------------
+    mpris widget
+-------------------- */
+
+.widget-mpris {
+    background: @bg-alt;
+    border: 2px solid @surface1;
+    border-radius: 1px;
+    margin: 5px 0;
+    padding: 0 10px;
+}
+
+.mpris-overlay {
+    background: @bg-alt;
+}
+
+.widget-mpris-player {
+    background: @bg-alt;
+    color: @fg;
+    margin: 0 5px;
+    padding: 10px 0 15px;
+}
+
+.widget-mpris-player .image-button:hover {
+    border-radius: 1px;
+    background: @hover;
+}
+
+.widget-mpris-player button {
+    padding: 5px;
+    margin: 0 2.5px;
+}
+
+.widget-mpris-player .mpris-overlay > box:last-child {
+    border-radius: 1px;
+    padding: 0 5px;
+    background: alpha(@hover, 0.3);
+}
+
+.widget-mpris-album-art {
+    border-radius: 1px;
+    margin: 6px 4px;
+}
+
+.widget-mpris-title,
+.widget-mpris-subtitle {
+    font-weight: 700;
+    margin: 0 3px;
+}
+
+.widget-mpris-title {
+    font-size: 1.2rem;
+}
+
+.widget-mpris-subtitle {
+    font-size: 0.9rem;
+    color: @fg-alt;
+}
+
+/* --------------------
+    buttons grid
+-------------------- */
+
+.widget-buttons-grid {
+    border-radius: 1px;
+    padding: 8px;
+    background: @bg-alt;
+    border: 2px solid @surface1;
+    margin: 5px 0;
+}
+
+.widget-buttons-grid button {
+    padding: 12px 0;
+    margin: 4px;
+    background: @hover;
+    border-radius: 1px;
+    min-width: 50px;
+    min-height: 36px;
+}
+
+.widget-buttons-grid button > label {
+    font-size: 18px;
+    font-family: "CommitMono Nerd Font", "Symbols Nerd Font", monospace;
+    color: @fg;
+    min-width: 50px;
+    min-height: 18px;
+}
+
+.widget-buttons-grid button:hover {
+    background: @selected;
+}
+
+.widget-buttons-grid button:checked {
+    background-color: @accent;
+}
+
+.widget-buttons-grid button:checked > label {
+    color: @bg;
+}
+
+/* --------------------
+    misc
+-------------------- */
+
+.control-center-list-placeholder {
+    color: @fg;
+}
+
+.blank-window {
+    background: transparent;
+}

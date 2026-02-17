@@ -1,0 +1,9 @@
+{
+	"custom/swaync": {
+		"exec": "~/.config/waybar/scripts/swaync.sh",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"tooltip-format": "Notifications",
+		"restart-interval": 1
+	}
+}

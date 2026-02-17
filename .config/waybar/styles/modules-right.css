@@ -6,6 +6,14 @@
 	padding: 0 12px;
 }
 
+/*---------
+    tray
+---------*/
+
+#tray {
+	padding: 0 14px;
+}
+
 /*------------
     volume
 ------------*/
@@ -16,6 +24,15 @@
 #pulseaudio,
 #wireplumber {
 	background-color: @volume;
+}
+
+/*---------------------
+    notification center
+---------------------*/
+
+#custom-swaync {
+	background-color: @backlight;
+	padding: 0 14px;
 }
 
 /*----------------

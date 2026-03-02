@@ -15,7 +15,7 @@ window {
     text-color:                     @FG;
     border:                         2px;
     border-color:                   @BDR;
-    border-radius:                  10px;
+    border-radius:                  2px;
     width:                          350px;
     location:                       center;
     anchor:                         center;
@@ -27,7 +27,7 @@ prompt {
     enabled: 			            true;
     padding: 			            8px;
     background-color: 		        @BG;
-    text-color: 		            @IMG;
+    text-color: 		            @FG;
 }
 
 textbox-prompt-colon {
@@ -37,7 +37,7 @@ textbox-prompt-colon {
     background-color:               @BG;
     text-color:                     @FG;
     padding:                        8px 12px 8px 12px;
-	font:							"Iosevka Nerd Font 10";
+	font:							"FiraCode Nerd Font Mono 11";
 }
 
 entry {
@@ -50,7 +50,7 @@ entry {
     blink:                          true;
     border:                  		0px 0px 2px 0px;
     border-color:                  	@BDR;
-    border-radius:                  10px;
+    border-radius:                  2px;
     padding:                        8px;
 }
 
@@ -132,7 +132,7 @@ element selected {
     background-color:               @BGA;
     text-color:                     @SEL;
     border:                  		0px 0px 0px 0px;
-    border-radius:                  10px;
+    border-radius:                  2px;
     border-color:                  	@BDR;
 }
 

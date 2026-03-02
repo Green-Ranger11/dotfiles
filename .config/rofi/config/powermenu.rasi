@@ -27,13 +27,9 @@ window {
 
 prompt {
     enabled: 			            true;
-    margin: 			            0px 0px 0px 8px;
     padding: 			            8px;
     background-color: 		        @BG;
     text-color: 		            @FG;
-    border:                  	    0px 0px 2px 0px;
-    border-color:                   @BDR;
-    border-radius:                  10px;
 }
 
 textbox-prompt-colon {
@@ -41,9 +37,9 @@ textbox-prompt-colon {
     str: 			                "";
     border-radius:                  100%;
     background-color:               @BG;
-    text-color:                     @BG;
+    text-color:                     @FG;
     padding:                        8px 12px 8px 12px;
-    font:			                "Iosevka Nerd Font 10";
+    font:			                "FiraCode Nerd Font Mono 11";
 }
 
 entry {

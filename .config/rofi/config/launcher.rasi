@@ -25,17 +25,17 @@ prompt {
     enabled: 			            true;
     padding: 			            8px;
     background-color: 		        @BG;
-    text-color: 		            @IMG;
+    text-color: 		            @FG;
 }
 
 textbox-prompt-colon {
     expand: 			            false;
     str: 			                "";
     border-radius:                  100%;
-    background-color:               @SEL;
+    background-color:               @BG;
     text-color:                     @FG;
     padding:                        8px 12px 8px 12px;
-    font:			                "FiraCode Nerd Font 10";
+    font:			                "FiraCode Nerd Font Mono 11";
 }
 
 entry {

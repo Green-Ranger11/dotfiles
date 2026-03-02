@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+# Bluetooth rofi menu — trusted devices only
+# Connect/disconnect with a single selection
+
+config="$HOME/.config/rofi/config/bluetooth.rasi"
+
+# Helper: run bluetoothctl commands reliably (pipe through interactive session)
+btctl() {
+	echo -e "$1\nquit" | bluetoothctl 2>/dev/null
+}
+
+# Bail out if bluetooth is off
+bt_power=$(btctl "show" | awk '/Powered:/ {print $2}')
+if [[ "$bt_power" != "yes" ]]; then
+	notify-send "Bluetooth is off" "Power on bluetooth first."
+	exit 1
+fi
+
+get_device_icon() {
+	local info icon
+	info=$(btctl "info $1")
+	icon=$(awk '/Icon:/ {print $2}' <<< "$info")
+	case "$icon" in
+	audio-headphones | audio-headset) echo "󰋋" ;;
+	audio-speakers) echo "󰓃" ;;
+	audio-input-microphone) echo "󰍬" ;;
+	input-keyboard) echo "󰌌" ;;
+	input-mouse) echo "󰍽" ;;
+	video-display | computer) echo "󰍹" ;;
+	phone) echo "󰏲" ;;
+	*) echo "󰂱" ;;
+	esac
+}
+
+# Build list of trusted devices with connection state
+devices_output=$(btctl "devices")
+entries=""
+while IFS= read -r line; do
+	[[ "$line" == *"Device "* ]] || continue
+	mac=$(awk '{print $2}' <<< "$line")
+	name=$(awk '{$1=$2=""; print substr($0,3)}' <<< "$line")
+
+	info=$(btctl "info $mac")
+	trusted=$(awk '/Trusted:/ {print $2}' <<< "$info")
+	[[ "$trusted" != "yes" ]] && continue
+
+	connected=$(awk '/Connected:/ {print $2}' <<< "$info")
+	icon=$(get_device_icon "$mac")
+
+	if [[ "$connected" == "yes" ]]; then
+		entries+="${icon}  ${name}  (connected)\n"
+	else
+		entries+="${icon}  ${name}\n"
+	fi
+done <<< "$devices_output"
+
+if [[ -z "$entries" ]]; then
+	notify-send "Bluetooth" "No trusted devices found."
+	exit 0
+fi
+
+selected=$(echo -en "$entries" | rofi -dmenu -i -theme "$config" -p "")
+
+[[ -z "$selected" ]] && exit 0
+
+# Parse selection
+device_name=$(sed 's/^[^ ]* *//; s/  *(connected)$//' <<< "$selected")
+
+mac=$(awk -v name="$device_name" '$0 ~ name {print $2}' <<< "$devices_output")
+[[ -z "$mac" ]] && exit 1
+
+connected=$(btctl "info $mac" | awk '/Connected:/ {print $2}')
+
+if [[ "$connected" == "yes" ]]; then
+	btctl "disconnect $mac" > /dev/null
+	notify-send "Bluetooth" "Disconnected from \"$device_name\"."
+else
+	btctl "connect $mac" > /dev/null &
+	sleep 3
+	status=$(btctl "info $mac" | awk '/Connected:/ {print $2}')
+	if [[ "$status" == "yes" ]]; then
+		notify-send "Bluetooth" "Connected to \"$device_name\"."
+	else
+		notify-send "Bluetooth" "Failed to connect to \"$device_name\"."
+	fi
+fi

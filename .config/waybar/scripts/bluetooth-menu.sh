@@ -9,9 +9,14 @@ config="$HOME/.config/rofi/bluetooth-menu.rasi"
 # Rofi window override
 override_disabled="mainbox { children: [ textbox-custom, listview ]; } listview { lines: 1; padding: 6px 6px 8px; }"
 
+# Helper: run bluetoothctl commands reliably (pipe through interactive session)
+btctl() {
+  echo -e "$1\nquit" | bluetoothctl 2>/dev/null
+}
+
 get_device_icon() {
   local device_mac=$1
-  device_info=$(bluetoothctl info "$device_mac")
+  device_info=$(btctl "info $device_mac")
   device_icon=$(echo "$device_info" | grep "Icon:" | awk '{print $2}')
 
   case "$device_icon" in
@@ -30,8 +35,10 @@ get_device_icon() {
 
 while true; do
   # Get list of paired devices
-  bluetooth_devices=$(bluetoothctl devices | while read -r line; do
+  bluetooth_devices=$(btctl "devices" | grep "^Device " | while read -r line; do
     device_mac=$(echo "$line" | awk '{print $2}')
+    trusted=$(btctl "info $device_mac" | grep "Trusted:" | awk '{print $2}')
+    [[ "$trusted" != "yes" ]] && continue
     device_name=$(echo "$line" | awk '{$1=$2=""; print substr($0, 3)}')
     icon=$(get_device_icon "$device_mac")
     echo "$icon $device_name"
@@ -45,12 +52,12 @@ while true; do
   option="󰂯  Enable Bluetooth"
 
   # Get Bluetooth status
-  bluetooth_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
+  bluetooth_status=$(btctl "show" | grep "Powered:" | awk '{print $2}')
 
   if [[ "$bluetooth_status" == "yes" ]]; then
-    selected_option=$(echo -e "$options" | rofi -dmenu -i -selected-row 1 -config "${config}" -p " " || pkill -x rofi)
+    selected_option=$(echo -e "$options" | rofi -dmenu -i -selected-row 1 -config "${config}" -p " " || pkill -x rofi)
   else
-    selected_option=$(echo -e "$option" | rofi -dmenu -i -selected-row 1 -config "${config}" -theme-str "${override_disabled}" -p " " || pkill -x rofi)
+    selected_option=$(echo -e "$option" | rofi -dmenu -i -selected-row 1 -config "${config}" -theme-str "${override_disabled}" -p " " || pkill -x rofi)
   fi
 
   # Exit if no option is selected
@@ -63,13 +70,13 @@ while true; do
   *"Enable Bluetooth")
     notify-send "Bluetooth Enabled" -i "package-installed-outdated"
     rfkill unblock bluetooth
-    bluetoothctl power on
+    btctl "power on"
     sleep 1
     ;;
   *"Disable Bluetooth")
     notify-send "Bluetooth Disabled" -i "package-broken"
     rfkill block bluetooth
-    bluetoothctl power off
+    btctl "power off"
     exit
     ;;
   *"Scan for devices")
@@ -83,16 +90,16 @@ while true; do
 
     if [[ -n "$device_name" ]]; then
       # Get MAC address
-      device_mac=$(bluetoothctl devices | grep "$device_name" | awk '{print $2}')
+      device_mac=$(btctl "devices" | grep "$device_name" | awk '{print $2}')
 
       # Trust and pair device
-      bluetoothctl trust "$device_mac" >/dev/null 2>&1
-      bluetoothctl pair "$device_mac" >/dev/null 2>&1
+      btctl "trust $device_mac" >/dev/null 2>&1
+      btctl "pair $device_mac" >/dev/null 2>&1
 
       # Connect to device
-      bluetoothctl connect "$device_mac" &
+      btctl "connect $device_mac" &
       sleep 3
-      connection_status=$(bluetoothctl info "$device_mac" | grep "Connected:" | awk '{print $2}')
+      connection_status=$(btctl "info $device_mac" | grep "Connected:" | awk '{print $2}')
 
       if [[ "$connection_status" == "yes" ]]; then
         notify-send "Connected to \"$device_name\"." -i "package-installed-outdated"

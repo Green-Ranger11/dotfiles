@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Rofi wrapper: connected first, tick on right, no highlight bar
+
+mapfile -t lines < <(grep -v '^\s*$')
+
+connected=()
+disconnected=()
+marker="::ACTIVE:: "
+pad="${marker//?/ }"
+
+for line in "${lines[@]}"; do
+	if [[ "$line" == "${marker}"* ]]; then
+		clean="${line#"$marker"}"
+		connected+=("${clean}  ✓")
+	elif [[ "$line" == "${pad}"* ]]; then
+		clean="${line#"$pad"}"
+		disconnected+=("${clean}")
+	else
+		disconnected+=("${line}")
+	fi
+done
+
+output=()
+for entry in "${connected[@]}"; do output+=("$entry"); done
+for entry in "${disconnected[@]}"; do output+=("$entry"); done
+
+selected=$(printf '%s\n' "${output[@]}" | rofi -dmenu -i -p "" -theme ~/.config/rofi/config/network.rasi "$@")
+
+[[ -z "$selected" ]] && exit 1
+
+echo "${selected%  ✓}"

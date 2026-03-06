@@ -67,6 +67,10 @@
                     "command": "hyprctl dispatch exec 'kitty -e nvtop' ; swaync-client -cp"
                 },
                 {
+                    "label": "󰅇",
+                    "command": "swaync-client -cp ; sh $HOME/.config/rofi/bin/clipboard"
+                },
+                {
                     "label": "󰤄",
                     "command": "swaync-client -cp ; ~/.config/waybar/scripts/power-menu.sh"
                 }

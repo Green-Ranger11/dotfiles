@@ -67,6 +67,7 @@
 # Install script
 !.config/scripts/
 !.config/scripts/install.sh
+!.config/scripts/remote-setup.sh
 
 # README
 !README.md

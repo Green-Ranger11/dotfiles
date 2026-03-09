@@ -1,0 +1,7 @@
+[mgr]
+prepend_keymap = [
+  { on = "<Enter>",   run = ["open", "plugin smart-quit"], desc = "Open and maybe quit" },
+  { on = "o",         run = ["open", "quit"], desc = "Open and maybe quit" },
+  { on = "<S-Enter>", run = ["open --interactive", "plugin smart-quit"], desc = "Open interactively and maybe quit" },
+  { on = "O",         run = ["open --interactive", "plugin smart-quit"], desc = "Open interactively and maybe quit" },
+]

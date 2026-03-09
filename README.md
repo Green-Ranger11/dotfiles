@@ -6,12 +6,14 @@ Personal dotfiles managed with a bare git repository.
 
 | Category | Configs |
 |----------|---------|
-| Shell | zsh, starship |
+| Shell | zsh, starship, zoxide, mcfly, fzf |
 | Editor | neovim (LazyVim) |
 | Terminal | kitty, tmux |
 | Window Managers | hyprland, i3 |
-| Bars & Menus | waybar, rofi, dunst |
-| Tools | yazi, btop, fastfetch, bottom |
+| Bars & Menus | waybar, rofi, dunst, swaync |
+| Screenshots | grim, slurp, swappy, wl-clipboard, cliphist |
+| Utilities | hyprpicker, brightnessctl, networkmanager-dmenu |
+| Tools | yazi (smart-quit floating mode), btop, fastfetch, bottom |
 
 ## Installation on a New Machine
 

@@ -34,6 +34,9 @@ CORE_PACKAGES=(
     btop
     fastfetch
     bottom
+    zoxide
+    mcfly
+    fzf
 )
 
 # Linux-only packages (window managers, bars, etc.)
@@ -41,11 +44,20 @@ LINUX_PACKAGES=(
     hyprland
     hyprpaper
     hyprlock
+    hyprpicker
     waybar
     rofi
     dunst
+    swaync
     i3-wm
     i3blocks
+    grim
+    slurp
+    swappy
+    wl-clipboard
+    cliphist
+    brightnessctl
+    networkmanager-dmenu
 )
 
 install_arch() {

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Remote server quick setup: bash vi-mode + tmux config
-# Usage: curl -fsSL <gist-raw-url> | bash
+# Usage: curl -fsSL https://gist.githubusercontent.com/Green-Ranger11/deef5e149337d1054e657014ab3b7003/raw/remote-setup.sh | bash
 
 set -e
 
@@ -54,20 +54,19 @@ cat > ~/.tmux.conf << 'TMUXEOF'
 set-option -sa terminal-overrides ",xterm*:Tc"
 set -g mouse on
 
-# Prefix
-unbind C-b
-set -g prefix C-Space
-bind C-Space send-prefix
+# Prefix (keep default C-b to avoid conflicts with local tmux)
+set -g prefix C-b
+bind C-b send-prefix
 
 # Window navigation
 bind -n M-H previous-window
 bind -n M-L next-window
 
-# Pane navigation (no plugin needed)
-bind -n C-h select-pane -L
-bind -n C-j select-pane -D
-bind -n C-k select-pane -U
-bind -n C-l select-pane -R
+# Pane navigation (prefix + hjkl)
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 
 # Indexing
 set -g base-index 1
@@ -97,6 +96,6 @@ info "Wrote ~/.tmux.conf"
 echo ""
 info "Done! Summary:"
 echo "  ~/.bashrc  — vi-mode, cursor shape switching"
-echo "  ~/.tmux.conf — C-Space prefix, Alt+H/L windows, C-hjkl panes, mouse, vi copy"
+echo "  ~/.tmux.conf — C-b prefix, Alt+H/L windows, C-b+hjkl panes, mouse, vi copy"
 echo ""
 echo "  Run: source ~/.bashrc && tmux kill-server 2>/dev/null; tmux"

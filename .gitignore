@@ -63,6 +63,8 @@
 !.config/fastfetch/**
 !.config/bottom/
 !.config/bottom/bottom.toml
+!.config/gazelle/
+!.config/gazelle/**
 
 # Install script
 !.config/scripts/
@@ -121,6 +123,10 @@ node_modules/
 .cargo/
 .rustup/
 .local/
+!.local/
+!.local/share/
+!.local/share/bluetui/
+!.local/share/bluetui/**
 .gem/
 
 # IDE/Editor state

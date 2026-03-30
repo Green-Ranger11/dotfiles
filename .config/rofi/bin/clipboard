@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+selected=$(cliphist list | fzf \
+  --layout=reverse \
+  --disabled \
+  --no-info \
+  --no-scrollbar \
+  --separator='─' \
+  --prompt='  ' \
+  --pointer='▎' \
+  --border=rounded \
+  --border-label=' 󰅇 Clipboard ' \
+  --border-label-pos=center \
+  --margin=1 \
+  --padding=1,1 \
+  --cycle \
+  --highlight-line \
+  --header='  NORMAL   j/k navigate  / search  q quit' \
+  --header-first \
+  --color='bg:#1E1D2F,fg:#D9E0EE,hl:#F28FAD' \
+  --color='bg+:#b4befe,fg+:#1E1E2E,hl+:#F28FAD' \
+  --color='info:#575268,prompt:#b4befe,pointer:#b4befe' \
+  --color='marker:#ABE9B3,spinner:#b4befe,header:#575268' \
+  --color='border:#b4befe,label:#b4befe' \
+  --bind 'change:clear-query' \
+  --bind 'j:down,k:up,G:last,q:abort' \
+  --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up' \
+  --bind '/:unbind(j,k,G,q,/,change)+enable-search+transform-prompt(echo "/ ")+transform-header(echo "  INSERT   type to filter  esc back")' \
+  --bind 'esc:rebind(j,k,G,q,/,change)+disable-search+clear-query+transform-prompt(echo "  ")+transform-header(echo "  NORMAL   j/k navigate  / search  q quit")' \
+  --with-nth=2.. \
+)
+
+[ -n "$selected" ] && echo "$selected" | cliphist decode | wl-copy

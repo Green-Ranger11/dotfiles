@@ -3,5 +3,10 @@ sort_by = "mtime"
 sort_reverse = true
 ratio = [1, 2, 5]
 
+[opener]
+open = [
+  { run = 'xdg-open "$@"', orphan = true, desc = "Open", for = "unix" },
+]
+
 [header]
 enabled = true

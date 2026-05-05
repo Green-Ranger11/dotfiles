@@ -4,6 +4,9 @@ sort_reverse = true
 ratio = [1, 2, 5]
 
 [opener]
+edit = [
+  { run = '$EDITOR "$@"', block = true, desc = "Edit", for = "unix" },
+]
 open = [
   { run = 'xdg-open "$@"', orphan = true, desc = "Open", for = "unix" },
 ]

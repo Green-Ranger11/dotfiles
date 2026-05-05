@@ -24,6 +24,10 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc":"$XDG_CONFIG_HOME/gtk-2.0/gtkrc.mine"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export XCURSOR_PATH=/usr/share/icons:"$XDG_DATA_HOME"/icons
 export MCFLY_KEY_SCHEME=vim
 export MCFLY_HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
@@ -68,7 +72,7 @@ elif [[ -x "/usr/bin/firefox" ]]; then
     export BROWSER='/usr/bin/firefox'
 fi
 export KITTY_LISTEN_ON=unix:/tmp/kitty
-export JAVA_TOOL_OPTIONS="-Xmx512m"
+gradle() { JAVA_TOOL_OPTIONS="-Xmx512m" command gradle "$@"; }
 
 #NVM
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -109,6 +113,7 @@ function zvm_after_init() {
 #ALIASES
 #XDG SPECIFICATION ALIASES
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 
 #SOURCING ZSH
 alias srczsh='source ~/.config/zsh/.zshrc'

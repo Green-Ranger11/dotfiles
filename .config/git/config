@@ -61,3 +61,10 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/env gh auth git-credential
+[commit]
+	gpgsign = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -38,6 +38,7 @@
 !.config/dunst/dunstrc
 !.config/swaync/
 !.config/swaync/**
+!.config/kded6rc
 
 # Tier 2b - macOS Desktop Environment
 !.config/yabai/

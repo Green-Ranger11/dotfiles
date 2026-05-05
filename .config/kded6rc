@@ -1,0 +1,5 @@
+[Module-statusnotifierwatcher]
+autoload=true
+
+[PlasmaBrowserIntegration]
+shownCount=1

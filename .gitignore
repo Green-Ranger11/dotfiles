@@ -22,6 +22,8 @@
 !.config/git/config
 !.config/nvim/
 !.config/nvim/**
+!.config/vim/
+!.config/vim/vimrc
 !.config/kitty/
 !.config/kitty/**
 
@@ -38,6 +40,8 @@
 !.config/dunst/dunstrc
 !.config/swaync/
 !.config/swaync/**
+!.config/swaylock/
+!.config/swaylock/config
 !.config/kded6rc
 
 # Tier 2b - macOS Desktop Environment
@@ -52,6 +56,18 @@
 
 # Exclude compiled binaries in sketchybar
 .config/sketchybar/helpers/menus/bin/
+
+# Tier 2c - Theming (Qt + GTK + Kvantum)
+!.config/Kvantum/
+!.config/Kvantum/**
+!.config/qt5ct/
+!.config/qt5ct/**
+!.config/qt6ct/
+!.config/qt6ct/**
+!.config/gtk-3.0/
+!.config/gtk-3.0/**
+!.config/gtk-4.0/
+!.config/gtk-4.0/**
 
 # Tier 3 - Tools
 !.config/tmux/

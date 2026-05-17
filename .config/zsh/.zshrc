@@ -170,6 +170,8 @@ fi
 # removed
 # removed
 
+# removed
+
 # GIT BARE REPO
 alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias conf="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

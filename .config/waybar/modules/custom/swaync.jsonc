@@ -1,9 +1,21 @@
 {
 	"custom/swaync": {
 		"exec": "~/.config/waybar/scripts/swaync.sh",
+		"return-type": "json",
+		"format": "{icon} {}",
+		"format-icons": {
+			"none": "󰂜",
+			"notification": "󰂚",
+			"dnd-none": "󰂛",
+			"dnd-notification": "󰂚",
+			"inhibited-none": "󰂜",
+			"inhibited-notification": "󰂚",
+			"dnd-inhibited-none": "󰂛",
+			"dnd-inhibited-notification": "󰂚"
+		},
 		"on-click": "swaync-client -t -sw",
 		"on-click-right": "swaync-client -d -sw",
-		"tooltip-format": "Notifications",
-		"restart-interval": 1
+		"escape": true,
+		"tooltip": true
 	}
 }

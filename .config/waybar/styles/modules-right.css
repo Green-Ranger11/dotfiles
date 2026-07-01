@@ -34,6 +34,14 @@
 	background-color: @backlight;
 	padding: 0 14px;
 }
+/* light up + emphasize the bell when notifications are pending */
+#custom-swaync.notification,
+#custom-swaync.dnd-notification,
+#custom-swaync.inhibited-notification,
+#custom-swaync.dnd-inhibited-notification {
+	color: @red;
+	font-weight: bold;
+}
 
 /*----------------
     brightness

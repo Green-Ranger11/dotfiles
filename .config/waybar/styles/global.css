@@ -33,3 +33,31 @@ tooltip {
 tooltip > box {
 	padding: 0 6px;
 }
+
+/* SNI tray / context menus (dbusmenu).
+   `* { all: initial }` in style.css strips the GTK theme from these menus
+   too (they render inside the waybar process), leaving them transparent and
+   unstyled — same reason the tooltip above is restyled. Restore a solid look. */
+menu {
+	background-color: @main-bg;
+	border: 2px solid @main-br;
+	border-radius: 10px;
+	padding: 4px;
+}
+menu menuitem {
+	color: @main-fg;
+	padding: 4px 12px;
+	border-radius: 6px;
+}
+menu menuitem:hover {
+	background-color: @hover-bg;
+	color: @hover-fg;
+}
+menu menuitem:disabled {
+	color: @overlay1;
+}
+menu separator {
+	background-color: @outline;
+	min-height: 1px;
+	margin: 4px 2px;
+}

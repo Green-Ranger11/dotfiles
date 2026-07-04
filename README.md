@@ -7,6 +7,7 @@ Bare git repo. Alias: `config` → `git --git-dir=$HOME/.dotfiles --work-tree=$H
 - **hyprland / i3** — WM (Wayland / X11 fallback)
 - **yabai + skhd + sketchybar + borders** — macOS WM stack
 - **waybar / rofi / dunst / swaync** — bar / launcher / notifications
+- **rbw + rofi-rbw** — Bitwarden CLI + styled rofi vault picker (`SUPER + /`)
 - **hyprlock / swaylock** — lockscreen
 - **kitty + tmux + zsh + starship** — terminal stack
 - **neovim (LazyVim)** — editor

@@ -1,0 +1,16 @@
+# rofi-rbw configuration
+# Uses rofi (matching the rest of the rofi menus) + Wayland type/clipboard tools.
+
+# Selector: rofi, styled with the matching theme
+selector = rofi
+selector-args = -theme /home/alesana/.config/rofi/config/rbw.rasi
+
+# Wayland tools (rofi-rbw defaults to X11 xdotool/xsel otherwise)
+typer = wtype
+clipboarder = wl-copy
+
+# Default action on Enter: type the credential into the focused field
+action = type
+
+# Clear the clipboard 30s after a copy action
+clear-after = 30

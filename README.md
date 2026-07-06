@@ -1,6 +1,13 @@
 <div align="center">
 
-# dotfiles
+```
+     ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
+     ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
+     ██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
+     ██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
+     ██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
+     ╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
+```
 
 Catppuccin Mocha rice for Arch + Hyprland
 
@@ -62,8 +69,6 @@ Catppuccin Mocha rice for Arch + Hyprland
 
 ## Install
 
-This is a [bare git repo](https://www.atlassian.com/git/tutorials/dotfiles) — files live at their real `$HOME` paths, no symlink farm. Any existing configs that would conflict are backed up to `~/.dotfiles-backup` first.
-
 ```bash
 git clone --bare https://github.com/Green-Ranger11/dotfiles.git $HOME/.dotfiles
 alias config='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -76,5 +81,3 @@ config checkout
 config config --local status.showUntrackedFiles no
 ~/.config/scripts/install.sh
 ```
-
-Packages are handled by `~/.config/scripts/install.sh`.

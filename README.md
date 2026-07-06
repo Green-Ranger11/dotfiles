@@ -44,9 +44,13 @@
 |---|---|
 | <img src=".github/assets/yazi.png" width="100%"/> | <img src=".github/assets/clipboard.png" width="100%"/> |
 
-| Bitwarden vault | Emoji picker |
-|---|---|
-| <img src=".github/assets/rbw.png" width="100%"/> | <img src=".github/assets/emoji.png" width="100%"/> |
+<div align="center">
+
+**Emoji picker**
+
+<img src=".github/assets/emoji.png" width="49%"/>
+
+</div>
 
 ## 🚀 Install
 

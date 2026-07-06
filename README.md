@@ -14,45 +14,33 @@
 
 ---
 
-## ✨ What's inside
+## What's inside
 
-- **hyprland** — WM (i3 as X11 fallback)
-- **waybar / rofi / dunst / swaync** — bar / launcher / notifications
-- **rbw + rofi-rbw** — Bitwarden CLI + styled rofi vault picker
-- **hyprlock / swaylock** — lockscreen
-- **kitty + tmux + zsh + starship** — terminal stack
-- **neovim (LazyVim)** — editor
-- **yazi** — file manager
-- **bluetui** — Bluetooth TUI
-- **gazelle-tui** — Nostr client
-- **fzf + zoxide + mcfly** — fuzzy find / smart cd / history
-- **grim + slurp + swappy + wl-clipboard + cliphist** — screenshots & clipboard
-- **Kvantum + qt5/6ct + gtk-3/4** — Qt/GTK Catppuccin theming
+- **[hyprland](https://github.com/hyprwm/Hyprland)** — WM ([i3](https://github.com/i3/i3) as X11 fallback)
+- **[waybar](https://github.com/Alexays/Waybar) / [rofi](https://github.com/davatorium/rofi) / [dunst](https://github.com/dunst-project/dunst) / [swaync](https://github.com/ErikReider/SwayNotificationCenter)** — bar / launcher / notifications
+- **[rbw](https://github.com/doy/rbw) + [rofi-rbw](https://github.com/fdw/rofi-rbw)** — Bitwarden CLI + styled rofi vault picker
+- **[hyprlock](https://github.com/hyprwm/hyprlock) / [swaylock](https://github.com/swaywm/swaylock)** — lockscreen
+- **[kitty](https://github.com/kovidgoyal/kitty) + [tmux](https://github.com/tmux/tmux) + [zsh](https://www.zsh.org) + [starship](https://github.com/starship/starship)** — terminal stack
+- **[neovim](https://github.com/neovim/neovim) ([LazyVim](https://github.com/LazyVim/LazyVim))** — editor
+- **[yazi](https://github.com/sxyazi/yazi)** — file manager
+- **[bluetui](https://github.com/pythops/bluetui)** — Bluetooth TUI
+- **[gazelle-tui](https://github.com/Zeus-Deus/gazelle-tui)** — NetworkManager TUI
+- **[fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [mcfly](https://github.com/cantino/mcfly)** — fuzzy find / smart cd / history
+- **[grim](https://github.com/emersion/grim) + [slurp](https://github.com/emersion/slurp) + [swappy](https://github.com/jtheoof/swappy) + [wl-clipboard](https://github.com/bugaevc/wl-clipboard) + [cliphist](https://github.com/sentriz/cliphist)** — screenshots & clipboard
+- **[Kvantum](https://github.com/tsujan/Kvantum) + qt5/6ct + gtk-3/4** — Qt/GTK Catppuccin theming
 - **kded6** — needed for waybar's tray (`autoload=true` in kded6rc)
 
-## 📸 Features
+## Features
 
 <div align="center">
 
-**Launcher** · **Notification center**
+<img src=".github/assets/rofi.png" width="13.5%"/> <img src=".github/assets/swaync.png" width="13.5%"/> <img src=".github/assets/bluetooth.png" width="13.5%"/> <img src=".github/assets/network.png" width="13.5%"/> <img src=".github/assets/yazi.png" width="13.5%"/> <img src=".github/assets/clipboard.png" width="13.5%"/> <img src=".github/assets/emoji.png" width="13.5%"/>
 
-<img src=".github/assets/rofi.png" width="49%"/> <img src=".github/assets/swaync.png" width="49%"/>
-
-**Bluetooth** · **Network**
-
-<img src=".github/assets/bluetooth.png" width="49%"/> <img src=".github/assets/network.png" width="49%"/>
-
-**File picker** · **Clipboard history**
-
-<img src=".github/assets/yazi.png" width="49%"/> <img src=".github/assets/clipboard.png" width="49%"/>
-
-**Emoji picker**
-
-<img src=".github/assets/emoji.png" width="49%"/>
+<sub>launcher · notifications · bluetooth · network · file picker · clipboard · emoji</sub>
 
 </div>
 
-## 🚀 Install
+## Install
 
 This is a [bare git repo](https://www.atlassian.com/git/tutorials/dotfiles) — files live at their real `$HOME` paths, no symlink farm. Any existing configs that would conflict are backed up to `~/.dotfiles-backup` first.
 

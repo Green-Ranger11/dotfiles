@@ -36,8 +36,10 @@ LINUX_HYPR_PACKAGES=(
     xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
     waybar rofi dunst swaync swaylock
     grim slurp swappy wl-clipboard cliphist
-    brightnessctl playerctl pavucontrol
+    brightnessctl playerctl pavucontrol wireplumber
     networkmanager networkmanager-dmenu kdeconnect bluetui
+    rbw rofi-rbw dolphin
+    asusctl # ROG laptop keybinds (led-mode, rog-control-center)
 )
 
 # i3 fallback

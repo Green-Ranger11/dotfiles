@@ -18,7 +18,6 @@ function z () {
 
 eval "$(zoxide init --cmd cd zsh)"
 
-# eval "$(bw completion --shell zsh); compdef _bw bw;"
 
 
 function y() {

@@ -1,5 +1,5 @@
 #GIT STUFF
-autoload -Uz compinit && compinit
+autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 #ANTIGEN

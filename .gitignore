@@ -139,11 +139,6 @@ node_modules/
 .yarn/
 .cargo/
 .rustup/
-.local/
-!.local/
-!.local/share/
-!.local/share/bluetui/
-!.local/share/bluetui/**
 .gem/
 
 # IDE/Editor state

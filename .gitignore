@@ -1,98 +1,9 @@
-# Dotfiles .gitignore - Whitelist approach
-# Ignore everything by default, explicitly whitelist tracked configs
-
-# Ignore everything
-*
+# Dotfiles .gitignore - Blocklist approach
+# Files are added explicitly one by one (`config add <file>`).
+# No whitelist needed; this only guards against secrets/junk slipping in.
 
 # ============================================
-# WHITELISTED CONFIGS
-# ============================================
-
-# This gitignore file
-!.gitignore
-
-# Tier 1 - Critical
-!.config/
-!.config/zsh/
-!.config/zsh/.zshrc
-!.config/zsh/autoload/
-!.config/zsh/autoload/**
-!.config/starship.toml
-!.config/git/
-!.config/git/config
-!.config/nvim/
-!.config/nvim/**
-!.config/vim/
-!.config/vim/vimrc
-!.config/kitty/
-!.config/kitty/**
-
-# Tier 2 - Desktop Environment
-!.config/hypr/
-!.config/hypr/**
-!.config/i3/
-!.config/i3/**
-!.config/waybar/
-!.config/waybar/**
-!.config/rofi/
-!.config/rofi/**
-!.config/dunst/
-!.config/dunst/dunstrc
-!.config/swaync/
-!.config/swaync/**
-!.config/swaylock/
-!.config/swaylock/config
-!.config/kded6rc
-
-# Tier 2b - macOS Desktop Environment
-!.config/yabai/
-!.config/yabai/yabairc
-!.config/sketchybar/
-!.config/sketchybar/**
-!.config/skhd/
-!.config/skhd/skhdrc
-!.config/borders/
-!.config/borders/bordersrc
-
-# Exclude compiled binaries in sketchybar
-.config/sketchybar/helpers/menus/bin/
-
-# Tier 2c - Theming (Qt + GTK + Kvantum)
-!.config/Kvantum/
-!.config/Kvantum/**
-!.config/qt5ct/
-!.config/qt5ct/**
-!.config/qt6ct/
-!.config/qt6ct/**
-!.config/gtk-3.0/
-!.config/gtk-3.0/**
-!.config/gtk-4.0/
-!.config/gtk-4.0/**
-
-# Tier 3 - Tools
-!.config/tmux/
-!.config/tmux/tmux.conf
-!.config/yazi/
-!.config/yazi/**
-!.config/btop/
-!.config/btop/**
-!.config/fastfetch/
-!.config/fastfetch/**
-!.config/bottom/
-!.config/bottom/bottom.toml
-!.config/gazelle/
-!.config/gazelle/**
-
-# Install script
-!.config/scripts/
-!.config/scripts/install.sh
-!.config/scripts/remote-setup.sh
-
-# README
-!README.md
-
-# ============================================
-# ALWAYS IGNORED (Security & Privacy)
+# SECURITY & PRIVACY
 # ============================================
 
 # SSH keys and config
@@ -109,17 +20,16 @@
 **/*.env
 **/.env*
 
+# Tokens and auth
+**/*token*
+**/.auth*
+**/auth.json
+
 # Browser data
 .mozilla/
 .config/chromium/
 .config/google-chrome/
 .config/BraveSoftware/
-
-# Cache directories
-.cache/
-**/.cache/
-**/cache/
-**/*cache*/
 
 # History files
 .*_history
@@ -128,10 +38,15 @@
 .python_history
 .node_repl_history
 
-# Tokens and auth
-**/*token*
-**/.auth*
-**/auth.json
+# ============================================
+# JUNK
+# ============================================
+
+# Cache directories
+.cache/
+**/.cache/
+**/cache/
+**/*cache*/
 
 # Package managers
 node_modules/
@@ -140,6 +55,9 @@ node_modules/
 .cargo/
 .rustup/
 .gem/
+
+# Compiled binaries in sketchybar
+.config/sketchybar/helpers/menus/bin/
 
 # IDE/Editor state
 .vscode/

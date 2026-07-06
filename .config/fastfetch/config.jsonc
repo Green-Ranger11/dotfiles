@@ -9,7 +9,7 @@
     "source": "~/.config/fastfetch/palkia.png",
     "type": "kitty-direct",
     "width": 28,
-    "height": 17,
+    "height": 12,
     "padding": {
       "top": 3,
       "left": 11,
@@ -90,6 +90,12 @@
     {
       "type": "custom",
       "format": "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛",
+    },
+    {
+      // caption under the logo: cursor up 3 rows to col 11 (centers 29 chars in the
+      // 50-col logo column), print, then jump back down so the prompt lands normally
+      "type": "custom",
+      "format": "\u001b[3F\u001b[11GPalkia · #0484 · Water/Dragon\u001b[2E",
     },
   ],
 }

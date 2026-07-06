@@ -8,7 +8,7 @@
     "source": "~/.config/fastfetch/sceptile-mega",
     "type": "file-raw",
     "padding": {
-      "top": 3,
+      "top": 0,
     },
   },
   "display": {

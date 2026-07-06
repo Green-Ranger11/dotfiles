@@ -149,28 +149,8 @@ else
     alias vpnvoda='sudo openfortivpn -c ~/.config/openfortivpn/vodafone --pppd-accept-remote'
 fi
 
-#SSH WEB SERVERS
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-
-#SFTP WEB SERVERS
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-# removed
-
-# removed
+# Work aliases (SSH/SFTP hosts) - kept out of the public repo
+[ -f "$XDG_CONFIG_HOME/zsh/work.zsh" ] && source "$XDG_CONFIG_HOME/zsh/work.zsh"
 
 # GIT BARE REPO
 alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

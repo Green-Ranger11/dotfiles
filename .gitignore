@@ -73,3 +73,6 @@ node_modules/
 
 # VPN configs (plaintext passwords)
 .config/openfortivpn/
+
+# Work-specific shell config (internal hosts)
+.config/zsh/work.zsh

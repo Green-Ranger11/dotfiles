@@ -1,8 +1,8 @@
 <div align="center">
 
-# 〜 dotfiles 〜
+# dotfiles
 
-**Catppuccin Mocha rice for Arch + Hyprland**
+Catppuccin Mocha rice for Arch + Hyprland
 
 ![Arch](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=archlinux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=for-the-badge&logo=hyprland&logoColor=black)
@@ -32,13 +32,33 @@
 
 ## Features
 
-<div align="center">
+> App launcher — rofi with a Catppuccin theme
 
-<img src=".github/assets/rofi.png" width="13.5%"/> <img src=".github/assets/swaync.png" width="13.5%"/> <img src=".github/assets/bluetooth.png" width="13.5%"/> <img src=".github/assets/network.png" width="13.5%"/> <img src=".github/assets/yazi.png" width="13.5%"/> <img src=".github/assets/clipboard.png" width="13.5%"/> <img src=".github/assets/emoji.png" width="13.5%"/>
+<img src=".github/assets/rofi.png" width="100%"/>
 
-<sub>launcher · notifications · bluetooth · network · file picker · clipboard · emoji</sub>
+> Notification center — swaync with matching styling
 
-</div>
+<img src=".github/assets/swaync.png" width="100%"/>
+
+> Bluetooth — bluetui in a floating kitty window
+
+<img src=".github/assets/bluetooth.png" width="100%"/>
+
+> Network — gazelle-tui for NetworkManager
+
+<img src=".github/assets/network.png" width="100%"/>
+
+> File picker — yazi floating, opens files in nvim
+
+<img src=".github/assets/yazi.png" width="100%"/>
+
+> Clipboard history — cliphist with a fuzzy picker
+
+<img src=".github/assets/clipboard.png" width="100%"/>
+
+> Emoji picker — rofimoji, straight to clipboard
+
+<img src=".github/assets/emoji.png" width="100%"/>
 
 ## Install
 

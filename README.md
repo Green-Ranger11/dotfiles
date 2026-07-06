@@ -30,11 +30,23 @@
 - **Kvantum + qt5/6ct + gtk-3/4** — Qt/GTK Catppuccin theming
 - **kded6** — needed for waybar's tray (`autoload=true` in kded6rc)
 
-## 🎬 Demo
+## 📸 Features
 
-<div align="center">
-<img src=".github/assets/demo.gif" alt="Workflow demo" width="80%"/>
-</div>
+| Launcher | Notification center |
+|---|---|
+| <img src=".github/assets/rofi.png" width="100%"/> | <img src=".github/assets/swaync.png" width="100%"/> |
+
+| Bluetooth | Network |
+|---|---|
+| <img src=".github/assets/bluetooth.png" width="100%"/> | <img src=".github/assets/network.png" width="100%"/> |
+
+| File picker | Clipboard history |
+|---|---|
+| <img src=".github/assets/yazi.png" width="100%"/> | <img src=".github/assets/clipboard.png" width="100%"/> |
+
+| Bitwarden vault | Emoji picker |
+|---|---|
+| <img src=".github/assets/rbw.png" width="100%"/> | <img src=".github/assets/emoji.png" width="100%"/> |
 
 ## 🚀 Install
 

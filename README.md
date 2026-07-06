@@ -32,19 +32,19 @@
 
 ## 📸 Features
 
-| Launcher | Notification center |
-|---|---|
-| <img src=".github/assets/rofi.png" width="100%"/> | <img src=".github/assets/swaync.png" width="100%"/> |
-
-| Bluetooth | Network |
-|---|---|
-| <img src=".github/assets/bluetooth.png" width="100%"/> | <img src=".github/assets/network.png" width="100%"/> |
-
-| File picker | Clipboard history |
-|---|---|
-| <img src=".github/assets/yazi.png" width="100%"/> | <img src=".github/assets/clipboard.png" width="100%"/> |
-
 <div align="center">
+
+**Launcher** · **Notification center**
+
+<img src=".github/assets/rofi.png" width="49%"/> <img src=".github/assets/swaync.png" width="49%"/>
+
+**Bluetooth** · **Network**
+
+<img src=".github/assets/bluetooth.png" width="49%"/> <img src=".github/assets/network.png" width="49%"/>
+
+**File picker** · **Clipboard history**
+
+<img src=".github/assets/yazi.png" width="49%"/> <img src=".github/assets/clipboard.png" width="49%"/>
 
 **Emoji picker**
 

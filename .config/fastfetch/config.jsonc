@@ -7,7 +7,7 @@
     // Palkia game sprite (PokeAPI 484) via kitty graphics protocol
     
     "source": "~/.config/fastfetch/palkia.png",
-    "type": "kitty-direct",
+    "type": "kitty-icat",
     "width": 28,
     "height": 12,
     "padding": {

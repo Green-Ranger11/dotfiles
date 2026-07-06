@@ -1,19 +1,12 @@
 <div align="center">
 
-<pre>
-██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
-██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
-██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
-██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
-██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
-╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
-</pre>
-
-Catppuccin Mocha rice for Arch + Hyprland
+<img src=".github/assets/title.png" alt="dotfiles" width="60%"/>
 
 ![Arch](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=archlinux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=for-the-badge&logo=hyprland&logoColor=black)
 ![Catppuccin](https://img.shields.io/badge/theme-Catppuccin_Mocha-cba6f7?style=for-the-badge)
+![Neovim](https://img.shields.io/badge/Neovim-57A143?style=for-the-badge&logo=neovim&logoColor=white)
+![Kitty](https://img.shields.io/badge/Kitty-2D2D2D?style=for-the-badge&logo=kitty&logoColor=white)
 
 <img src=".github/assets/hero.png" alt="Desktop overview" width="100%"/>
 

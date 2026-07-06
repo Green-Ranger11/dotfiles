@@ -1,6 +1,9 @@
 <div align="center">
 
-<img src=".github/assets/title.png" alt="dotfiles" width="60%"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/title-dark.png">
+  <img src=".github/assets/title-light.png" alt="dotfiles" width="60%"/>
+</picture>
 
 ![Arch](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=archlinux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=for-the-badge&logo=hyprland&logoColor=black)
@@ -25,8 +28,6 @@
 - **[gazelle-tui](https://github.com/Zeus-Deus/gazelle-tui)** — NetworkManager TUI
 - **[fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [mcfly](https://github.com/cantino/mcfly)** — fuzzy find / smart cd / history
 - **[grim](https://github.com/emersion/grim) + [slurp](https://github.com/emersion/slurp) + [swappy](https://github.com/jtheoof/swappy) + [wl-clipboard](https://github.com/bugaevc/wl-clipboard) + [cliphist](https://github.com/sentriz/cliphist)** — screenshots & clipboard
-- **[Kvantum](https://github.com/tsujan/Kvantum) + qt5/6ct + gtk-3/4** — Qt/GTK Catppuccin theming
-- **kded6** — needed for waybar's tray (`autoload=true` in kded6rc)
 
 ## Features
 

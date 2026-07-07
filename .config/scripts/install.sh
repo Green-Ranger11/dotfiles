@@ -37,7 +37,7 @@ LINUX_HYPR_PACKAGES=(
     waybar rofi dunst swaync swaylock
     grim slurp swappy wl-clipboard cliphist
     brightnessctl playerctl pavucontrol wireplumber
-    networkmanager networkmanager-dmenu kdeconnect bluetui
+    networkmanager kdeconnect bluetui
     rbw rofi-rbw dolphin
     asusctl # ROG laptop keybinds (led-mode, rog-control-center)
 )

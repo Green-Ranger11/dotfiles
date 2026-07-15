@@ -42,11 +42,6 @@ LINUX_HYPR_PACKAGES=(
     asusctl # ROG laptop keybinds (led-mode, rog-control-center)
 )
 
-# i3 fallback
-LINUX_I3_PACKAGES=(
-    i3-wm i3blocks i3lock
-)
-
 # KDE bits — needed for the kded statusnotifierwatcher fix that makes
 # waybar's tray work on non-Plasma sessions, plus Qt app niceties.
 LINUX_KDE_PACKAGES=(
@@ -113,9 +108,6 @@ install_arch() {
     print_status "Installing Hyprland desktop..."
     sudo pacman -S --needed --noconfirm "${LINUX_HYPR_PACKAGES[@]}" 2>/dev/null || true
 
-    print_status "Installing i3 fallback..."
-    sudo pacman -S --needed --noconfirm "${LINUX_I3_PACKAGES[@]}" 2>/dev/null || true
-
     print_status "Installing KDE bits (kded watcher, Breeze, polkit-kde)..."
     sudo pacman -S --needed --noconfirm "${LINUX_KDE_PACKAGES[@]}" 2>/dev/null || true
 
@@ -164,7 +156,7 @@ install_macos() {
     print_status "Installing yabai stack..."
     brew install "${BREW_YABAI[@]}" 2>/dev/null || true
 
-    print_warning "Linux-only packages (hyprland, waybar, rofi, dunst, i3, KDE bits) skipped on macOS"
+    print_warning "Linux-only packages (hyprland, waybar, rofi, dunst, KDE bits) skipped on macOS"
     print_warning "Yabai needs SIP partially disabled for some features — see https://github.com/koekeishiya/yabai/wiki"
 
     print_status "macOS package installation complete!"
@@ -181,7 +173,7 @@ install_debian() {
     )
 
     DEBIAN_LINUX=(
-        rofi dunst i3 i3blocks i3lock
+        rofi dunst
         grim slurp wl-clipboard
         brightnessctl playerctl pavucontrol
         network-manager kdeconnect
@@ -209,7 +201,7 @@ install_fedora() {
 
     print_status "Installing core packages with dnf..."
     sudo dnf install -y "${CORE_PACKAGES[@]}" 2>/dev/null || true
-    sudo dnf install -y "${LINUX_HYPR_PACKAGES[@]}" "${LINUX_I3_PACKAGES[@]}" 2>/dev/null || true
+    sudo dnf install -y "${LINUX_HYPR_PACKAGES[@]}" 2>/dev/null || true
     sudo dnf install -y "${LINUX_KDE_PACKAGES[@]}" "${LINUX_THEMING_PACKAGES[@]}" 2>/dev/null || true
 
     print_warning "Some Arch package names may differ on Fedora — check failures above."

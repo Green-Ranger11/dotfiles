@@ -39,7 +39,6 @@ LINUX_HYPR_PACKAGES=(
     brightnessctl playerctl pavucontrol wireplumber
     networkmanager kdeconnect bluetui
     rbw rofi-rbw dolphin
-    asusctl # ROG laptop keybinds (led-mode, rog-control-center)
 )
 
 # KDE bits — needed for the kded statusnotifierwatcher fix that makes
@@ -66,6 +65,11 @@ LINUX_FONT_PACKAGES=(
 # AUR-only packages
 LINUX_AUR_PACKAGES=(
     antigen gazelle-tui tmux-plugin-manager ttf-joypixels rofimoji
+    # asusctl is AUR-only -- NOT in the official repos. It previously sat in
+    # LINUX_HYPR_PACKAGES, where pacman aborted that whole transaction on
+    # "target not found", so NONE of the Hyprland packages installed -- and
+    # `2>/dev/null || true` hid the failure. Keep ROG tooling in this array.
+    asusctl # ROG laptop: asusd daemon + led-mode keybinds
 )
 
 # macOS Homebrew formulas (cross-platform tools)

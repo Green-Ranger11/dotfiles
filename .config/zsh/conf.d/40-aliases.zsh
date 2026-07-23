@@ -34,7 +34,9 @@ else
     alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
     alias ntc="nmtui-connect"
     alias b="sudo bandwhich"
-    alias vpnvoda='sudo openfortivpn -c ~/.config/openfortivpn/vodafone --pppd-accept-remote'
+    # Toggles openfortivpn@vodafone via systemd (config in /etc/openfortivpn/,
+    # passwordless thanks to polkit rule). Same toggle as waybar / Super+Shift+W.
+    alias vpnvoda='sh ~/.config/waybar/scripts/vpn.sh toggle'
 fi
 
 # Work aliases (SSH/SFTP hosts) - kept out of the public repo

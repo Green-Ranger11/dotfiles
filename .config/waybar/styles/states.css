@@ -2,6 +2,7 @@
 #idle_inhibitor:hover,
 #clock.date:hover,
 #network:hover,
+#custom-vpn:hover,
 #bluetooth:hover,
 #custom-system_update:hover,
 #custom-swaync:hover,
@@ -12,6 +13,7 @@
 }
 
 /* inactive state */
+#custom-vpn.disconnected,
 #idle_inhibitor.deactivated,
 #mpris.paused,
 #pulseaudio.output.muted,

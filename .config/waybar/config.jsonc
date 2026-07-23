@@ -25,6 +25,7 @@
 		"~/.config/waybar/modules/idle_inhibitor.jsonc",
 		"~/.config/waybar/modules/clock.jsonc",
 		"~/.config/waybar/modules/network.jsonc",
+		"~/.config/waybar/modules/custom/vpn.jsonc",
 		"~/.config/waybar/modules/bluetooth.jsonc",
 
 		// modules-right
@@ -73,6 +74,7 @@
 		"clock#date",
 		"custom/right_div#4",
 		"network",
+		"custom/vpn",
 		"bluetooth",
 		"custom/right_div#5"
 	],

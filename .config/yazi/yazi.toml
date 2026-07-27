@@ -8,7 +8,10 @@ edit = [
   { run = '$EDITOR "$@"', block = true, desc = "Edit", for = "unix" },
 ]
 open = [
-  { run = 'xdg-open "$@"', orphan = true, desc = "Open", for = "unix" },
+  # setsid: detach from the terminal's session, not just from yazi (orphan) --
+  # the floating kitty closes right after open (smart-quit), which would
+  # otherwise SIGHUP the spawned app before its window appears.
+  { run = 'setsid -f xdg-open "$@" </dev/null >/dev/null 2>&1', orphan = true, desc = "Open", for = "unix" },
 ]
 
 [header]

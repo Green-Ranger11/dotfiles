@@ -8,5 +8,6 @@
     UGT:   #F28FADff;
     IMG:   #FAE3B0ff;
     OFF:   #575268ff;
+    BGL:   #313244ff;
     ON:    #ABE9B3ff;
 }

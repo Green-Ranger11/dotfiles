@@ -1,6 +1,6 @@
 configuration {
     show-icons:                     true;
-    display-drun: 		            "";
+    display-drun: 		            "";
     drun-display-format:            "{icon} {name}";
     disable-history:                false;
     click-to-exit: 		            true;
@@ -13,54 +13,50 @@ configuration {
 window {
     background-color:               @BG;
     text-color:                     @FG;
-    border:                         1px;
+    border:                         2px;
     border-color:                   @BDR;
-    width:                          600px;
+    width:                          640px;
     anchor:                         center;
     x-offset:                       0;
     y-offset:                       0;
 }
 
-prompt {
-    enabled: 			            true;
-    padding: 			            8px;
-    background-color: 		        @BG;
-    text-color: 		            @FG;
+mainbox {
+    background-color:               @BG;
+    children:                       [ inputbar, listview ];
+    spacing:                        14px;
+    padding:                        18px;
 }
 
+/* search chip: solid lavender square, dark glyph */
 textbox-prompt-colon {
     expand: 			            false;
     str: 			                "";
-    border-radius:                  100%;
-    background-color:               @BG;
-    text-color:                     @FG;
-    padding:                        8px 12px 8px 12px;
-    font:			                "FiraCode Nerd Font Mono 11";
+    background-color:               @BGA;
+    text-color:                     @SEL;
+    padding:                        10px 15px 10px 15px;
+    font:			                "FiraCode Nerd Font Mono 12";
 }
 
 entry {
-    background-color:               @BG;
+    background-color:               @BGL;
     text-color:                     @FG;
-    placeholder-color:              @FG;
+    placeholder-color:              @OFF;
     expand:                         true;
     horizontal-align:               0;
-    placeholder:                    "Search...";
+    placeholder:                    "Search apps...";
     blink:                          true;
-    border:                  	    0px 0px 2px 0px;
-    border-color:                   @BDR;
-    border-radius:                  2px;
-    padding:                        8px;
+    padding:                        10px 12px;
 }
 
 inputbar {
-	children: 		                [ textbox-prompt-colon, prompt, entry ];
-    background-color:               @BG;
+    children: 		                [ textbox-prompt-colon, entry ];
+    background-color:               @BGL;
     text-color:                     @FG;
     expand:                         false;
-    border:                  	    0px 0px 0px 0px;
-    border-radius:                  0px;
+    border:                  	    0px 0px 2px 0px;
     border-color:                   @BDR;
-    margin:                         0px 0px 0px 0px;
+    margin:                         0px;
     padding:                        0px;
     position:                       center;
 }
@@ -71,30 +67,22 @@ case-indicator {
     spacing:                        0;
 }
 
-
 listview {
     background-color:               @BG;
     columns:                        1;
-    lines:			                7;
+    lines:			                8;
     spacing:                        4px;
     cycle:                          false;
     dynamic:                        true;
     layout:                         vertical;
-}
-
-mainbox {
-    background-color:               @BG;
-    children:                       [ inputbar, listview ];
-    spacing:                        15px;
-    padding:                        15px;
+    scrollbar:                      false;
 }
 
 element {
     background-color:               @BG;
     text-color:                     @FG;
     orientation:                    horizontal;
-    border-radius:                  2px;
-    padding:                        6px 6px 6px 6px;
+    padding:                        8px 10px;
 }
 
 element-icon {
@@ -102,7 +90,7 @@ element-icon {
     text-color:       		        inherit;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    size:                           24px;
+    size:                           28px;
     border:                         0px;
 }
 
@@ -112,7 +100,7 @@ element-text {
     expand:                         true;
     horizontal-align:               0;
     vertical-align:                 0.5;
-    margin:                         2px 0px 2px 2px;
+    margin:                         0px 0px 0px 8px;
 }
 
 element normal.urgent,
@@ -127,11 +115,11 @@ element alternate.active {
     text-color:                     @FG;
 }
 
+/* selected: lavender block, dark text, lavender edge carried by the block itself */
 element selected {
     background-color:               @BGA;
     text-color:                     @SEL;
-    border:                  	    0px 0px 0px 0px;
-    border-color:                   @BDR;
+    border:                  	    0px;
 }
 
 element selected.urgent {

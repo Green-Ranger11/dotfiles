@@ -106,6 +106,13 @@
 	background-color: @tray;
 	padding: 0 6px 0 4px;
 }
+#custom-vpn {
+	background-color: @tray;
+	padding: 0 7px 0 5px;
+}
+#custom-vpn.connected {
+	color: @green;
+}
 #bluetooth {
 	background-color: @tray;
 	padding: 0 5px;

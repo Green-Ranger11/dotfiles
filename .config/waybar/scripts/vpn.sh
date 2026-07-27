@@ -16,7 +16,7 @@ toggle)
 	;;
 *)
 	if systemctl is-active --quiet "$UNIT"; then
-		printf '{"text":"󰖂","class":"connected","tooltip":"Vodafone VPN: connected (click to disconnect)"}\n'
+		printf '{"text":"󰖂 VPN","class":"connected","tooltip":"Vodafone VPN: connected (click to disconnect)"}\n'
 	else
 		printf '{"text":"󰖂","class":"disconnected","tooltip":"Vodafone VPN: disconnected (click to connect)"}\n'
 	fi

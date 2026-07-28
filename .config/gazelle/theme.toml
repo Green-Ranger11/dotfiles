@@ -1,4 +1,11 @@
 # Gazelle Theme Configuration - Catppuccin Mocha
+# Slim the default section spacing (was "1 2" all round): bottom-only margin
+# keeps 1 row between sections and a gap above the help bar, and dropping the
+# borders saves 2 rows/section -- lavender titles carry the structure.
+[styles]
+section_margin = "2 0 2 0"
+section_border = "none"
+
 [colors.primary]
 foreground = "#CDD6F4"
 background = "#1E1E2E"

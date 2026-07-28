@@ -29,14 +29,14 @@
 
 /* semantic aliases */
 
-@define-color accent        @mauve;
+@define-color accent        @lavender;
 @define-color center-bg     alpha(@base, 0.9);
-@define-color bg            @base;
+@define-color bg            @crust;
 @define-color bg-alt        @mantle;
 @define-color fg            @text;
-@define-color fg-alt        @overlay1;
-@define-color selected      alpha(@mauve, 0.4);
-@define-color hover         alpha(@mauve, 0.2);
+@define-color fg-alt        @subtext1;
+@define-color selected      alpha(@lavender, 0.4);
+@define-color hover         alpha(@lavender, 0.2);
 @define-color urgent        @red;
 
 /*
@@ -107,11 +107,13 @@
     margin-bottom: 2px;
     padding: 2px 0;
     font-size: 1rem;
+    color: @accent;
 }
 
 .notification .body {
     color: @fg-alt;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .notification.critical .notification-background,
@@ -119,10 +121,26 @@
     border-color: @urgent;
 }
 
+.notification.critical .notification-background {
+    background: mix(@crust, @red, 0.12);
+}
+
+.notification.critical .summary {
+    color: @urgent;
+}
+
+.notification.low .notification-background {
+    border-color: @surface2;
+}
+
+.notification.low .summary {
+    color: @fg;
+}
+
 .notification.low progress,
 .notification.normal progress,
 .notification.critical progress {
-    background: @selected;
+    background: @accent;
 }
 
 .notification-background .close-button {

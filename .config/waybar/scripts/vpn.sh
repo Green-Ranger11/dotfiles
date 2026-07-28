@@ -9,8 +9,15 @@ case "$1" in
 toggle)
 	if systemctl is-active --quiet "$UNIT"; then
 		systemctl stop "$UNIT"
+		notify-send -a "VPN" "󰖂 Vodafone VPN" "Disconnected"
 	else
-		systemctl start "$UNIT"
+		# start blocks until the tunnel is up (Type=notify) or the unit fails
+		if systemctl start "$UNIT" 2>/dev/null && systemctl is-active --quiet "$UNIT"; then
+			notify-send -a "VPN" "󰖂 Vodafone VPN" "Connected"
+		else
+			notify-send -u critical -a "VPN" "󰖂 Vodafone VPN" \
+				"Failed to connect — check: journalctl -u $UNIT"
+		fi
 	fi
 	pkill -RTMIN+8 waybar
 	;;

@@ -4,9 +4,8 @@ return {
     lazy = false,
     opts = {
       extra_groups = {
-        "NeoTreeNormal", -- NeoTree
-        "NeoTreeNormal", -- NeoTree
-        "NeoTreeNormalNC", -- NeoTree
+        "SnacksPickerBox", -- snacks explorer/picker
+        "SnacksPicker",
       },
     },
   },

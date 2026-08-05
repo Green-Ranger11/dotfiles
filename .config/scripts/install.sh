@@ -51,6 +51,7 @@ LINUX_KDE_PACKAGES=(
 # Theming (Catppuccin Mocha across Qt + GTK + Kvantum)
 LINUX_THEMING_PACKAGES=(
     kvantum qt5ct qt6ct
+    papirus-icon-theme # icon theme set in gtk settings.ini + kdeglobals + gsettings
 )
 
 # Fonts (Nerd Fonts + emoji + CJK + symbols)
@@ -240,6 +241,11 @@ main() {
     echo "  1. Set zsh as default shell: chsh -s \$(which zsh)"
     echo "  2. Log out and back in for shell changes to take effect"
     echo "  3. Start a new terminal session"
+    echo "  4. herdr (agent multiplexer, config in ~/.config/herdr):"
+    echo "       curl -fsSL https://herdr.dev/install.sh | sh"
+    echo "       herdr integration install claude"
+    echo "  5. Icon theme for GTK apps that read dconf: "
+    echo "       gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'"
 }
 
 main "$@"

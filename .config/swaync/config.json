@@ -60,11 +60,11 @@
                 },
                 {
                     "label": "󰍹",
-                    "command": "hyprctl dispatch exec 'kitty -e btop' ; swaync-client -cp"
+                    "command": "hyprctl dispatch \"hl.dsp.exec_cmd('kitty -e btop')\" ; swaync-client -cp"
                 },
                 {
                     "label": "󰢶",
-                    "command": "hyprctl dispatch exec 'kitty -e nvtop' ; swaync-client -cp"
+                    "command": "hyprctl dispatch \"hl.dsp.exec_cmd('kitty -e nvtop')\" ; swaync-client -cp"
                 },
                 {
                     "label": "󰅇",

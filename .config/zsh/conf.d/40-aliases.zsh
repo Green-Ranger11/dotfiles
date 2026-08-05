@@ -50,3 +50,5 @@ alias conf="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias gitbc="git branch | grep -v 'main' | xargs git branch -D"
 
 alias kc="kubectl"
+alias c="claude"
+alias h="herdr"

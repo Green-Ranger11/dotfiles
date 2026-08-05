@@ -2,6 +2,9 @@
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
+#HERDR completions
+command -v herdr >/dev/null && eval "$(herdr completion zsh)"
+
 #ANTIGEN
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$HOME"/antigen.zsh

@@ -1,8 +1,3 @@
-if [ -z "$TMUX" ] && [ -z "$NOAUTOATTACH" ]
-then
-    tmux attach -t TMUX || tmux new -s TMUX
-fi
-
 #FASTFETCH
 if command -v fastfetch &> /dev/null; then
   fastfetch

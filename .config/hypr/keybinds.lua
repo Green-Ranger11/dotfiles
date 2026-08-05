@@ -20,6 +20,8 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("kitty --class floating -e bl
 -- (Lua strings need no ## escape for a literal # like hyprlang did.)
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("kitty --class floating -o color12=#313244 -e gazelle", floatRules))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("sh $HOME/.config/waybar/scripts/vpn.sh toggle"))
+-- herdr agent cockpit (absolute path: Hyprland's exec PATH lacks ~/.local/bin)
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class herdr -e $HOME/.local/bin/herdr"))
 
 -- Window management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -30,7 +32,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a -f hex"))
 -- Session
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("env NOAUTOATTACH=1 YAZI_FLOAT=1 EDITOR=nvim kitty --class yazi-float yazi", floatRules))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("env YAZI_FLOAT=1 EDITOR=nvim kitty --class yazi-float yazi", floatRules))
 
 -- Hardware controls
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("brightnessctl s +5%"))

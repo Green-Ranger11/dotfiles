@@ -1,6 +1,16 @@
 #FASTFETCH
 if command -v fastfetch &> /dev/null; then
-  fastfetch
+  # fastfetch's kitty-icat logo QUERIES the terminal and reads the reply from
+  # the tty -- that read swallows anything already buffered on stdin. In herdr
+  # panes that buffer can hold the injected `claude --resume <id>` from agent
+  # restore. If input is pending, skip fastfetch entirely (claude's TUI is
+  # about to cover the pane anyway); otherwise run it normally with the PNG.
+  zmodload zsh/zselect 2>/dev/null
+  if [ -n "$HERDR_PANE_ID" ] && zselect -t 0 -r 0 2>/dev/null; then
+    : # pending input (herdr injection) -- don't let anything touch the tty
+  else
+    fastfetch
+  fi
   # kitty graphics under tmux: `kitten icat` detects tmux and uses Unicode
   # placeholders (--passthrough=detect implies --unicode-placeholder). The
   # placeholder cells go into tmux's grid as text, but kitty won't composite

@@ -1,6 +1,12 @@
 -- Environment Variables
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
+-- PATH: include ~/.local/bin session-wide. Needed by anything Hyprland spawns
+-- outside a zsh (which adds it itself) -- notably the herdr server, which
+-- exec's `claude --resume <id>` during agent restore; without this it falls
+-- back to plain shells and sessions silently don't resume.
+hl.env("PATH", os.getenv("HOME") .. "/.local/bin:" .. (os.getenv("PATH") or "/usr/local/bin:/usr/bin"))
+
 -- Cursor
 hl.env("XCURSOR_SIZE", "24")
 

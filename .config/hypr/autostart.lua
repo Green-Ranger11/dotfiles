@@ -13,6 +13,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c 'kbuildsycoca6 --noincremental; kded6'")
 
     -- Core services (after environment is set)
+    -- NOTE: kdeconnect-indicator races kded6's tray watcher at login. On slow
+    -- cold boots it can lose and the tray icon won't appear (process still
+    -- runs). Rare; fix when it happens: pkill -f kdeconnect-ind && kdeconnect-indicator &
     hl.exec_cmd("waybar & hyprpaper & kdeconnect-indicator & swaync")
     hl.exec_cmd("wl-paste --watch cliphist store")
 

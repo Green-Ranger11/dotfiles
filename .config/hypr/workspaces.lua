@@ -30,3 +30,24 @@ hl.workspace_rule({ workspace = "4", monitor = "desc:Thermotrex Corporation TL14
 -- NOTE: a workspace can only be bound to ONE monitor; the LAST binding wins.
 -- Binding to two monitors put ws2 on the disconnected one -> fell back to eDP-2.
 hl.workspace_rule({ workspace = "2", monitor = "desc:Philips Consumer Electronics Company PHL 346B1C 1322131231233", default = true })
+
+-- Keep workspace 2 on the external monitor, wherever we are.
+-- A workspace rule binds to exactly ONE monitor, so the rule above only fires
+-- at work (Philips). This puts ws2 on whatever non-laptop monitor is attached
+-- -- Philips at work, AOC at home -- at startup and on every hotplug.
+local LAPTOP_DESC = "Thermotrex"
+
+local function place_external_workspace()
+    for _, m in ipairs(hl.get_monitors()) do
+        if not m.description:find(LAPTOP_DESC, 1, true) then
+            -- focus first: Hyprland reaps empty workspaces, so ws2 may not
+            -- exist yet and move alone fails with "Workspace not found".
+            hl.dispatch(hl.dsp.focus({ workspace = 2 }))
+            hl.dispatch(hl.dsp.workspace.move({ workspace = "2", monitor = m.name }))
+            return
+        end
+    end
+end
+
+hl.on("hyprland.start", place_external_workspace)
+hl.on("monitor.added", place_external_workspace)

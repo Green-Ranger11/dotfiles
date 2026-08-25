@@ -55,12 +55,15 @@
 	useBuiltin = false
 [include]
     path = ./config.local
+# Default GitHub identity: Green-Ranger11 (personal + Vodafone work).
+# Pinned to a specific gh account rather than `gh auth git-credential`, which
+# uses whichever account is *active* -- that mismatch caused push 403s.
 [credential "https://github.com"]
 	helper = 
-	helper = !/usr/bin/env gh auth git-credential
+	helper = "!f() { echo username=Green-Ranger11; echo password=$(gh auth token --user Green-Ranger11); }; f"
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/usr/bin/env gh auth git-credential
+	helper = "!f() { echo username=Green-Ranger11; echo password=$(gh auth token --user Green-Ranger11); }; f"
 [commit]
 	gpgsign = false
 [filter "lfs"]
@@ -68,3 +71,8 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
+# Miracle repos authenticate as the other account. Must come last: later
+# includes win. Commit identity can be overridden in miracle.inc too.
+[includeIf "gitdir:~/Repos/Work/Miracle/"]
+	path = ~/.config/git/miracle.inc

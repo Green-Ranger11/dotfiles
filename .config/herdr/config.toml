@@ -22,6 +22,15 @@ focus_agent = "alt+1..9"
 [theme]
 name = "catppuccin"
 
+[theme.custom]
+# Make the tab bar / panels share the terminal background instead of the
+# theme's slightly different panel shade.
+panel_bg = "reset"
+# State colors pinned to Catppuccin Mocha (sidebar rail dots and state text)
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+
 [session]
 # Relaunch agents (claude --resume <id>) with workspace/tab/pane layout
 # after a server restart or reboot -- the reason for moving agent work here.
@@ -34,3 +43,28 @@ kitty_graphics = true
 
 [update]
 channel = "preview"
+
+[ui]
+# tmux-style pane separation: single shared divider lines instead of each
+# pane floating in its own bordered box with gaps.
+# Borderless panes separated by whitespace. (Tried and rejected: full boxes,
+# shared borders -- perimeter unavoidable; no divider-only mode upstream.)
+pane_gaps = true
+pane_borders = false
+
+# Minimal sidebar: one compact row per space (no number token exists upstream;
+# workspace name is the smallest available identifier). Lavender accent for
+# the selected entry to match the rig.
+accent = "#b4befe"
+
+# Sidebar toggle is binary: fully open or fully hidden (no dot rail).
+sidebar_collapsed_mode = "hidden"
+
+[ui.sidebar.spaces]
+row_gap = 0
+rows = [["workspace"]]
+
+[ui.sidebar.agents]
+row_gap = 0
+rows = [["tab"]]
+

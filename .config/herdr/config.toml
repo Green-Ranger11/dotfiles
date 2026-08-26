@@ -45,12 +45,12 @@ kitty_graphics = true
 channel = "preview"
 
 [ui]
-# tmux-style pane separation: single shared divider lines instead of each
-# pane floating in its own bordered box with gaps.
-# Borderless panes separated by whitespace. (Tried and rejected: full boxes,
-# shared borders -- perimeter unavoidable; no divider-only mode upstream.)
-pane_gaps = true
-pane_borders = false
+# tmux-style pane separation: shared internal splitters, no outer frame.
+# (pane_outer_borders landed upstream 2026-08-09; before that the perimeter
+# was unavoidable, so this config went through boxes -> borderless -> here.)
+pane_gaps = false
+pane_borders = true
+pane_outer_borders = false
 
 # Minimal sidebar: one compact row per space (no number token exists upstream;
 # workspace name is the smallest available identifier). Lavender accent for

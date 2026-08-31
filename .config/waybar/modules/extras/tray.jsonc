@@ -1,7 +1,9 @@
 {
 	"tray": {
 		"icon-size": 16,
-		// "show-passive-items":
+		// kdeconnect-indicator reports Passive when no device is actively
+		// connected; without this the icon silently vanishes.
+		"show-passive-items": true,
 		// "smooth-scrolling-threshold":
 		"spacing": 12,
 		// "reverse-direction":

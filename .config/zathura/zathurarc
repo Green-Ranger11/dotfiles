@@ -1,0 +1,29 @@
+# Catppuccin Mocha
+set default-bg                  "#1e1e2e"
+set default-fg                  "#cdd6f4"
+set statusbar-bg                "#181825"
+set statusbar-fg                "#cdd6f4"
+set inputbar-bg                 "#1e1e2e"
+set inputbar-fg                 "#cdd6f4"
+set notification-bg             "#1e1e2e"
+set notification-fg             "#cdd6f4"
+set notification-error-bg       "#1e1e2e"
+set notification-error-fg       "#f38ba8"
+set notification-warning-bg     "#1e1e2e"
+set notification-warning-fg     "#f9e2af"
+set highlight-color             "#b4befe"
+set highlight-active-color      "#cba6f7"
+set completion-bg               "#313244"
+set completion-fg               "#cdd6f4"
+set completion-highlight-bg     "#b4befe"
+set completion-highlight-fg     "#1e1e2e"
+set recolor-lightcolor          "#1e1e2e"
+set recolor-darkcolor           "#cdd6f4"
+
+set font "CommitMono Nerd Font 10"
+set selection-clipboard clipboard
+set scroll-step 80
+set guioptions ""
+# Dark-mode PDFs by default; toggle with ctrl+r
+set recolor true
+set recolor-keephue true

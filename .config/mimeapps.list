@@ -16,7 +16,7 @@ x-scheme-handler/mid=userapp-Thunderbird-A16PP3.desktop;
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-VF2HR3.desktop;
 
 [Default Applications]
-application/pdf=org.pwmt.zathura.desktop;
+application/pdf=org.pwmt.zathura.desktop
 application/x-extension-htm=firefox.desktop;
 application/x-extension-html=firefox.desktop;
 application/x-extension-shtml=firefox.desktop;

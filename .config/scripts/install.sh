@@ -39,6 +39,7 @@ LINUX_HYPR_PACKAGES=(
     brightnessctl playerctl pavucontrol wireplumber
     networkmanager kdeconnect bluetui
     rbw rofi-rbw dolphin
+    zathura zathura-pdf-mupdf # default PDF viewer (see mimeapps.list)
 )
 
 # KDE bits — needed for the kded statusnotifierwatcher fix that makes

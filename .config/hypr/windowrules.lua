@@ -43,3 +43,15 @@ hl.window_rule({ name = "yazi-float", match = { class = "^(yazi-float)$" }, floa
 
 -- swaync notification slide-in from right
 hl.layer_rule({ name = "notif-slide", match = { namespace = "notifications" }, animation = "slide right" })
+
+-- Remmina: session windows fill the workspace, main window stays behind.
+-- Both windows share class org.remmina.Remmina; only the session window has
+-- initial_title "Remmina" (its title becomes the profile name), while the
+-- main window's is "Remmina Remote Desktop Client". maximize (not fullscreen)
+-- keeps waybar visible and draws above the floating main window, which is
+-- there again when the session closes.
+hl.window_rule({
+    name  = "remmina-session-maximize",
+    match = { class = "^(org\\.remmina\\.Remmina)$", initial_title = "^(Remmina)$" },
+    maximize = true,
+})

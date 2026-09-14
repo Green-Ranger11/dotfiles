@@ -5,6 +5,7 @@
 
 local opt = vim.opt
 opt.relativenumber = true -- Relative line numbers
+opt.mousescroll = "ver:5,hor:6" -- Lines per mouse wheel step
 -- Set to false to disable auto format
 vim.g.lazyvim_eslint_auto_format = true
 -- If no prettier config file is found, the formatter will not be used

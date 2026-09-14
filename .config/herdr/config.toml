@@ -4,13 +4,16 @@ onboarding = false
 # Keybinds: hybrid -- the three tmux reflexes are ported (ctrl+space prefix,
 # direct ctrl+h/j/k/l pane nav, alt+shift+h/l tab switching); everything else
 # uses herdr defaults so prefix+? help stays accurate.
+# ctrl+h/j/k/l go through the herdr-splits plugin (vim-tmux-navigator for herdr):
+# forwarded to Neovim when it owns the pane, herdr pane focus otherwise.
+# prefix+h/j/k/l stays as the plain fallback.
 
 [keys]
 prefix = "ctrl+space"
-focus_pane_left  = "ctrl+h"
-focus_pane_down  = "ctrl+j"
-focus_pane_up    = "ctrl+k"
-focus_pane_right = "ctrl+l"
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
 previous_tab = "alt+shift+h"
 next_tab     = "alt+shift+l"
 # Workspace cycling completes the alt+shift hand-shape: h/l tabs, k/j workspaces
@@ -18,6 +21,26 @@ previous_workspace = "alt+shift+k"
 next_workspace     = "alt+shift+j"
 # One chord from anywhere to any agent row in the sidebar
 focus_agent = "alt+1..9"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "herdr-splits.nav-left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "herdr-splits.nav-down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "herdr-splits.nav-up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "herdr-splits.nav-right"
 
 [theme]
 name = "catppuccin"

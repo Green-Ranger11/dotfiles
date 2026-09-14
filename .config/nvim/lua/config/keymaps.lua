@@ -17,8 +17,3 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<S-q>", "<cmd> lua Snacks.bufdelete()<cr>", { desc = "Delete Buffer" })
--- vim-tmux-navigator
-map({ "i", "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<cr><esc>", { desc = "Move cursor to top pane" })
-map({ "i", "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<cr><esc>", { desc = "Move cursor to bottom pane" })
-map({ "i", "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr><esc>", { desc = "Move cursor to left pane" })
-map({ "i", "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<cr><esc>", { desc = "Move cursor to right pane" })

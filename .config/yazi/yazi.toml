@@ -4,14 +4,25 @@ sort_reverse = true
 ratio = [1, 2, 5]
 
 [opener]
-edit = [
-  { run = '$EDITOR "$@"', block = true, desc = "Edit", for = "unix" },
-]
 open = [
   # setsid: detach from the terminal's session, not just from yazi (orphan) --
   # the floating kitty closes right after open (smart-quit), which would
   # otherwise SIGHUP the spawned app before its window appears.
-  { run = 'setsid -f xdg-open "$@" </dev/null >/dev/null 2>&1', orphan = true, desc = "Open", for = "unix" },
+  # %s, not "$@": yazi 26.9.1 removed the "$@" placeholder (sxyazi/yazi#4327).
+  # gio, not xdg-open: xdg-open on Hyprland sniffs content with `file`, so a
+  # .csv reads as text/plain and lands in nvim. gio uses shared-mime-info
+  # (extension first) like Dolphin, then the same mimeapps.list defaults.
+  { run = 'setsid -f gio open %s </dev/null >/dev/null 2>&1', orphan = true, desc = "Open", for = "unix" },
+]
+play = [
+  { run = 'setsid -f gio open %s </dev/null >/dev/null 2>&1', orphan = true, desc = "Play", for = "unix" },
+]
+
+[open]
+# Match Dolphin where yazi's content-based MIME disagrees with the extension.
+prepend_rules = [
+  { url = "*.{csv,tsv}", use = [ "open", "edit", "reveal" ] },
+  { mime = "application/{zip,rar,vnd.rar,7z*,tar,gzip,xz,zstd,bzip*}", use = [ "open", "extract", "reveal" ] },
 ]
 
 [header]

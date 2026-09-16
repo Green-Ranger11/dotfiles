@@ -53,8 +53,6 @@
 	whitespace = red reverse
 [add "interactive"]
 	useBuiltin = false
-[include]
-    path = ./config.local
 # Default GitHub identity: Green-Ranger11 (personal + Vodafone work).
 # Pinned to a specific gh account rather than `gh auth git-credential`, which
 # uses whichever account is *active* -- that mismatch caused push 403s.
@@ -72,3 +70,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
+# Machine-local overrides, last so they win over everything above
+# (per-directory account switching lives there; file is untracked).
+[include]
+	path = ./config.local

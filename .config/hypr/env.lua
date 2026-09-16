@@ -29,6 +29,12 @@ hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_STYLE_OVERRIDE", "kvantum")
 
+-- LibreOffice: KDE/Qt backend instead of auto-detected gtk3. The gtk3 backend
+-- calls gtk_window_maximize on every new document window (vcl/unx/gtk3/
+-- gtkframe.cxx, SetDefaultSize), which covers the other tiled windows; the Qt
+-- backends don't. kf6 also matches the Dolphin/KDE file dialogs.
+hl.env("SAL_USE_VCLPLUGIN", "kf6")
+
 -- Java
 hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
 

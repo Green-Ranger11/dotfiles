@@ -21,6 +21,9 @@ return {
             "-line_column",
           },
         },
+        -- Normal mode badge uses the desktop accent (green); the other modes
+        -- keep staline's syntax-derived colours.
+        mode_colors = { n = "#a6e3a1" },
         defaults = {
           cool_symbol = "  ",
           left_separator = "",

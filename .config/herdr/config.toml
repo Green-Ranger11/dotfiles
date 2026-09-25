@@ -43,8 +43,9 @@ type = "plugin_action"
 command = "herdr-splits.nav-right"
 
 [theme]
-name = "catppuccin"
+name = "terminal"
 
+auto_switch = false
 [theme.custom]
 # Make the tab bar / panels share the terminal background instead of the
 # theme's slightly different panel shade.
@@ -76,13 +77,15 @@ pane_borders = true
 pane_outer_borders = false
 
 # Minimal sidebar: one compact row per space (no number token exists upstream;
-# workspace name is the smallest available identifier). Lavender accent for
+# workspace name is the smallest available identifier). Green accent for
 # the selected entry to match the rig.
-accent = "#b4befe"
+accent = "#a6e3a1"
 
 # Sidebar toggle is binary: fully open or fully hidden (no dot rail).
 sidebar_collapsed_mode = "hidden"
 
+agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = false
 [ui.sidebar.spaces]
 row_gap = 0
 rows = [["workspace"]]
@@ -91,3 +94,5 @@ rows = [["workspace"]]
 row_gap = 0
 rows = [["tab"]]
 
+[ui.toast]
+delivery = "system"

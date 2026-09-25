@@ -7,7 +7,7 @@ hl.config({
         gaps_out    = 20,
         border_size = 2,
         col = {
-            active_border   = "0xffcba6f7",
+            active_border   = "0xffa6e3a1",
             inactive_border = "0xff313244",
         },
         layout           = "master",
@@ -16,9 +16,9 @@ hl.config({
 
     group = {
         col = {
-            border_active          = { colors = { "rgba(ca9ee6ff)", "rgba(f2d5cfff)" }, angle = 45 },
+            border_active          = { colors = { "rgba(a6e3a1ff)", "rgba(94e2d5ff)" }, angle = 45 },
             border_inactive        = { colors = { "rgba(b4befecc)", "rgba(6c7086cc)" }, angle = 45 },
-            border_locked_active   = { colors = { "rgba(ca9ee6ff)", "rgba(f2d5cfff)" }, angle = 45 },
+            border_locked_active   = { colors = { "rgba(a6e3a1ff)", "rgba(94e2d5ff)" }, angle = 45 },
             border_locked_inactive = { colors = { "rgba(b4befecc)", "rgba(6c7086cc)" }, angle = 45 },
         },
     },
@@ -61,4 +61,4 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 5,  bezier = "wind"
 hl.animation({ leaf = "border",      enabled = true, speed = 1,  bezier = "liner" })
 hl.animation({ leaf = "borderangle", enabled = true, speed = 30, bezier = "liner",   style = "loop" })
 hl.animation({ leaf = "fade",        enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "workspaces",  enabled = true, speed = 5,  bezier = "wind" })
+hl.animation({ leaf = "workspaces",  enabled = true, speed = 5,  bezier = "wind",    style = "slidefade 20%" })

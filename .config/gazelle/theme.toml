@@ -3,26 +3,31 @@
 # keeps 1 row between sections and a gap above the help bar, and dropping the
 # borders saves 2 rows/section -- lavender titles carry the structure.
 [styles]
-section_margin = "2 0 2 0"
+section_margin = "1 0 1 0"
 section_border = "none"
+dialog_border = "round"
+title_text_style = "bold"
+cursor_opacity = "0%"
+hover_opacity = "0%"
+new_section_height = "10"
 
 [colors.primary]
 foreground = "#CDD6F4"
 background = "#1E1E2E"
 [colors.normal]
 black = "#45475A"
-red = "#F38BA8"
+red = "#CDD6F4"
 green = "#A6E3A1"
-yellow = "#B4BEFE"
+yellow = "#A6E3A1"
 blue = "#89B4FA"
 magenta = "#F5C2E7"
 cyan = "#94E2D5"
 white = "#BAC2DE"
 [colors.bright]
 black = "#585B70"
-red = "#F38BA8"
+red = "#CDD6F4"
 green = "#A6E3A1"
-yellow = "#B4BEFE"
+yellow = "#A6E3A1"
 blue = "#89B4FA"
 magenta = "#F5C2E7"
 cyan = "#94E2D5"

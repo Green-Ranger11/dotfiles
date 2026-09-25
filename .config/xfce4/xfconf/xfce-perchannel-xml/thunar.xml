@@ -9,12 +9,13 @@
   <property name="last-show-hidden" type="bool" value="false"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_50_PERCENT"/>
   <property name="last-details-view-visible-columns" type="string" value="THUNAR_COLUMN_NAME,THUNAR_COLUMN_SIZE,THUNAR_COLUMN_DATE_MODIFIED"/>
-  <property name="misc-small-toolbar-icons" type="bool" value="true"/>
+  <property name="misc-small-toolbar-icons" type="bool" value="false"/>
   <property name="misc-folders-first" type="bool" value="true"/>
   <property name="misc-full-path-in-tab-title" type="bool" value="true"/>
   <property name="misc-date-style" type="string" value="THUNAR_DATE_STYLE_SHORT"/>
   <property name="misc-thumbnail-mode" type="string" value="THUNAR_THUMBNAIL_MODE_ONLY_LOCAL"/>
   <property name="last-window-maximized" type="bool" value="true"/>
-  <property name="last-details-view-column-widths" type="string" value="50,50,231,50,50,50,50,50,350,50,50,69,50,50"/>
+  <property name="last-details-view-column-widths" type="string" value="50,50,243,243,243,432,50,50,664,50,50,81,50,50"/>
   <property name="last-separator-position" type="int" value="181"/>
+  <property name="last-toolbar-items" type="string" value="back:1,forward:1,location-bar:1,search:1,menu:1,open-parent:0,open-home:0,new-tab:0,new-window:0,toggle-split-view:0,undo:0,redo:0,zoom-out:0,zoom-in:0,zoom-reset:0,view-as-icons:0,view-as-detailed-list:0,view-as-compact-list:0,view-switcher:0,reload:0"/>
 </channel>

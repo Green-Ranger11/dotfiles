@@ -78,13 +78,43 @@
 menu, .menu, .context-menu, popover, popover > contents, popover.menu > contents,
 tooltip, tooltip > * { border-radius: 0; }
 
-/* Thunar: only the file list is see-through (like kitty's 0.85), blurred by
-   Hyprland; sidebar, toolbar and path bar stay solid. The window itself is
-   transparent so the list's alpha reaches the compositor. */
+/* Thunar: everything sits on crust (#11111b, the bar/kitty colour); only the
+   file list is see-through (0.85, blurred by Hyprland). The window itself is
+   transparent so the list's alpha reaches the compositor. The file list lives
+   in the tab notebook, the sidebar doesn't -- that's what separates them. */
 window.thunar { background-color: transparent; }
 window.thunar toolbar,
 window.thunar .sidebar,
 window.thunar .sidebar .view,
-window.thunar paned > separator { background-color: @theme_bg_color; }
-window.thunar scrolledwindow .view:not(.sidebar) { background-color: alpha(@theme_base_color, 0.85); }
-window.thunar scrolledwindow .view:not(.sidebar):selected { background-color: @theme_selected_bg_color; }
+window.thunar paned > separator { background-color: #11111b; background-image: none; }
+/* The tint sits on the tab stack, so it also fills the margin around the
+   list; the list itself stays clear on top of it. */
+window.thunar notebook,
+window.thunar notebook scrolledwindow,
+window.thunar notebook .view { background-color: transparent; }
+window.thunar notebook > stack { background-color: alpha(#11111b, 0.85); }
+window.thunar notebook .view:selected { background-color: @theme_selected_bg_color; }
+/* Minimal top bar: flat buttons, no frames, tight padding. */
+window.thunar toolbar { border: none; box-shadow: none; padding: 10px 12px; }
+window.thunar toolbar button,
+window.thunar toolbar entry { background: none; border: none; box-shadow: none; }
+window.thunar toolbar button:hover { background-color: #313244; }
+/* Square corners everywhere in Thunar, matching Hyprland rounding = 1. */
+window.thunar button, window.thunar entry, window.thunar .view, window.thunar .sidebar row,
+window.thunar treeview.view, window.thunar scrollbar slider { border-radius: 0; }
+/* A little breathing room: sidebar rows, file list rows, toolbar buttons. */
+window.thunar .sidebar .view { padding: 1px 4px; }
+window.thunar notebook .view { padding: 2px 6px; }
+window.thunar notebook scrolledwindow { margin: 0 10px 6px; }
+window.thunar toolbar button { margin: 0 3px; padding: 4px 6px; }
+/* The solid sidebar rule above also hid the selected row's label (crust on
+   crust); give selection its own colours. */
+window.thunar .sidebar .view:selected { background-color: @theme_selected_bg_color; color: @theme_selected_fg_color; }
+/* No bold anywhere in Thunar (path button, column headers, sidebar). */
+window.thunar, window.thunar * { font-weight: normal; }
+/* No line under the path bar: strip borders/shadows from everything in the top bar. */
+window.thunar toolbar * { border: none; box-shadow: none; background-image: none; outline: none; }
+/* Sidebar: rows flush with the Places/Devices/Network headings (no tree
+   indent), and no frame line along the top of the pane. */
+window.thunar .sidebar .view { -GtkTreeView-expander-size: 0; }
+window.thunar scrolledwindow, window.thunar frame > border, window.thunar .sidebar { border: none; box-shadow: none; }

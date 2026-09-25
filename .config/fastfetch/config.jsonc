@@ -4,9 +4,9 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-    // Palkia game sprite (PokeAPI 484) via kitty graphics protocol
+    // Mega Sceptile game sprite (PokeAPI 10065) via kitty graphics protocol
     
-    "source": "~/.config/fastfetch/palkia.png",
+    "source": "~/.config/fastfetch/sceptile-mega.png",
     "type": "kitty-icat",
     "width": 28,
     "height": 12,
@@ -92,10 +92,10 @@
       "format": "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛",
     },
     {
-      // caption under the logo: cursor up 3 rows to col 11 (centers 29 chars in the
+      // caption under the logo: cursor up 3 rows to col 8 (centers 36 chars in the
       // 50-col logo column), print, then jump back down so the prompt lands normally
       "type": "custom",
-      "format": "\u001b[3F\u001b[11GPalkia · #0484 · Water/Dragon\u001b[2E",
+      "format": "\u001b[3F\u001b[8GMega Sceptile · #0254 · Grass/Dragon\u001b[2E",
     },
   ],
 }

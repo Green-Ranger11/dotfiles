@@ -12,7 +12,31 @@ PickerList {
     id: picker
     title: "Bitwarden"
     countNoun: "items"
-    hints: [["↑↓", "navigate"], ["⏎", "copy password"], ["⇧⏎", "copy username"], ["esc", "close"]]
+    // Vim-driven like clipboard/emoji: j/k to move, "/" slides in the search.
+    searchable: false
+    slashSearch: true
+    hints: [["j/k", "navigate"], ["/", "search"], ["⏎", "copy password"], ["⇧⏎", "copy username"], ["q", "close"]]
+
+    // Vault items from rbw, and the ids of the 20 most recently copied ones
+    // (ids only, no secrets) persisted in the Quickshell state dir.
+    property var items: []
+    property var recent: []
+
+    // Recently used items on top under a "Recent" heading, then A-Z.
+    entries: {
+        const byId = {};
+        for (const e of items) byId[e.data.id] = e;
+        const top = recent.filter(id => byId[id]).map(id => Object.assign({}, byId[id], { section: "Recent" }));
+        const seen = new Set(recent);
+        return top.concat(items.filter(e => !seen.has(e.data.id)));
+    }
+
+    FileView {
+        id: recentFile
+        path: Quickshell.stateDir + "/bitwarden-recent"
+        printErrors: false // missing until the first copy
+        onLoaded: picker.recent = text().split("\n").filter(id => id)
+    }
     boxWidth: 560
 
     // Unlock first (rbw's pinentry must not sit under this overlay), then
@@ -23,6 +47,8 @@ PickerList {
     }
 
     onAccepted: e => {
+        recent = [e.data.id].concat(recent.filter(id => id !== e.data.id)).slice(0, 20);
+        recentFile.setText(recent.join("\n") + "\n");
         if (acceptModifiers & Qt.ShiftModifier)
             copy.exec(["sh", "-c", 'printf %s "$1" | wl-copy', "_", e.data.user]);
         else
@@ -53,7 +79,7 @@ PickerList {
                     out.push({ text: name, sub: [user, folder].filter(x => x).join("  "), data: { id: id, user: user || "" } });
                 }
                 out.sort((a, b) => a.text.localeCompare(b.text));
-                picker.entries = out;
+                picker.items = out;
                 if (out.length) picker.open();
             }
         }

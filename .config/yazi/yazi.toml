@@ -22,6 +22,11 @@ play = [
 # Match Dolphin where yazi's content-based MIME disagrees with the extension.
 prepend_rules = [
   { url = "*.{csv,tsv}", use = [ "open", "edit", "reveal" ] },
+  # Text/code through "open" too (gio -> nvim.desktop -> xdg-terminal-exec ->
+  # a new tiled kitty), not yazi's in-place "edit". From the Super+Shift+E
+  # float, smart-quit then closes yazi, so nvim gets its own tiled window.
+  { mime = "text/*", use = [ "open", "edit", "reveal" ] },
+  { mime = "application/{json,javascript,toml,xml,x-yaml,x-shellscript,x-subrip}", use = [ "open", "edit", "reveal" ] },
   { mime = "application/{zip,rar,vnd.rar,7z*,tar,gzip,xz,zstd,bzip*}", use = [ "open", "extract", "reveal" ] },
 ]
 

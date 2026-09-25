@@ -19,7 +19,6 @@ hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(QS .. "clipboard toggle"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(QS .. "bluetooth toggle"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(QS .. "network toggle"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(QS .. "power toggle"))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("sh $HOME/.config/scripts/vpn.sh toggle"))
 -- herdr agent cockpit (absolute path: Hyprland's exec PATH lacks ~/.local/bin)
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class herdr -e $HOME/.local/bin/herdr"))
 

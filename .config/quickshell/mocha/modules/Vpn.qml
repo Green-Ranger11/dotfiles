@@ -26,7 +26,7 @@ Stat {
     Timer { running: true; interval: 10000; repeat: true; onTriggered: probe.running = true }
 
     // openfortivpn brings ppp0 up/down; any link change re-probes at once, so
-    // toggles from the network menu or Super+Shift+W show without the 10s lag.
+    // toggles from the network menu show without the 10s lag.
     Process {
         running: true
         command: ["ip", "-o", "monitor", "link"]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # VPN toggle for openfortivpn@<name> (default vodafone), used by the
-# Quickshell network menu, the bar VPN icon and Super+Shift+W.
+# Quickshell network menu and the bar VPN icon.
 # Usage: vpn.sh [toggle] [name]  (name = /etc/openfortivpn/<name>.conf)
 # Passwordless start/stop relies on the polkit rule in
 # /etc/polkit-1/rules.d/50-openfortivpn.rules.

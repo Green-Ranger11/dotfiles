@@ -1,4 +1,5 @@
 //@ pragma UseQApplication
+//@ pragma IconTheme Breeze-Dark-Green
 // Platform (dbusmenu) tray menus need QApplication rather than QGuiApplication.
 import QtQuick
 import QtQuick.Layouts

@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-rofi -modi "emoji:rofimoji" -show emoji -theme "$HOME"/.config/rofi/config/launcher.rasi

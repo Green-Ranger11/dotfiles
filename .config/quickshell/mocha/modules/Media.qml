@@ -20,7 +20,9 @@ Segment {
     }
 
     Label {
-        Layout.maximumWidth: 260
+        // Hard cap: long "artist - title" strings elide instead of pushing
+        // the tray and status icons across the bar.
+        Layout.preferredWidth: Math.min(implicitWidth, 180)
         elide: Text.ElideRight
         text: {
             const p = chip.player;

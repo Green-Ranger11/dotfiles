@@ -144,8 +144,11 @@ install_arch() {
     echo "  SDDM login screen with the mocha theme (then reboot):"
     echo "    sudo ~/.config/sddm/themes/mocha/install.sh"
     echo "    sudo systemctl disable plasmalogin 2>/dev/null; sudo systemctl enable sddm"
-    echo "  rbw (Bitwarden picker, Super+/):"
-    echo "    rbw config set email <you@example.com> && rbw login"
+    echo "  rbw (Bitwarden picker, Super+/). register needs the personal API key"
+    echo "  (web vault > Settings > Security > Keys); the pinentry reads the master"
+    echo "  password from the login keyring after the first unlock:"
+    echo "    rbw config set email <you@example.com> && rbw register && rbw login"
+    echo "    rbw config set pinentry ~/.config/scripts/rbw-pinentry-keyring"
 }
 
 install_macos() {

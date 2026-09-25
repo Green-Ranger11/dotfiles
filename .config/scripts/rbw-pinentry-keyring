@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+# pinentry for rbw: answers the "Master Password" prompt from the login
+# keyring (Secret Service, unlocked by PAM at sign-in), so unlocking the
+# vault is silent while logged in. Everything else -- first use, a rejected
+# stored password, API key / 2FA prompts -- goes to the real pinentry-qt.
+#
+# Set with: rbw config set pinentry ~/.config/scripts/rbw-pinentry-keyring
+# Forget the stored password: secret-tool clear service rbw type master-password
+import subprocess
+import sys
+
+REAL = "pinentry-qt"
+ATTRS = ["service", "rbw", "type", "master-password"]
+
+
+def send(line):
+    sys.stdout.write(line + "\n")
+    sys.stdout.flush()
+
+
+def escape(s):
+    return s.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def unescape(s):
+    return s.replace("%0A", "\n").replace("%0D", "\r").replace("%25", "%")
+
+
+def lookup():
+    r = subprocess.run(["secret-tool", "lookup", *ATTRS], capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 and r.stdout else None
+
+
+def store(pw):
+    subprocess.run(["secret-tool", "store", "--label=rbw master password", *ATTRS], input=pw, text=True)
+
+
+def clear():
+    subprocess.run(["secret-tool", "clear", *ATTRS])
+
+
+def ask_real(commands):
+    """Replay the SET*/OPTION commands to pinentry-qt, GETPIN, relay its answer."""
+    p = subprocess.Popen([REAL], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+    p.stdout.readline()  # greeting
+    for c in commands:
+        p.stdin.write(c + "\n")
+        p.stdin.flush()
+        p.stdout.readline()
+    p.stdin.write("GETPIN\n")
+    p.stdin.flush()
+    data, lines = None, []
+    while True:
+        line = p.stdout.readline().rstrip("\n")
+        if not line:
+            break
+        lines.append(line)
+        if line.startswith("D "):
+            data = unescape(line[2:])
+        if line.startswith(("OK", "ERR")):
+            break
+    p.stdin.write("BYE\n")
+    p.stdin.close()
+    p.wait()
+    return data, lines
+
+
+def main():
+    send("OK rbw-pinentry-keyring")
+    commands, prompt, error = [], "", False
+    for raw in sys.stdin:
+        line = raw.rstrip("\n")
+        cmd = line.split(" ", 1)[0].upper()
+        if cmd == "BYE":
+            send("OK")
+            return
+        if cmd == "GETPIN":
+            master = prompt.startswith("Master Password")
+            if master and error:
+                clear()  # rbw rejected the stored password: ask again
+            pw = lookup() if master and not error else None
+            if pw is not None:
+                send("D " + escape(pw))
+                send("OK")
+            else:
+                data, lines = ask_real(commands)
+                for l in lines:
+                    send(l)
+                if master and data:
+                    store(data)
+            commands, prompt, error = [], "", False
+            continue
+        if cmd == "SETPROMPT":
+            prompt = line[len("SETPROMPT "):]
+        if cmd == "SETERROR":
+            error = True
+        commands.append(line)
+        send("OK")
+
+
+if __name__ == "__main__":
+    main()

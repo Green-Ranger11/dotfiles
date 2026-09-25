@@ -1,0 +1,18 @@
+# imv: default image viewer (mimeapps.list -> imv-dir.desktop, so opening one
+# image loads the whole folder). Catppuccin Mocha on crust, like kitty/the bar.
+[options]
+background = 11111b
+overlay = false
+overlay_font = CommitMono Nerd Font:11
+overlay_text_color = cdd6f4
+overlay_background_color = 11111b
+overlay_background_alpha = cc
+overlay_position_bottom = true
+overlay_text = [${imv_current_index}/${imv_file_count}] ${imv_current_file##*/}  ${imv_width}x${imv_height}  ${imv_scale}%
+title_text = imv - ${imv_current_file##*/}
+
+[binds]
+# Defaults stay on (h/j/k/l pan, arrows/[ ] prev/next, +/- zoom, gg/G, f, d).
+# Vim-style next/prev on n/p, like the pickers' j/k.
+n = next
+p = prev

@@ -47,6 +47,7 @@ LINUX_HYPR_PACKAGES=(
     # File manager: Thunar + gvfs (trash, mounts, sftp), tumbler/ffmpegthumbnailer
     # (thumbnails), archive plugin (right-click extract/compress via ark).
     thunar gvfs tumbler ffmpegthumbnailer thunar-archive-plugin
+    imv mpv # image viewer (imv-dir: whole folder) + video/audio player
     zathura zathura-pdf-mupdf # default PDF viewer (see mimeapps.list)
 )
 
@@ -59,7 +60,6 @@ LINUX_KDE_PACKAGES=(
 # Theming (Catppuccin Mocha across Qt + GTK + Kvantum)
 LINUX_THEMING_PACKAGES=(
     kvantum qt5ct qt6ct
-    papirus-icon-theme # icon theme set in gtk settings.ini + kdeglobals + gsettings
 )
 
 # Fonts (Nerd Fonts + emoji + CJK + symbols)
@@ -263,9 +263,10 @@ main() {
     echo "  4. herdr (agent multiplexer, config in ~/.config/herdr):"
     echo "       curl -fsSL https://herdr.dev/install.sh | sh"
     echo "       herdr integration install claude"
-    echo "  5. Green-folder icon theme (Papirus-Dark-Green, set in kdeglobals/qt*ct/gtk):"
-    echo "       ~/.config/scripts/papirus-green.sh"
-    echo "       gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark-Green'"
+    echo "  5. Icon theme (Breeze-Dark-Green: sharp Breeze icons, green folders;"
+    echo "     set in kdeglobals/qt*ct/gtk):"
+    echo "       ~/.config/scripts/breeze-green.sh"
+    echo "       gsettings set org.gnome.desktop.interface icon-theme 'Breeze-Dark-Green'"
 }
 
 main "$@"

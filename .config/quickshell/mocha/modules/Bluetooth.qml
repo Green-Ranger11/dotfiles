@@ -19,13 +19,8 @@ Stat {
     iconColor: !on ? Theme.iconDim : connected ? Theme.iconOn : Theme.iconMid
 
     onClicked: mouse => {
-        // Left: the Quickshell menu (launcher/BluetoothPicker.qml).
-        // Right: bluetuith, for pairing devices that need a typed passkey.
-        // foreground=green: bluetuith draws the selected row in reverse video
-        // of the terminal default fg, so this is what turns the highlight green.
-        proc.command = mouse.button === Qt.LeftButton
-            ? ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "bluetooth", "toggle"]
-            : ["kitty", "--class", "bluetuith", "-o", "foreground=#a6e3a1", "-e", "bluetuith"];
+        // launcher/BluetoothPicker.qml
+        proc.command = ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "bluetooth", "toggle"];
         proc.running = true;
     }
 }

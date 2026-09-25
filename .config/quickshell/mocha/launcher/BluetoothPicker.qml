@@ -10,7 +10,7 @@ import ".."
 //
 // ponytail: no BlueZ agent, so pairing is "just works" only (headsets,
 // speakers; phones confirm on their own screen). Devices that need a typed
-// passkey (some keyboards) still need bluetuith, on right click of the icon.
+// passkey (some keyboards): pair them once with bluetoothctl (bluez-utils).
 Scope {
     id: root
 

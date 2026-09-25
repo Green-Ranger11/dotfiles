@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# VPN status blocklet + toggle for openfortivpn@<name> (default vodafone).
+# VPN toggle for openfortivpn@<name> (default vodafone), used by the
+# Quickshell network menu, the bar VPN icon and Super+Shift+W.
 # Usage: vpn.sh [toggle] [name]  (name = /etc/openfortivpn/<name>.conf)
 # Passwordless start/stop relies on the polkit rule in
 # /etc/polkit-1/rules.d/50-openfortivpn.rules.
@@ -21,13 +22,9 @@ toggle)
 				"Failed to connect — check: journalctl -u $UNIT"
 		fi
 	fi
-	pkill -RTMIN+8 waybar
 	;;
 *)
-	if systemctl is-active --quiet "$UNIT"; then
-		printf '{"text":"󰖂 VPN","class":"connected","tooltip":"Vodafone VPN: connected (click to disconnect)"}\n'
-	else
-		printf '{"text":"󰖂","class":"disconnected","tooltip":"Vodafone VPN: disconnected (click to connect)"}\n'
-	fi
+	echo "usage: vpn.sh toggle [name]" >&2
+	exit 1
 	;;
 esac

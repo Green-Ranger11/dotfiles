@@ -8,7 +8,7 @@ import ".."
 // Toggled over IPC (qs ipc call network toggle) and by the bar's network icon.
 //
 // ponytail: skipped - 802.1X/enterprise Wi-Fi, hidden SSIDs, IP settings.
-// gazelle (right click on the bar icon) still covers those.
+// Use nmtui / nmcli (networkmanager) for those.
 Scope {
     id: root
 
@@ -88,7 +88,7 @@ Scope {
         onAccepted: e => {
             const d = e.data;
             if (d.vpn) {
-                vpnToggle.exec(["sh", Quickshell.env("HOME") + "/.config/waybar/scripts/vpn.sh", "toggle", d.vpn]);
+                vpnToggle.exec(["sh", Quickshell.env("HOME") + "/.config/scripts/vpn.sh", "toggle", d.vpn]);
             } else if (d.radio) {
                 Networking.wifiEnabled = !Networking.wifiEnabled;
             } else if (d.net.connected) {

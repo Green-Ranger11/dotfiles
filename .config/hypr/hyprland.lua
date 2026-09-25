@@ -5,7 +5,7 @@
 -- same order the old source= lines did.
 --
 -- Still hyprlang (separate tools, NOT part of this config):
---   hyprlock.conf, hyprpaper.conf, themes/mocha.conf (consumed by hyprlock)
+--   hyprpaper.conf
 
 require("monitors")
 require("env")

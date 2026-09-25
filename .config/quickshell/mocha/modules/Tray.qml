@@ -13,20 +13,6 @@ Segment {
     id: tray
     visible: SystemTray.items.values.length > 0
 
-    // TEMP debug hook: qs ipc call tray dump / tray menu
-    IpcHandler {
-        target: "tray"
-        function dump(): string {
-            return SystemTray.items.values.map(i => `${i.id} hasMenu=${i.hasMenu} onlyMenu=${i.onlyMenu} menu=${i.menu}`).join("\n");
-        }
-        function menu(): string {
-            const entry = rep.itemAt(0);
-            if (!entry) return "no items";
-            entry.openMenu();
-            return "opened " + entry.modelData.id;
-        }
-    }
-
     Repeater {
         id: rep
         model: SystemTray.items

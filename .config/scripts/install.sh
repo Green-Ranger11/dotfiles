@@ -73,10 +73,7 @@ LINUX_FONT_PACKAGES=(
 
 # AUR-only packages
 LINUX_AUR_PACKAGES=(
-    # gazelle-tui / bluetuith: right click on the bar's network / bluetooth
-    # icons, for what the Quickshell menus skip (enterprise Wi-Fi, passkey
-    # pairing). rofimoji: only its emoji CSVs, read by the emoji picker.
-    antigen gazelle-tui bluetuith tmux-plugin-manager ttf-joypixels rofimoji
+    antigen tmux-plugin-manager ttf-joypixels
     # asusctl is AUR-only -- NOT in the official repos. It previously sat in
     # LINUX_HYPR_PACKAGES, where pacman aborted that whole transaction on
     # "target not found", so NONE of the Hyprland packages installed -- and
@@ -197,7 +194,6 @@ install_debian() {
     )
 
     DEBIAN_LINUX=(
-        rofi dunst
         grim slurp wl-clipboard
         brightnessctl playerctl pavucontrol
         network-manager kdeconnect
@@ -215,7 +211,6 @@ install_debian() {
     echo "  zoxide:   curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh"
     echo "  fastfetch: build from source or use a PPA"
     echo "  hyprland: build from source — not in Debian repos"
-    echo "  waybar:   may need a backport"
 
     print_status "Debian/Ubuntu package installation complete!"
 }

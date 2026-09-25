@@ -10,7 +10,7 @@ local floatRules = { float = true, size = "1150 590", center = true }
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("thunar"))
 -- Pickers live in the quickshell process; toggling them is an IPC call, not a
--- new process. rofi stays installed: swap these lines back to fall back to it.
+-- new process.
 local QS = "qs -p $HOME/.config/quickshell/mocha ipc call "
 hl.bind(mainMod .. " + D",      hl.dsp.exec_cmd(QS .. "launcher toggle"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd(QS .. "emoji toggle"))
@@ -19,7 +19,7 @@ hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(QS .. "clipboard toggle"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(QS .. "bluetooth toggle"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(QS .. "network toggle"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(QS .. "power toggle"))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("sh $HOME/.config/waybar/scripts/vpn.sh toggle"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("sh $HOME/.config/scripts/vpn.sh toggle"))
 -- herdr agent cockpit (absolute path: Hyprland's exec PATH lacks ~/.local/bin)
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class herdr -e $HOME/.local/bin/herdr"))
 

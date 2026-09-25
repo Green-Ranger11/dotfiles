@@ -3,7 +3,7 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
-    -- Update environment FIRST (required for Waybar to find Hyprland socket)
+    -- Update environment FIRST (so D-Bus/systemd services see the Hyprland socket)
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE XDG_MENU_PREFIX")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
@@ -16,9 +16,7 @@ hl.on("hyprland.start", function()
     -- NOTE: kdeconnect-indicator races kded6's tray watcher at login. On slow
     -- cold boots it can lose and the tray icon won't appear (process still
     -- runs). Rare; fix when it happens: pkill -f kdeconnect-ind && kdeconnect-indicator &
-    -- quickshell replaces waybar (bar), swaync (notifications) and rofi
-    -- (launcher/emoji/clipboard pickers). Both are still installed: put them
-    -- back on this line to fall back.
+    -- quickshell: bar, notifications, OSDs, lock screen and every picker.
     hl.exec_cmd("qs -p $HOME/.config/quickshell/mocha & hyprpaper & kdeconnect-indicator")
     hl.exec_cmd("wl-paste --watch cliphist store")
 

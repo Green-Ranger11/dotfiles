@@ -4,7 +4,7 @@ import Quickshell.Io
 import ".."
 
 // openfortivpn@vodafone. Read the unit state directly; the toggle reuses the
-// waybar script because it carries the polkit rule and the notifications.
+// shared vpn.sh because it carries the polkit rule and the notifications.
 Stat {
     id: vpn
     interactive: true
@@ -40,7 +40,7 @@ Stat {
     valueColor: Theme.accent
 
     onClicked: {
-        toggle.command = ["sh", Quickshell.env("HOME") + "/.config/waybar/scripts/vpn.sh", "toggle"];
+        toggle.command = ["sh", Quickshell.env("HOME") + "/.config/scripts/vpn.sh", "toggle"];
         toggle.running = true;
     }
 

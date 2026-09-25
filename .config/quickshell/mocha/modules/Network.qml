@@ -21,11 +21,8 @@ Stat {
     iconColor: wiredUp || wifiUp ? Theme.iconOn : Theme.iconDim
 
     onClicked: mouse => {
-        // Left: the Quickshell network menu (launcher/NetworkPicker.qml).
-        // Right: gazelle for what that menu skips (enterprise Wi-Fi, IP settings).
-        proc.command = mouse.button === Qt.LeftButton
-            ? ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "network", "toggle"]
-            : ["kitty", "--class", "gazelle", Quickshell.env("HOME") + "/.local/bin/gazelle"];
+        // launcher/NetworkPicker.qml
+        proc.command = ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "network", "toggle"];
         proc.running = true;
     }
 }

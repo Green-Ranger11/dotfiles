@@ -69,7 +69,7 @@ PanelWindow {
     anchors { top: true; bottom: true; left: true; right: true }
 
     function open() { visible = true; shown = true; }
-    function close() { console.log("DBG close", new Error().stack); shown = false; gPending = false; }
+    function close() { shown = false; gPending = false; }
     function toggle() { if (shown) close(); else open(); }
 
     onVisibleChanged: {
@@ -213,7 +213,7 @@ PanelWindow {
             NumberAnimation {
                 duration: root.shown ? 110 : 110
                 easing.type: Easing.OutQuad
-                onRunningChanged: { console.log("DBG opacityAnim running", running, "shown", root.shown); if (!running && !root.shown) root.visible = false; }
+                onRunningChanged: if (!running && !root.shown) root.visible = false
             }
         }
         Behavior on scale {

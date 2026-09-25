@@ -143,8 +143,10 @@ Rectangle {
             currentIndex: sessionModel.lastIndex
             onPicked: password.forceActiveFocus()
         }
+        // Layout switcher (not an on-screen keyboard): only useful with 2+
+        // layouts, so a single-layout machine doesn't show a dead button.
         Text {
-            visible: keyboard.layouts.length > 0
+            visible: keyboard.layouts.length > 1
             color: layoutArea.containsMouse ? Theme.accent : Theme.subtext0
             font.family: Theme.fontFamily
             font.pixelSize: Theme.fontSize

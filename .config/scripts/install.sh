@@ -40,15 +40,16 @@ LINUX_HYPR_PACKAGES=(
     quickshell
     sddm # login screen; theme in ~/.config/sddm/themes/mocha
     grim slurp swappy wl-clipboard cliphist
-    brightnessctl playerctl pavucontrol wireplumber
+    brightnessctl pavucontrol wireplumber
     networkmanager kdeconnect
+    xdg-terminal-exec # Terminal=true apps open in kitty (~/.config/xdg-terminals.list)
     rbw dolphin # rbw backs the Quickshell Bitwarden picker
     zathura zathura-pdf-mupdf # default PDF viewer (see mimeapps.list)
 )
 
 # KDE bits — kded services (see hypr/autostart.lua) plus Qt app niceties.
 LINUX_KDE_PACKAGES=(
-    kded kio polkit polkit-kde-agent
+    kded kio polkit
     breeze breeze-icons breeze-gtk breeze-cursors
 )
 

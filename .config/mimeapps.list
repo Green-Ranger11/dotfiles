@@ -129,5 +129,5 @@ x-scheme-handler/mailto=userapp-Thunderbird-A16PP3.desktop
 message/rfc822=userapp-Thunderbird-A16PP3.desktop
 x-scheme-handler/mid=userapp-Thunderbird-A16PP3.desktop
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-VF2HR3.desktop
-inode/directory=org.kde.dolphin.desktop
-x-directory/normal=org.kde.dolphin.desktop
+inode/directory=thunar.desktop
+x-directory/normal=thunar.desktop

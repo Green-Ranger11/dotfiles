@@ -77,3 +77,14 @@
 /* Square menus, popovers and tooltips, matching Quickshell popups (Theme.radius = 1). */
 menu, .menu, .context-menu, popover, popover > contents, popover.menu > contents,
 tooltip, tooltip > * { border-radius: 0; }
+
+/* Thunar: only the file list is see-through (like kitty's 0.85), blurred by
+   Hyprland; sidebar, toolbar and path bar stay solid. The window itself is
+   transparent so the list's alpha reaches the compositor. */
+window.thunar { background-color: transparent; }
+window.thunar toolbar,
+window.thunar .sidebar,
+window.thunar .sidebar .view,
+window.thunar paned > separator { background-color: @theme_bg_color; }
+window.thunar scrolledwindow .view:not(.sidebar) { background-color: alpha(@theme_base_color, 0.85); }
+window.thunar scrolledwindow .view:not(.sidebar):selected { background-color: @theme_selected_bg_color; }

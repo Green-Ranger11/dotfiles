@@ -8,7 +8,7 @@ local floatRules = { float = true, size = "1150 590", center = true }
 
 -- Application launchers
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
-hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("dolphin"))
+hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("thunar"))
 -- Pickers live in the quickshell process; toggling them is an IPC call, not a
 -- new process. rofi stays installed: swap these lines back to fall back to it.
 local QS = "qs -p $HOME/.config/quickshell/mocha ipc call "

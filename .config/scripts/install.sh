@@ -43,7 +43,10 @@ LINUX_HYPR_PACKAGES=(
     brightnessctl pavucontrol wireplumber
     networkmanager kdeconnect
     xdg-terminal-exec # Terminal=true apps open in kitty (~/.config/xdg-terminals.list)
-    rbw dolphin # rbw backs the Quickshell Bitwarden picker
+    rbw # backs the Quickshell Bitwarden picker
+    # File manager: Thunar + gvfs (trash, mounts, sftp), tumbler/ffmpegthumbnailer
+    # (thumbnails), archive plugin (right-click extract/compress via ark).
+    thunar gvfs tumbler ffmpegthumbnailer thunar-archive-plugin
     zathura zathura-pdf-mupdf # default PDF viewer (see mimeapps.list)
 )
 
@@ -260,8 +263,9 @@ main() {
     echo "  4. herdr (agent multiplexer, config in ~/.config/herdr):"
     echo "       curl -fsSL https://herdr.dev/install.sh | sh"
     echo "       herdr integration install claude"
-    echo "  5. Icon theme for GTK apps that read dconf: "
-    echo "       gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'"
+    echo "  5. Green-folder icon theme (Papirus-Dark-Green, set in kdeglobals/qt*ct/gtk):"
+    echo "       ~/.config/scripts/papirus-green.sh"
+    echo "       gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark-Green'"
 }
 
 main "$@"

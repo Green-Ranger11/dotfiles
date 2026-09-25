@@ -38,6 +38,13 @@ hl.window_rule({ name = "ff-main-pin", match = { class = "^(firefox)$", title = 
 hl.window_rule({ name = "dofus-tag",  match = { title = "Dofus" }, tag = "+dofus" })
 hl.window_rule({ name = "dofus-tile", match = { tag = "dofus" },   tile = true })
 
+-- bluetuith: small float, sized for a couple of paired devices (help line is off).
+-- Launched by keybinds.lua and the Quickshell bar icon (modules/Bluetooth.qml).
+hl.window_rule({ name = "bluetuith-float", match = { class = "^(bluetuith)$" }, float = true, size = "820 220", center = true })
+
+-- gazelle (network TUI): opened by right click on the bar network icon.
+hl.window_rule({ name = "gazelle-float", match = { class = "^(gazelle)$" }, float = true, size = "1150 590", center = true })
+
 -- Yazi floating file manager
 hl.window_rule({ name = "yazi-float", match = { class = "^(yazi-float)$" }, float = true })
 

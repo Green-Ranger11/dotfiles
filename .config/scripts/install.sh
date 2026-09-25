@@ -32,18 +32,21 @@ CORE_PACKAGES=(
 
 # Hyprland desktop (Linux Wayland session)
 LINUX_HYPR_PACKAGES=(
-    hyprland hyprpaper hyprlock hyprpicker hyprpolkitagent
+    hyprland hyprpaper hyprpicker hyprpolkitagent
     xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
-    waybar rofi dunst swaync swaylock
+    # Quickshell (~/.config/quickshell/mocha) is the bar, notifications, lock
+    # screen and every picker (apps, emoji, clipboard, network, bluetooth,
+    # power, bitwarden) -- it replaced waybar, swaync, rofi, rofi-rbw, hyprlock.
+    quickshell
+    sddm # login screen; theme in ~/.config/sddm/themes/mocha
     grim slurp swappy wl-clipboard cliphist
     brightnessctl playerctl pavucontrol wireplumber
-    networkmanager kdeconnect bluetui
-    rbw rofi-rbw dolphin
+    networkmanager kdeconnect
+    rbw dolphin # rbw backs the Quickshell Bitwarden picker
     zathura zathura-pdf-mupdf # default PDF viewer (see mimeapps.list)
 )
 
-# KDE bits — needed for the kded statusnotifierwatcher fix that makes
-# waybar's tray work on non-Plasma sessions, plus Qt app niceties.
+# KDE bits — kded services (see hypr/autostart.lua) plus Qt app niceties.
 LINUX_KDE_PACKAGES=(
     kded kio polkit polkit-kde-agent
     breeze breeze-icons breeze-gtk breeze-cursors
@@ -66,7 +69,10 @@ LINUX_FONT_PACKAGES=(
 
 # AUR-only packages
 LINUX_AUR_PACKAGES=(
-    antigen gazelle-tui tmux-plugin-manager ttf-joypixels rofimoji
+    # gazelle-tui / bluetuith: right click on the bar's network / bluetooth
+    # icons, for what the Quickshell menus skip (enterprise Wi-Fi, passkey
+    # pairing). rofimoji: only its emoji CSVs, read by the emoji picker.
+    antigen gazelle-tui bluetuith tmux-plugin-manager ttf-joypixels rofimoji
     # asusctl is AUR-only -- NOT in the official repos. It previously sat in
     # LINUX_HYPR_PACKAGES, where pacman aborted that whole transaction on
     # "target not found", so NONE of the Hyprland packages installed -- and
@@ -132,9 +138,14 @@ install_arch() {
 
     print_status "Arch Linux package installation complete!"
     echo ""
-    print_warning "Reminder: enable kded statusnotifierwatcher autoload (already in ~/.config/kded6rc):"
-    echo "  [Module-statusnotifierwatcher]"
-    echo "  autoload=true"
+    print_warning "One-time root steps (not run automatically):"
+    echo "  Quickshell lock screen PAM service:"
+    echo "    sudo cp ~/.config/quickshell/mocha/lock/pam/quickshell-lock /etc/pam.d/quickshell-lock"
+    echo "  SDDM login screen with the mocha theme (then reboot):"
+    echo "    sudo ~/.config/sddm/themes/mocha/install.sh"
+    echo "    sudo systemctl disable plasmalogin 2>/dev/null; sudo systemctl enable sddm"
+    echo "  rbw (Bitwarden picker, Super+/):"
+    echo "    rbw config set email <you@example.com> && rbw login"
 }
 
 install_macos() {
@@ -162,7 +173,7 @@ install_macos() {
     print_status "Installing yabai stack..."
     brew install "${BREW_YABAI[@]}" 2>/dev/null || true
 
-    print_warning "Linux-only packages (hyprland, waybar, rofi, dunst, KDE bits) skipped on macOS"
+    print_warning "Linux-only packages (hyprland, quickshell, sddm, KDE bits) skipped on macOS"
     print_warning "Yabai needs SIP partially disabled for some features — see https://github.com/koekeishiya/yabai/wiki"
 
     print_status "macOS package installation complete!"

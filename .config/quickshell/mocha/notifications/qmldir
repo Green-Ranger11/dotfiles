@@ -1,0 +1,4 @@
+singleton Notifs 1.0 Notifs.qml
+Toast 1.0 Toast.qml
+NotificationCentre 1.0 NotificationCentre.qml
+NotificationLayer 1.0 NotificationLayer.qml

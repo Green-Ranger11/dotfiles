@@ -9,16 +9,16 @@ local floatRules = { float = true, size = "1150 590", center = true }
 -- Application launchers
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd("dolphin"))
-hl.bind(mainMod .. " + D",      hl.dsp.exec_cmd("sh $HOME/.config/rofi/bin/launcher"))
-hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("sh $HOME/.config/rofi/bin/emoji"))
-hl.bind(mainMod .. " + slash",  hl.dsp.exec_cmd("rofi-rbw"))
-hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("kitty --class clippicker -o close_on_child_death=yes -e sh $HOME/.config/rofi/bin/clipboard", floatRules))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("kitty --class floating -e bluetui", floatRules))
--- -o color12: Textual hardcodes table headers to ansi_bright_blue in ANSI mode
--- (unreachable from gazelle's theme.toml); remap it to surface0 in this
--- dedicated float so headers render dark with readable text.
--- (Lua strings need no ## escape for a literal # like hyprlang did.)
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("kitty --class floating -o color12=#313244 -e gazelle", floatRules))
+-- Pickers live in the quickshell process; toggling them is an IPC call, not a
+-- new process. rofi stays installed: swap these lines back to fall back to it.
+local QS = "qs -p $HOME/.config/quickshell/mocha ipc call "
+hl.bind(mainMod .. " + D",      hl.dsp.exec_cmd(QS .. "launcher toggle"))
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd(QS .. "emoji toggle"))
+hl.bind(mainMod .. " + slash",  hl.dsp.exec_cmd(QS .. "bitwarden toggle"))
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(QS .. "clipboard toggle"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(QS .. "bluetooth toggle"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(QS .. "network toggle"))
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(QS .. "power toggle"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("sh $HOME/.config/waybar/scripts/vpn.sh toggle"))
 -- herdr agent cockpit (absolute path: Hyprland's exec PATH lacks ~/.local/bin)
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class herdr -e $HOME/.local/bin/herdr"))
@@ -31,7 +31,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a -f hex"))
 
 -- Session
 hl.bind(mainMod .. " + M", hl.dsp.exit())
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("qs ipc -p " .. os.getenv("HOME") .. "/.config/quickshell/mocha call lock trigger"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("env YAZI_FLOAT=1 EDITOR=nvim kitty --class yazi-float yazi", floatRules))
 
 -- Hardware controls
@@ -54,7 +54,7 @@ local touchpadEnabled = true
 local function toggleTouchpad()
     touchpadEnabled = not touchpadEnabled
     hl.device({ name = "asuf1204:00-2808:0201-touchpad", enabled = touchpadEnabled })
-    hl.exec_cmd('notify-send -t 2000 "Touchpad" "' .. (touchpadEnabled and "Enabled" or "Disabled") .. '"')
+    hl.exec_cmd('notify-send -a "Touchpad" -t 2000 "Touchpad" "' .. (touchpadEnabled and "Enabled" or "Disabled") .. '"')
 end
 hl.bind("XF86TouchpadToggle", toggleTouchpad, { locked = true })
 hl.bind("F10", toggleTouchpad)
@@ -69,8 +69,8 @@ hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_S
 hl.bind("XF86Launch1",          hl.dsp.exec_cmd("rog-control-center"),                           { locked = true })
 
 -- Screenshots (each command shared by its PRINT-key and letter-key binds)
-local shotFull = [[grim -o "$(hyprctl -j monitors | jq -r '.[] | select(.focused) | .name')" ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send "Screenshot" "Saved to Pictures/Screenshots"]]
-local shotEdit = [[grim -g "$(slurp)" - | swappy -f - && notify-send "Screenshot saved to Pictures"]]
+local shotFull = [[grim -o "$(hyprctl -j monitors | jq -r '.[] | select(.focused) | .name')" ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send -a "Screenshot" "Screenshot saved" "Saved to Pictures/Screenshots"]]
+local shotEdit = [[grim -g "$(slurp)" - | swappy -f - && notify-send -a "Screenshot" "Screenshot saved" "Saved to Pictures"]]
 local shotClip = [[grim -g "$(slurp -d)" - | wl-copy]]
 
 -- Full screen (focused monitor) straight to file

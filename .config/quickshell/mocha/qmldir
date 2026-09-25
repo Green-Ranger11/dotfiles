@@ -1,0 +1,7 @@
+singleton Theme 1.0 Theme.qml
+singleton Sys 1.0 Sys.qml
+Chip 1.0 Chip.qml
+Label 1.0 Label.qml
+Segment 1.0 Segment.qml
+Divider 1.0 Divider.qml
+Stat 1.0 Stat.qml

@@ -1,0 +1,8 @@
+PickerList 1.0 PickerList.qml
+AppLauncher 1.0 AppLauncher.qml
+EmojiPicker 1.0 EmojiPicker.qml
+ClipboardPicker 1.0 ClipboardPicker.qml
+NetworkPicker 1.0 NetworkPicker.qml
+BluetoothPicker 1.0 BluetoothPicker.qml
+PowerPicker 1.0 PowerPicker.qml
+BitwardenPicker 1.0 BitwardenPicker.qml

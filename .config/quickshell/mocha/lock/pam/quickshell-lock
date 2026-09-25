@@ -1,0 +1,12 @@
+# PAM service file for the Quickshell lock prototype.
+#
+# This is a REFERENCE COPY. The real one PAM reads has to live at
+# /etc/pam.d/quickshell-lock (PamContext can't use a custom configDirectory
+# here -- see the comment in ../LockContext.qml for why). Install it once:
+#
+#   sudo cp ~/.config/quickshell/mocha/lock/pam/quickshell-lock /etc/pam.d/quickshell-lock
+#
+# Content mirrors /etc/pam.d/hyprlock exactly (which itself just includes
+# /etc/pam.d/login) -- deliberately not a bare pam_unix.so stack, so this
+# can't accidentally diverge from what hyprlock already does safely here.
+auth        include     login

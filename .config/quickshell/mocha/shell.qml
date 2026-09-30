@@ -12,6 +12,9 @@ import "launcher"
 import "lock"
 
 ShellRoot {
+    // Battery/AC: power profile + laptop refresh rate.
+    PowerAuto {}
+
     // Volume / brightness popups: one window that follows the focused monitor.
     Osd {}
 

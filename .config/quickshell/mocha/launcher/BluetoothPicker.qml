@@ -85,7 +85,8 @@ Scope {
                     text: root.glyph(d.icon) + "  " + d.name,
                     sub: [root.stateText(d), battery].filter(x => x).join("  "),
                     data: { dev: d },
-                    color: d.connected ? Theme.accent : undefined
+                    color: d.connected ? Theme.accent : undefined,
+                    keep: true
                 });
             }
             return out;

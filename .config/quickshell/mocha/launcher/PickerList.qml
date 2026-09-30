@@ -98,10 +98,24 @@ PanelWindow {
             : entries.filter(e => (e.text + " " + (e.sub || "")).toLowerCase().indexOf(q) !== -1);
         return base.map(withSection);
     }
-    // Filtering restarts at the top; a clipboard delete keeps your place.
-    onFilteredChanged: list.currentIndex = typing
-        ? 0
-        : Math.max(0, Math.min(list.currentIndex, filtered.length - 1))
+    // Filtering restarts at the top; any other refresh keeps your place.
+    // Swapping the ListView's model array resets it to row 0 *after* this
+    // handler runs (list.model is still the old array here), so restore on
+    // the next tick. Follow the entry by text, not the row: pickers reorder
+    // (bluetooth floats a connected device to the top). Entry gone or its
+    // text changed (clipboard delete, wifi bars): stay on the same row.
+    onFilteredChanged: {
+        if (typing) {
+            list.currentIndex = 0;
+            return;
+        }
+        const row = list.currentIndex;
+        const was = list.model?.[row];
+        Qt.callLater(() => {
+            const i = was ? filtered.findIndex(e => e.text === was.text) : -1;
+            list.currentIndex = i >= 0 ? i : Math.max(0, Math.min(row, filtered.length - 1));
+        });
+    }
 
     function accept() {
         if (password) {

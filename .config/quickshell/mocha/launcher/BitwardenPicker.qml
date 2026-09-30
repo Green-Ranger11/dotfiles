@@ -39,6 +39,18 @@ PickerList {
     }
     boxWidth: 560
 
+    // `rbw list --fields id,name,user,folder` output -> PickerList entries, A-Z.
+    function parse(text) {
+        const out = [];
+        for (const line of text.split("\n")) {
+            const [id, name, user, folder] = line.split("\t");
+            if (!id) continue;
+            out.push({ text: name, sub: [user, folder].filter(x => x).join("  "), data: { id: id, user: user || "" } });
+        }
+        out.sort((a, b) => a.text.localeCompare(b.text));
+        return out;
+    }
+
     // Unlock first (rbw's pinentry must not sit under this overlay), then
     // list, then show. Cancelled unlock: nothing opens.
     function toggleVault() {
@@ -72,16 +84,29 @@ PickerList {
         }
         stdout: StdioCollector {
             onStreamFinished: {
-                const out = [];
-                for (const line of text.split("\n")) {
-                    const [id, name, user, folder] = line.split("\t");
-                    if (!id) continue;
-                    out.push({ text: name, sub: [user, folder].filter(x => x).join("  "), data: { id: id, user: user || "" } });
+                picker.items = picker.parse(text);
+                if (picker.items.length) {
+                    picker.open();
+                    syncer.running = true;
                 }
-                out.sort((a, b) => a.text.localeCompare(b.text));
-                picker.items = out;
-                if (out.length) picker.open();
             }
+        }
+    }
+
+    // Open from rbw's local cache straight away, then sync (~5s round trip)
+    // and relist, so items added elsewhere appear without waiting for rbw's
+    // hourly sync_interval. Offline: sync fails quietly, cached list stays.
+    Process {
+        id: syncer
+        command: ["rbw", "sync"]
+        onExited: code => { if (code === 0 && picker.shown) relist.running = true; }
+    }
+
+    Process {
+        id: relist
+        command: ["rbw", "list", "--fields", "id,name,user,folder"]
+        stdout: StdioCollector {
+            onStreamFinished: picker.items = picker.parse(text)
         }
     }
 

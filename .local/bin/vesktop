@@ -1,0 +1,15 @@
+#!/bin/sh
+# On battery, launch vesktop off the NVIDIA dGPU so it can runtime-suspend
+# (~5W). hypr/env.lua exports NVIDIA as the global GL/VA-API/GBM default, and
+# vesktop's GPU process otherwise opens the dGPU and keeps it awake. Both the
+# env overrides and --disable-gpu are needed: either alone still wakes it.
+# Plugged in: stock launch. Decided at launch; a running instance keeps its mode.
+if [ "$(cat /sys/class/power_supply/BAT0/status)" = Discharging ]; then
+    exec env LIBVA_DRIVER_NAME=radeonsi \
+        __GLX_VENDOR_LIBRARY_NAME=mesa \
+        __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json \
+        VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.json \
+        GBM_BACKEND= \
+        /usr/bin/vesktop --disable-gpu "$@"
+fi
+exec /usr/bin/vesktop "$@"

@@ -29,5 +29,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("kitty")
     hl.exec_cmd("firefox")
     -- vesktop-bin is a native package (/usr/bin/vesktop) -- NOT a flatpak.
-    hl.exec_cmd("vesktop")
+    -- ~/.local/bin/vesktop wraps /usr/bin/vesktop: keeps it off the NVIDIA
+    -- dGPU on battery. ~/.local/bin is not on Hyprland's PATH, hence absolute.
+    hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/vesktop")
 end)

@@ -52,3 +52,6 @@ hl.window_rule({
     match = { class = "^(org\\.remmina\\.Remmina)$", initial_title = "^(Remmina)$" },
     maximize = true,
 })
+
+-- qBittorrent: match kitty's background_opacity 0.85
+hl.window_rule({ name = "qbit-opacity", match = { class = "^(org\\.qbittorrent\\.qBittorrent)$" }, opacity = "0.85" })

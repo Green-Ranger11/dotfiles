@@ -12,6 +12,10 @@ Singleton {
     property int memory: 0
     property int temperature: 0
 
+    // True while the network picker's vpn.sh runs, so the bar's VPN spinner
+    // starts at once instead of waiting for the next systemd probe.
+    property bool vpnToggling: false
+
     property var lastStat: null
 
     FileView { id: stat; path: "/proc/stat"; blockLoading: true }

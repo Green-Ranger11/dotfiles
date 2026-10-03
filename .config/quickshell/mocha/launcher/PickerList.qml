@@ -53,6 +53,12 @@ PanelWindow {
     signal accepted(var entry)
     signal removed(var entry)
     signal submitted(string text)
+    // Tab / vim "a" / right-click: secondary actions for the row. Pickers
+    // that open a submenu set `submenu`, which turns Esc, q and vim "h"
+    // into `back` instead of closing.
+    signal more(var entry)
+    signal back()
+    property bool submenu: false
 
     // `shown` drives the animation. The window stays mapped until the close
     // animation finishes, otherwise it would blink out on frame one.
@@ -77,6 +83,7 @@ PanelWindow {
             searching = false;
             input.text = "";
             list.currentIndex = 0;
+            remember();
             intro = true;
             introTimer.restart();
             // Focus first, before any animation: keystrokes are never dropped.
@@ -99,21 +106,37 @@ PanelWindow {
         return base.map(withSection);
     }
     // Filtering restarts at the top; any other refresh keeps your place.
-    // Swapping the ListView's model array resets it to row 0 *after* this
-    // handler runs (list.model is still the old array here), so restore on
-    // the next tick. Follow the entry by text, not the row: pickers reorder
-    // (bluetooth floats a connected device to the top). Entry gone or its
-    // text changed (clipboard delete, wifi bars): stay on the same row.
+    // Swapping the ListView's model array resets it to row 0, in no fixed
+    // order relative to this handler, so the selection is remembered when
+    // the *user* moves (remember()), never read back at refresh time, and
+    // restored on the next tick. Entries are followed by `key` (falls back
+    // to text) because pickers reorder: bluetooth floats a connected device
+    // to the top, wifi text embeds the signal bars. Entry gone (clipboard
+    // delete): stay on the same row. One restore per burst of refreshes.
+    property string selectedKey: ""
+    property int selectedRow: 0
+    property bool restorePending: false
+    function keyOf(e) { return e.key !== undefined ? String(e.key) : e.text; }
+    function remember() {
+        selectedRow = list.currentIndex;
+        const e = filtered[selectedRow];
+        selectedKey = e ? keyOf(e) : "";
+    }
     onFilteredChanged: {
         if (typing) {
             list.currentIndex = 0;
+            remember();
             return;
         }
-        const row = list.currentIndex;
-        const was = list.model?.[row];
+        if (restorePending) return;
+        restorePending = true;
         Qt.callLater(() => {
-            const i = was ? filtered.findIndex(e => e.text === was.text) : -1;
-            list.currentIndex = i >= 0 ? i : Math.max(0, Math.min(row, filtered.length - 1));
+            restorePending = false;
+            if (list.count === 0) return;
+            const i = filtered.findIndex(e => keyOf(e) === selectedKey);
+            list.currentIndex = i >= 0 ? i : Math.min(selectedRow, list.count - 1);
+            list.positionViewAtIndex(list.currentIndex, ListView.Contain);
+            remember();
         });
     }
 
@@ -142,6 +165,7 @@ PanelWindow {
         if (list.count === 0) return;
         list.currentIndex = Math.max(0, Math.min(list.count - 1, list.currentIndex + n));
         list.positionViewAtIndex(list.currentIndex, ListView.Contain);
+        remember();
     }
     function halfPage() { return Math.max(1, Math.floor(list.height / rowHeight / 2)); }
 
@@ -152,12 +176,17 @@ PanelWindow {
         const vim = !root.typing && !ctrl;
         switch (e.key) {
         case Qt.Key_Escape:
-            // First Esc closes a "/" search, the next one the picker.
+            // First Esc closes a "/" search, then a submenu, then the picker.
             if (root.searching) {
                 root.searching = false;
                 input.text = "";
                 keys.forceActiveFocus();
-            } else root.close();
+            } else if (root.submenu) root.back();
+            else root.close();
+            e.accepted = true;
+            return;
+        case Qt.Key_Tab:
+            if (list.currentIndex >= 0 && root.filtered.length) root.more(root.filtered[list.currentIndex]);
             e.accepted = true;
             return;
         case Qt.Key_Slash:
@@ -187,7 +216,14 @@ PanelWindow {
             break;
         case Qt.Key_U: if (ctrl) { root.moveBy(-root.halfPage()); e.accepted = true; } break;
         case Qt.Key_L: if (vim) { root.accept(); e.accepted = true; } break;
-        case Qt.Key_Q: if (vim) { root.close(); e.accepted = true; } break;
+        case Qt.Key_H: if (vim && root.submenu) { root.back(); e.accepted = true; } break;
+        case Qt.Key_A:
+            if (vim && list.currentIndex >= 0 && root.filtered.length) {
+                root.more(root.filtered[list.currentIndex]);
+                e.accepted = true;
+            }
+            break;
+        case Qt.Key_Q: if (vim) { if (root.submenu) root.back(); else root.close(); e.accepted = true; } break;
         case Qt.Key_G:
             if (vim) {
                 if (e.modifiers & Qt.ShiftModifier) root.moveBy(list.count);
@@ -525,8 +561,15 @@ PanelWindow {
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
-                        onEntered: list.currentIndex = entry.index
-                        onClicked: { list.currentIndex = entry.index; root.acceptModifiers = 0; root.accept(); }
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onEntered: { list.currentIndex = entry.index; root.remember(); }
+                        onClicked: mouse => {
+                            list.currentIndex = entry.index;
+                            root.remember();
+                            if (mouse.button === Qt.RightButton) { root.more(entry.modelData); return; }
+                            root.acceptModifiers = 0;
+                            root.accept();
+                        }
                     }
                 }
             }

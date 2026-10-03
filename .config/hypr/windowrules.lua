@@ -38,7 +38,9 @@ hl.window_rule({ name = "ff-main-pin", match = { class = "^(firefox)$", title = 
 hl.window_rule({ name = "dofus-tag",  match = { title = "Dofus" }, tag = "+dofus" })
 hl.window_rule({ name = "dofus-tile", match = { tag = "dofus" },   tile = true })
 
--- Yazi floating file manager
+-- Yazi floating file manager. Size and centering come from the exec rules in
+-- keybinds.lua (yaziFloat): a percent `size` here is ignored on 0.56.2, and a
+-- pixel one can't fit both monitors.
 hl.window_rule({ name = "yazi-float", match = { class = "^(yazi-float)$" }, float = true })
 
 -- Remmina: session windows fill the workspace, main window stays behind.

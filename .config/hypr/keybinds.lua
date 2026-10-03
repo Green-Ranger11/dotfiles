@@ -3,8 +3,23 @@
 
 local mainMod = "SUPER"
 
--- Rules applied to the floating TUI tools (old inline [float; size 1150 590; center])
-local floatRules = { float = true, size = "1150 590", center = true }
+-- Yazi float (Super+Shift+E): 60% of the active monitor, never below the
+-- old fixed 1600x900 (so the laptop panel is unchanged), never above 90%.
+-- Computed in pixels at press time because two things break the obvious
+-- "size = 60% 60%" rule on Hyprland 0.56.2: percent sizes are ignored
+-- (window came up at kitty's own default 640x400), and kitty's
+-- remember_window_size requests its last size (a tiled slot, often the
+-- whole screen), which beats any size rule.
+local function yaziFloat()
+    local m = hl.get_active_monitor()
+    local W, H = 1920, 1200
+    if m then W, H = m.width / m.scale, m.height / m.scale end
+    local w = math.floor(math.min(math.max(W * 0.6, 1600), W * 0.9))
+    local h = math.floor(math.min(math.max(H * 0.6, 900), H * 0.9))
+    hl.dispatch(hl.dsp.exec_cmd(
+        "env YAZI_FLOAT=1 EDITOR=nvim kitty -o remember_window_size=no --class yazi-float yazi",
+        { float = true, size = w .. " " .. h, center = true }))
+end
 
 -- Application launchers
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
@@ -31,7 +46,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("hyprpicker -a -f hex"))
 -- Session
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("qs ipc -p " .. os.getenv("HOME") .. "/.config/quickshell/mocha call lock trigger"))
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("env YAZI_FLOAT=1 EDITOR=nvim kitty --class yazi-float yazi", floatRules))
+hl.bind(mainMod .. " + SHIFT + E", yaziFloat)
 
 -- Hardware controls
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("brightnessctl s +5%"))

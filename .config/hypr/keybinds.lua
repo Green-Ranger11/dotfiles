@@ -48,6 +48,32 @@ hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("qs ipc -p " .. os.getenv("HOME") .. "/.config/quickshell/mocha call lock trigger"))
 hl.bind(mainMod .. " + SHIFT + E", yaziFloat)
 
+-- Scratchpad (Super+S): kitty + nvim on ~/Documents/scratch.md, parked in
+-- the "scratch" special workspace by the rule in workspaces.lua. One key:
+--   not running        -> launch (lands in the special, shown on this monitor)
+--   focused            -> hide
+--   open but elsewhere -> go to it (other monitor / forgot it's open)
+--   hidden             -> show on this monitor
+local scratchLaunchedAt = 0
+local function scratch()
+    local w = hl.get_window("class:nvim-scratch")
+    if not w then
+        -- kitty+nvim take ~0.5s to map; a second press in that gap would
+        -- launch a second scratchpad (and nvim's swap-file prompt).
+        if os.time() - scratchLaunchedAt < 2 then return end
+        scratchLaunchedAt = os.time()
+        hl.dispatch(hl.dsp.exec_cmd("kitty --class nvim-scratch -o remember_window_size=no nvim " .. os.getenv("HOME") .. "/Documents/scratch.md"))
+        return
+    end
+    local a = hl.get_active_window()
+    if w.workspace.visible and not (a and a.class == "nvim-scratch") then
+        hl.dispatch(hl.dsp.focus({ window = w }))
+    else
+        hl.dispatch(hl.dsp.workspace.toggle_special("scratch"))
+    end
+end
+hl.bind(mainMod .. " + S", scratch)
+
 -- Hardware controls
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("brightnessctl s +5%"))
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("brightnessctl s 5%-"))

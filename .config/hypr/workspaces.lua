@@ -8,6 +8,10 @@ hl.window_rule({ name = "ws-vesktop", match = { class = "^(vesktop|Vesktop|Venco
 -- Steam: main window + login/friends windows all use class "steam".
 -- Game windows use class steam_app_<id> instead, so they need their own rules.
 hl.window_rule({ name = "ws-steam",   match = { class = "^(steam)$" },                       workspace = "4 silent" })
+-- Scratchpad: a kitty running nvim on ~/Documents/scratch.md lives in the
+-- "scratch" special workspace, toggled over everything with Super+S
+-- (keybinds.lua). Not silent: the first launch should show it.
+hl.window_rule({ name = "ws-scratch", match = { class = "^(nvim-scratch)$" },                workspace = "special:scratch" })
 -- Baldur's Gate 3 (Steam 1086940, runs under Proton/XWayland).
 -- Class is the exe name, NOT steam_app_<id>: bg3 = Vulkan, bg3_dx11 = DirectX11.
 -- Not silent: launching the game should actually take you to it.

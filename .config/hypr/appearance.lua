@@ -62,3 +62,5 @@ hl.animation({ leaf = "border",      enabled = true, speed = 1,  bezier = "liner
 hl.animation({ leaf = "borderangle", enabled = true, speed = 30, bezier = "liner",   style = "loop" })
 hl.animation({ leaf = "fade",        enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "workspaces",  enabled = true, speed = 5,  bezier = "wind",    style = "slidefade 20%" })
+-- Scratchpad (special:scratch) drops in from the top, quake-style.
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "wind", style = "slidefadevert 20%" })

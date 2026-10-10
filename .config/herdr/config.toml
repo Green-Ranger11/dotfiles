@@ -94,5 +94,10 @@ rows = [["workspace"]]
 row_gap = 0
 rows = [["tab"]]
 
+# Agent done/needs-input popups are off here: the Claude Code Notification
+# hook (~/.claude/hooks/notify-focus.sh) sends the desktop toast instead, and
+# clicking that one focuses the kitty window and the herdr pane. Herdr's
+# system toast on Linux can't do the focus part, so two popups said the same
+# thing and only one of them worked.
 [ui.toast]
-delivery = "system"
+delivery = "off"

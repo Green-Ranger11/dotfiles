@@ -25,9 +25,22 @@ hl.window_rule({ name = "bg3-confine", match = { class = "^(bg3|bg3_dx11)$" }, c
 -- Workspaces 1/3/4 on the laptop panel.
 -- Bound by description, not connector: these previously said eDP-2, which does
 -- not exist (the panel is eDP-1), so all three bindings silently did nothing.
-hl.workspace_rule({ workspace = "1", monitor = "desc:Thermotrex Corporation TL140VDXP10", default = true })
-hl.workspace_rule({ workspace = "3", monitor = "desc:Thermotrex Corporation TL140VDXP10" })
-hl.workspace_rule({ workspace = "4", monitor = "desc:Thermotrex Corporation TL140VDXP10" })
+-- The panel differs per laptop, so pick it by hostname (default: the ROG).
+local LAPTOP_PANELS = {
+    battlestation = "BOE 0x0998", -- Lenovo Legion S7 15ACH6
+}
+local function hostname()
+    local f = io.open("/etc/hostname")
+    if not f then return "" end
+    local h = f:read("*l") or ""
+    f:close()
+    return h
+end
+local LAPTOP_PANEL = "desc:" .. (LAPTOP_PANELS[hostname()] or "Thermotrex Corporation TL140VDXP10")
+
+hl.workspace_rule({ workspace = "1", monitor = LAPTOP_PANEL, default = true })
+hl.workspace_rule({ workspace = "3", monitor = LAPTOP_PANEL })
+hl.workspace_rule({ workspace = "4", monitor = LAPTOP_PANEL })
 
 -- Workspace 2 on external monitor (Philips ultrawide)
 -- Bind by description, not connector name: DP-2/DP-1 swap across replugs.
@@ -39,7 +52,7 @@ hl.workspace_rule({ workspace = "2", monitor = "desc:Philips Consumer Electronic
 -- A workspace rule binds to exactly ONE monitor, so the rule above only fires
 -- at work (Philips). This puts ws2 on whatever non-laptop monitor is attached
 -- -- Philips at work, AOC at home -- at startup and on every hotplug.
-local LAPTOP_DESC = "Thermotrex"
+local LAPTOP_DESC = LAPTOP_PANEL:sub(#"desc:" + 1)
 
 local function place_external_workspace()
     for _, m in ipairs(hl.get_monitors()) do

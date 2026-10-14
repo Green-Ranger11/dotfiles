@@ -40,8 +40,5 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# Autoload zsh shell functions defined in the function path
-fpath=( ~/.config/zsh/autoload "${fpath[@]}" )
-autoload -Uz load_anthropic
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=$PATH:$HOME/.maestro/bin

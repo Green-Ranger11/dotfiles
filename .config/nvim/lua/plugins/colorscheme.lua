@@ -18,7 +18,26 @@ return {
       },
       custom_highlights = function(c)
         -- Accent is green now (Hyprland borders, kitty cursor, the bar).
-        return { CursorLineNr = { fg = c.green } }
+        -- Catppuccin draws float/picker/cmdline borders and titles in
+        -- blue/lavender; move those onto green too.
+        -- Borders keep the crust fill so they sit flush with the float body.
+        local accent = { fg = c.green }
+        local border = { fg = c.green, bg = c.crust }
+        return {
+          CursorLineNr = accent,
+          FloatBorder = border,
+          FloatTitle = border,
+          WhichKeyBorder = border,
+          SnacksPickerBorder = border,
+          SnacksPickerTitle = border,
+          SnacksInputBorder = border,
+          SnacksInputTitle = border,
+          SnacksDashboardHeader = accent,
+          NoiceCmdlinePopupBorder = accent,
+          NoiceCmdlinePopupTitle = accent,
+          NoiceCmdlineIcon = accent,
+          Title = accent,
+        }
       end,
     },
   },

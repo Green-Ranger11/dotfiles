@@ -20,8 +20,8 @@ Singleton {
 
     FileView { id: stat; path: "/proc/stat"; blockLoading: true }
     FileView { id: meminfo; path: "/proc/meminfo"; blockLoading: true }
-    // thermal-zone 0, same zone waybar read.
-    FileView { id: thermal; path: "/sys/class/thermal/thermal_zone0/temp"; blockLoading: true }
+    // thermal-zone 0 (same zone waybar read), or the hwmon Machine.qml names.
+    FileView { id: thermal; path: Machine.tempPath; blockLoading: true }
 
     function sample() {
         stat.reload();

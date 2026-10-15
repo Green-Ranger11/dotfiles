@@ -1,13 +1,14 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import ".."
 
 // Watches the panel backlight. brightnessctl owns the writes (hotkeys, the
 // bar's scroll wheel), we only notice them.
 Scope {
     id: root
     property var osd
-    property string device: "amdgpu_bl1"
+    property string device: Machine.panel
     property int pct: -1
 
     // blockLoading, or text() comes back empty.

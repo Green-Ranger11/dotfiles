@@ -9,7 +9,7 @@ Stat {
     interactive: true
 
     property int pct: 0
-    readonly property string device: "amdgpu_bl1"
+    readonly property string device: Machine.panel
 
     FileView { id: cur; path: "/sys/class/backlight/" + bl.device + "/brightness"; blockLoading: true }
     FileView { id: max; path: "/sys/class/backlight/" + bl.device + "/max_brightness"; blockLoading: true }

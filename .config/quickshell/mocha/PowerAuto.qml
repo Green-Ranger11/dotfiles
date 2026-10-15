@@ -10,25 +10,27 @@ import Quickshell.Services.UPower
 Scope {
     id: root
 
-    readonly property string panel: "amdgpu_bl1"
-    readonly property string kbd: "asus::kbd_backlight"
+    // Laptop hardware differs per machine: see Machine.qml.
+    readonly property string panel: Machine.panel
+    readonly property string kbd: Machine.kbd
 
     function apply(startup) {
         const bat = UPower.onBattery;
         PowerProfiles.profile = bat ? PowerProfile.PowerSaver
             : PowerProfiles.hasPerformanceProfile ? PowerProfile.Performance : PowerProfile.Balanced;
         // Same fields as the catch-all rule in hypr/monitors.lua, mode only.
-        hypr.command = ["hyprctl", "eval", `hl.monitor({ output = "eDP-1", mode = "1920x1200@${bat ? 60 : 144}", position = "auto", scale = 1 })`];
+        hypr.command = ["hyprctl", "eval", `hl.monitor({ output = "${Machine.output}", mode = "${Machine.res}@${bat ? 60 : Machine.acHz}", position = "auto", scale = 1 })`];
         hypr.running = true;
 
         // Backlights: save on unplug, restore on plug-in (brightnessctl keeps
         // the saved state in $XDG_RUNTIME_DIR). At startup only dim, never
         // save: a shell reload on battery would otherwise save the dimmed
         // values and "restore" them later. Only dims, never brightens.
-        const save = bat && !startup ? `brightnessctl -q -d ${panel} -s; brightnessctl -q -d ${kbd} -s; ` : "";
+        const k = kbd !== "";
+        const save = bat && !startup ? `brightnessctl -q -d ${panel} -s; ` + (k ? `brightnessctl -q -d ${kbd} -s; ` : "") : "";
         const dim = `b=$(brightnessctl -m -d ${panel} | cut -d, -f4 | tr -d %); `
-            + `[ "$b" -gt 45 ] && brightnessctl -q -d ${panel} set 45%; brightnessctl -q -d ${kbd} set 0`;
-        const restore = `brightnessctl -q -d ${panel} -r; brightnessctl -q -d ${kbd} -r`;
+            + `[ "$b" -gt 45 ] && brightnessctl -q -d ${panel} set 45%; ` + (k ? `brightnessctl -q -d ${kbd} set 0` : "true");
+        const restore = `brightnessctl -q -d ${panel} -r; ` + (k ? `brightnessctl -q -d ${kbd} -r` : "true");
         if (bat)
             light.command = ["sh", "-c", save + dim];
         else if (!startup)

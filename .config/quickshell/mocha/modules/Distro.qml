@@ -13,7 +13,7 @@ Segment {
     Process { id: proc }
 
     onClicked: {
-        proc.command = ["qs", "-p", Quickshell.shellDir,
+        proc.command = [Sys.shellCommand, "-p", Quickshell.shellDir,
                         "ipc", "call", "launcher", "toggle"];
         proc.running = true;
     }

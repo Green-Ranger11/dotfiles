@@ -20,7 +20,7 @@ Stat {
 
     onClicked: mouse => {
         // launcher/BluetoothPicker.qml
-        proc.command = ["qs", "-p", Quickshell.shellDir, "ipc", "call", "bluetooth", "toggle"];
+        proc.command = [Sys.shellCommand, "-p", Quickshell.shellDir, "ipc", "call", "bluetooth", "toggle"];
         proc.running = true;
     }
 }

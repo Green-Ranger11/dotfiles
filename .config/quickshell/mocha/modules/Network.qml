@@ -22,7 +22,7 @@ Stat {
 
     onClicked: mouse => {
         // launcher/NetworkPicker.qml
-        proc.command = ["qs", "-p", Quickshell.shellDir, "ipc", "call", "network", "toggle"];
+        proc.command = [Sys.shellCommand, "-p", Quickshell.shellDir, "ipc", "call", "network", "toggle"];
         proc.running = true;
     }
 }

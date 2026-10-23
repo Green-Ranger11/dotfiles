@@ -15,6 +15,9 @@ Singleton {
     // True while the network picker's vpn.sh runs, so the bar's VPN spinner
     // starts at once instead of waiting for the next systemd probe.
     property bool vpnToggling: false
+    // Command that runs this shell, for IPC to it from widgets and pickers:
+    // Quickshell's qs on Linux, Laumei on macOS.
+    readonly property string shellCommand: Qt.platform.os === "osx" ? "laumei" : "qs"
 
     property var lastStat: null
 

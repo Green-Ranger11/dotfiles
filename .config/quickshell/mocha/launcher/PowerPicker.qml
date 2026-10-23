@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import ".."
 
 // Power menu, replacing waybar/scripts/power-menu.sh (rofi). Toggled over IPC
 // (qs ipc call power toggle): Super+Escape and the bar's power icon.
@@ -13,7 +14,7 @@ PickerList {
     boxHeight: fitRows(entries.length, 0)
 
     entries: [
-        { text: "\u{f033e}  Lock", data: ["qs", "-p", Quickshell.shellDir, "ipc", "call", "lock", "trigger"] },
+        { text: "\u{f033e}  Lock", data: [Sys.shellCommand, "-p", Quickshell.shellDir, "ipc", "call", "lock", "trigger"] },
         { text: "\u{f04b2}  Suspend", data: ["systemctl", "suspend"] },
         { text: "\u{f0717}  Hibernate", data: ["systemctl", "hibernate"] },
         { text: "\u{f0709}  Reboot", data: ["systemctl", "reboot"] },

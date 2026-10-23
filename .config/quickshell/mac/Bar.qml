@@ -1,8 +1,8 @@
 // The mocha bar laid out for macOS: same widgets and order as the bar in
 // ../mocha/shell.qml, minus what macOS can't host (Tray: macOS 27 draws
-// menu-bar items as one window; Notifications, Backlight, Vpn: Linux
-// services). On the built-in display the centre group splits around the
-// notch.
+// menu-bar items as one window; Notifications: macOS can't hand them to
+// other apps; Vpn: openfortivpn under systemd). On the built-in display the
+// centre group splits around the notch.
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -92,6 +92,7 @@ PanelWindow {
         RowLayout {
             spacing: Theme.spacing
             Volume {}
+            Backlight {}
             Battery {}
         }
 

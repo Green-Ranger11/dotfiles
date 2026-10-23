@@ -1,8 +1,11 @@
-// macOS shell, run by Laumei (`laumei -c mac`). Reuses the mocha
-// pickers as-is; only what macOS can host is loaded here.
+// macOS shell, run by Laumei (`laumei -c mac`). Reuses mocha as-is; what's
+// left out is Linux-only (PowerAuto drives hyprctl; notifications can't be
+// received on macOS).
 import Quickshell
 import Quickshell.Io
 import "../mocha/launcher"
+import "../mocha/lock"
+import "../mocha/osd"
 
 ShellRoot {
     // One bar per display, like mocha.
@@ -10,6 +13,12 @@ ShellRoot {
         model: Quickshell.screens
         Bar {}
     }
+
+    // Volume / brightness popups.
+    Osd {}
+
+    // `ipc call lock trigger`; Laumei hands the lock to macOS.
+    LockLayer {}
 
     AppLauncher {}
     EmojiPicker {}
@@ -25,16 +34,5 @@ ShellRoot {
     Process {
         running: true
         command: ["wl-paste", "--watch", "cliphist", "store"]
-    }
-
-    // PowerPicker's Lock calls `qs ipc call lock trigger` on this shell; on
-    // Linux the mocha LockLayer answers it.
-    IpcHandler {
-        target: "lock"
-        function trigger(): void { locker.running = true; }
-    }
-    Process {
-        id: locker
-        command: ["loginctl", "lock-session"]
     }
 }

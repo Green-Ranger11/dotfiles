@@ -14,8 +14,10 @@ ShellRoot {
         Bar {}
     }
 
-    // Volume / brightness popups.
-    Osd {}
+    // Volume popup. mocha's Osd also pops up on brightness changes, which
+    // macOS auto-brightness would trigger constantly.
+    OsdWindow { id: osdWindow }
+    VolumeOsd { osd: osdWindow }
 
     // `ipc call lock trigger`; Laumei hands the lock to macOS.
     LockLayer {}

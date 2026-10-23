@@ -13,7 +13,7 @@ Segment {
 
     onClicked: {
         // launcher/PowerPicker.qml (replaced waybar/scripts/power-menu.sh + rofi).
-        proc.command = ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "power", "toggle"];
+        proc.command = ["qs", "-p", Quickshell.shellDir, "ipc", "call", "power", "toggle"];
         proc.running = true;
     }
 

@@ -13,7 +13,7 @@ Segment {
     Process { id: proc }
 
     onClicked: {
-        proc.command = ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha",
+        proc.command = ["qs", "-p", Quickshell.shellDir,
                         "ipc", "call", "launcher", "toggle"];
         proc.running = true;
     }
@@ -21,7 +21,8 @@ Segment {
     Text {
         Layout.alignment: Qt.AlignVCenter
         // linux-archlinux
-        text: "\uf303"
+        // Arch on Linux, Apple on macOS (quickshell-macos).
+        text: Qt.platform.os === "osx" ? "\uf179" : "\uf303"
         color: Theme.accent
         font.family: Theme.fontFamily
         font.pixelSize: Theme.iconSize + 3

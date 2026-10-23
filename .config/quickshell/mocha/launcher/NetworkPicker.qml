@@ -204,7 +204,7 @@ Scope {
 
     Process {
         id: vpnList
-        command: ["sh", "-c", 'for f in /etc/openfortivpn/*.conf; do n=$(basename "$f" .conf); [ "$n" = config ] && continue; printf "%s %s\\n" "$n" "$(systemctl is-active "openfortivpn@$n.service")"; done']
+        command: ["sh", "-c", 'for f in /etc/openfortivpn/*.conf; do [ -e "$f" ] || continue; n=$(basename "$f" .conf); [ "$n" = config ] && continue; printf "%s %s\\n" "$n" "$(systemctl is-active "openfortivpn@$n.service")"; done']
         stdout: StdioCollector {
             onStreamFinished: root.vpns = text.split("\n").filter(l => l).map(l => {
                 const [name, state] = l.split(" ");

@@ -13,7 +13,7 @@ PickerList {
     boxHeight: fitRows(entries.length, 0)
 
     entries: [
-        { text: "\u{f033e}  Lock", data: ["qs", "-p", Quickshell.env("HOME") + "/.config/quickshell/mocha", "ipc", "call", "lock", "trigger"] },
+        { text: "\u{f033e}  Lock", data: ["qs", "-p", Quickshell.shellDir, "ipc", "call", "lock", "trigger"] },
         { text: "\u{f04b2}  Suspend", data: ["systemctl", "suspend"] },
         { text: "\u{f0717}  Hibernate", data: ["systemctl", "hibernate"] },
         { text: "\u{f0709}  Reboot", data: ["systemctl", "reboot"] },

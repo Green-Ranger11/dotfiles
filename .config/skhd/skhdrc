@@ -11,7 +11,7 @@ alt - e              : open ~
 alt + shift - e      : open -na kitty --args --title yazi-float -o remember_window_size=no \
                        env YAZI_FLOAT=1 EDITOR=nvim yazi
 
-# Pickers from ~/.config/quickshell/mocha, run by quickshell-macos (`qs -c mac`)
+# Pickers from ~/.config/quickshell/mocha, run by Laumei (`qs -c mac`)
 alt - d    : $HOME/.local/bin/qs -c mac ipc call launcher toggle
 alt - 0x2F : $HOME/.local/bin/qs -c mac ipc call emoji toggle     # period
 alt - 0x2C : $HOME/.local/bin/qs -c mac ipc call bitwarden toggle # slash

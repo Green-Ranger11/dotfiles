@@ -21,7 +21,7 @@ Segment {
     Text {
         Layout.alignment: Qt.AlignVCenter
         // linux-archlinux
-        // Arch on Linux, Apple on macOS (quickshell-macos).
+        // Arch on Linux, Apple on macOS (Laumei).
         text: Qt.platform.os === "osx" ? "\uf179" : "\uf303"
         color: Theme.accent
         font.family: Theme.fontFamily

@@ -1,4 +1,4 @@
-// macOS shell, run by quickshell-macos (`qs -c mac`). Reuses the mocha
+// macOS shell, run by Laumei (`qs -c mac`). Reuses the mocha
 // pickers as-is; only what macOS can host is loaded here.
 import Quickshell
 import Quickshell.Io

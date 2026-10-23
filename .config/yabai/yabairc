@@ -60,7 +60,7 @@ yabai -m rule --add app="^Simulator$" manage=off
 yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
-yabai -m rule --add app="^qs$" manage=off
+yabai -m rule --add app="^Laumei$" manage=off
 
 # Scratchpad (alt+s) and yazi float (alt+shift+e), matched by kitty --title
 yabai -m rule --add title="^nvim-scratch$" scratchpad=scratch grid=6:6:1:1:4:4
@@ -71,7 +71,7 @@ yabai -m rule --add title="^yazi-float$" manage=off grid=10:10:2:2:6:6
 # title-bar double-click, menu item).
 yabai -m signal --add event=window_minimized action='yabai -m window --deminimize $YABAI_WINDOW_ID'
 
-# The quickshell bar (quickshell-macos, `qs -c mac`) registers its own
+# The quickshell bar (Laumei, `qs -c mac`) registers its own
 # space/window signals when it starts.
 
 # ===== Borders (using JankyBorders) =====

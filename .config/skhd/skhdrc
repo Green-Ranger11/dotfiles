@@ -27,7 +27,7 @@ alt - s : yabai -m window --toggle scratch || \
           nvim "$HOME/Documents/scratch.md"
 
 # ===== Window Management =====
-alt - q : yabai -m window --close
+alt - q : $HOME/.config/yabai/close-window.sh
 alt - v : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 alt - f : yabai -m window --toggle zoom-fullscreen
 

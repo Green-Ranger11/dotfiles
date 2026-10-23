@@ -100,7 +100,7 @@ BREW_CASKS=(
 
 # Yabai stack — needs custom taps
 BREW_YABAI=(
-    yabai skhd sketchybar borders
+    yabai skhd borders
 )
 
 install_arch() {
@@ -170,7 +170,7 @@ install_macos() {
     print_status "Installing casks (kitty + Nerd Fonts)..."
     brew install --cask "${BREW_CASKS[@]}" 2>/dev/null || true
 
-    print_status "Tapping yabai/skhd/sketchybar/borders repos..."
+    print_status "Tapping yabai/skhd/borders repos..."
     brew tap koekeishiya/formulae 2>/dev/null || true
     brew tap FelixKratz/formulae 2>/dev/null || true
 

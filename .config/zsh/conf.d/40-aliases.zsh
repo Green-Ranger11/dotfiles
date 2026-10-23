@@ -27,7 +27,7 @@ alias dotkitty='nvim ~/.config/kitty/kitty.conf'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     alias dotyabai='nvim ~/.config/yabai/yabairc'
     alias dotskhd='nvim ~/.config/skhd/skhdrc'
-    alias dotbar='nvim ~/.config/sketchybar/'
+    alias dotbar='nvim ~/.config/quickshell/mac/'
 else
     alias doti3='nvim ~/.config/i3/config'
     alias dothy='nvim ~/.config/hypr/'

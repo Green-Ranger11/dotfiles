@@ -9,7 +9,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 # ===== Spaces =====
-# skhd and sketchybar expect workspaces 1-5; macOS only keeps the Spaces you
+# skhd and the bar expect workspaces 1-5; macOS only keeps the Spaces you
 # have made, so create any that are missing (needs the scripting addition).
 while [ "$(yabai -m query --spaces | jq length)" -lt 5 ]; do
     yabai -m space --create || break
@@ -35,12 +35,11 @@ yabai -m config window_opacity off
 yabai -m config window_shadow float
 
 # ===== Gaps (matching Hyprland: gaps_in=10, gaps_out=20) =====
-# yabai -m config top_padding 10 # Extra for sketchybar
 # yabai -m config bottom_padding 30
 yabai -m config left_padding 20
 yabai -m config right_padding 20
 yabai -m config window_gap 25
-yabai -m config external_bar all:58:20
+yabai -m config external_bar all:62:20
 
 # ===== Mouse Settings =====
 yabai -m config mouse_follows_focus on
@@ -61,6 +60,7 @@ yabai -m rule --add app="^Simulator$" manage=off
 yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^qs$" manage=off
 
 # Scratchpad (alt+s) and yazi float (alt+shift+e), matched by kitty --title
 yabai -m rule --add title="^nvim-scratch$" scratchpad=scratch grid=6:6:1:1:4:4
@@ -71,12 +71,8 @@ yabai -m rule --add title="^yazi-float$" manage=off grid=10:10:2:2:6:6
 # title-bar double-click, menu item).
 yabai -m signal --add event=window_minimized action='yabai -m window --deminimize $YABAI_WINDOW_ID'
 
-# ===== Signals for SketchyBar =====
-# Notify sketchybar when space or window changes
-yabai -m signal --add event=space_changed action="sketchybar --trigger space_change"
-yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+# The quickshell bar (quickshell-macos, `qs -c mac`) registers its own
+# space/window signals when it starts.
 
 # ===== Borders (using JankyBorders) =====
 "$HOME/.config/borders/bordersrc" &

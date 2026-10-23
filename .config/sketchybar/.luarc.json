@@ -1,5 +1,0 @@
-{
-  "workspace.library": ["${workspaceFolder}/@types"],
-  "typeChecking.mode": "basic",
-  "diagnostics.enable": true
-}

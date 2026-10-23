@@ -56,9 +56,6 @@ node_modules/
 .rustup/
 .gem/
 
-# Compiled binaries in sketchybar
-.config/sketchybar/helpers/menus/bin/
-
 # IDE/Editor state
 .vscode/
 .idea/

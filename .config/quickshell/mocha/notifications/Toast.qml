@@ -29,6 +29,12 @@ Rectangle {
         return e ? Quickshell.iconPath(e.icon, true) : "";
     }
 
+    // KDE Connect mirrors phone notifications with no default action. It always
+    // sets x-kdeconnect-source-device; the phone app name is in
+    // x-kde-display-appname, or in the summary when we don't advertise that hint.
+    readonly property bool phoneText: !!notif.hints["x-kdeconnect-source-device"]
+        && /messag/i.test(notif.hints["x-kde-display-appname"] || notif.summary)
+
     // Small app icon beside the app name; the left bar carries the urgency.
     readonly property int iconSize: 14
     readonly property int pad: 12
@@ -66,6 +72,14 @@ Rectangle {
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
         onClicked: m => {
             // Left click runs the default action if there is one, else closes.
+            // Texts open the SMS app instead (newest conversation is on top;
+            // it has no way to jump to one). The phone keeps its notification.
+            if (m.button === Qt.LeftButton && card.phoneText) {
+                Quickshell.execDetached(["kdeconnect-sms"]);
+                Notifs.drop(card.notif);
+                Notifs.panelOpen = false;
+                return;
+            }
             if (m.button === Qt.LeftButton)
                 for (const a of card.notif.actions)
                     if (a.identifier === "default") {

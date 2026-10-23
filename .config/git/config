@@ -58,7 +58,7 @@
 # uses whichever account is *active* -- that mismatch caused push 403s.
 [credential "https://github.com"]
 	helper = 
-	helper = "!f() { echo username=Green-Ranger11; echo password=$(/usr/bin/gh auth token --user Green-Ranger11); }; f"
+	helper = "!f() { echo username=Green-Ranger11; echo password=$(gh auth token --user Green-Ranger11); }; f"
 [commit]
 	gpgsign = false
 [filter "lfs"]
@@ -73,4 +73,4 @@
 	path = ./config.local
 [credential "https://gist.github.com"]
 	helper = 
-	helper = "!f() { echo username=Green-Ranger11; echo password=$(/usr/bin/gh auth token --user Green-Ranger11); }; f"
+	helper = "!f() { echo username=Green-Ranger11; echo password=$(gh auth token --user Green-Ranger11); }; f"

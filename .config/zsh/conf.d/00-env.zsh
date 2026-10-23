@@ -36,7 +36,8 @@ export GOPATH="$XDG_DATA_HOME"/go
 #PLATFORM-SPECIFIC ENV VARIABLES
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export ANDROID_HOME="${HOME}/Library/Android/sdk"
-    export JAVA_HOME="/usr/local/opt/openjdk@17"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
     export PATH="$JAVA_HOME/bin:$PATH"
     export CAPACITOR_ANDROID_STUDIO_PATH="/Applications/Android Studio.app/Contents"
 else

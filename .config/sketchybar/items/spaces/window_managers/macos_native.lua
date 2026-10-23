@@ -9,7 +9,7 @@ local Window_Manager = {
 
 function Window_Manager:init()
   -- Query current focused space on startup
-  SBAR.exec("echo $(/usr/local/bin/yabai -m query --spaces --space | /usr/local/bin/jq '.index') 2>/dev/null || echo 1", function(focused)
+  SBAR.exec("echo $(yabai -m query --spaces --space | jq '.index') 2>/dev/null || echo 1", function(focused)
     local focused_id = tonumber(focused) or 1
 
     for i = 1, 5 do

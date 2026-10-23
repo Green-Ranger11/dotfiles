@@ -11,14 +11,14 @@ alt - e              : open ~
 alt + shift - e      : open -na kitty --args --title yazi-float -o remember_window_size=no \
                        env YAZI_FLOAT=1 EDITOR=nvim yazi
 
-# Pickers from ~/.config/quickshell/mocha, run by Laumei (`qs -c mac`)
-alt - d    : $HOME/.local/bin/qs -c mac ipc call launcher toggle
-alt - 0x2F : $HOME/.local/bin/qs -c mac ipc call emoji toggle     # period
-alt - 0x2C : $HOME/.local/bin/qs -c mac ipc call bitwarden toggle # slash
-alt + shift - v : $HOME/.local/bin/qs -c mac ipc call clipboard toggle
-alt + shift - b : $HOME/.local/bin/qs -c mac ipc call bluetooth toggle
-alt + shift - n : $HOME/.local/bin/qs -c mac ipc call network toggle
-alt - escape    : $HOME/.local/bin/qs -c mac ipc call power toggle
+# Pickers from ~/.config/quickshell/mocha, run by Laumei (`laumei -c mac`)
+alt - d    : $HOME/.local/bin/laumei -c mac ipc call launcher toggle
+alt - 0x2F : $HOME/.local/bin/laumei -c mac ipc call emoji toggle     # period
+alt - 0x2C : $HOME/.local/bin/laumei -c mac ipc call bitwarden toggle # slash
+alt + shift - v : $HOME/.local/bin/laumei -c mac ipc call clipboard toggle
+alt + shift - b : $HOME/.local/bin/laumei -c mac ipc call bluetooth toggle
+alt + shift - n : $HOME/.local/bin/laumei -c mac ipc call network toggle
+alt - escape    : $HOME/.local/bin/laumei -c mac ipc call power toggle
 
 # Scratchpad: toggle the nvim-scratch window, launching it if it isn't open
 # (see the scratchpad rule in yabairc)
@@ -36,7 +36,7 @@ cmd - m       : true
 cmd + alt - m : true
 
 # ===== Session =====
-alt - b : $HOME/.local/bin/qs -c mac ipc call lock trigger
+alt - b : $HOME/.local/bin/laumei -c mac ipc call lock trigger
 
 # ===== Screenshots =====
 alt - i         : mkdir -p ~/Pictures/Screenshots && \

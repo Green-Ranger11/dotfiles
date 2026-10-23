@@ -71,7 +71,7 @@ yabai -m rule --add title="^yazi-float$" manage=off grid=10:10:2:2:6:6
 # title-bar double-click, menu item).
 yabai -m signal --add event=window_minimized action='yabai -m window --deminimize $YABAI_WINDOW_ID'
 
-# The quickshell bar (Laumei, `qs -c mac`) registers its own
+# The quickshell bar (Laumei, `laumei -c mac`) registers its own
 # space/window signals when it starts.
 
 # ===== Borders (using JankyBorders) =====

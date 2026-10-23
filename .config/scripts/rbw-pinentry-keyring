@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 # pinentry for rbw: answers the "Master Password" prompt from the login
-# keyring (Secret Service, unlocked by PAM at sign-in), so unlocking the
-# vault is silent while logged in. Everything else -- first use, a rejected
-# stored password, API key / 2FA prompts -- goes to the real pinentry-qt.
+# keyring, so unlocking the vault is silent while logged in. Everything
+# else -- first use, a rejected stored password, API key / 2FA prompts --
+# goes to the real pinentry.
+#   Linux: Secret Service (unlocked by PAM at sign-in), pinentry-qt
+#   macOS: login Keychain (unlocked at sign-in), pinentry-mac
 #
 # Set with: rbw config set pinentry ~/.config/scripts/rbw-pinentry-keyring
-# Forget the stored password: secret-tool clear service rbw type master-password
+# Forget the stored password:
+#   Linux: secret-tool clear service rbw type master-password
+#   macOS: security delete-generic-password -s rbw -a master-password
 import subprocess
 import sys
 
-REAL = "pinentry-qt"
+MACOS = sys.platform == "darwin"
+REAL = "pinentry-mac" if MACOS else "pinentry-qt"
 ATTRS = ["service", "rbw", "type", "master-password"]
+# Keychain item: service "rbw", account "master-password".
+KEYCHAIN = ["-s", "rbw", "-a", "master-password"]
 
 
 def send(line):
@@ -27,20 +34,34 @@ def unescape(s):
 
 
 def lookup():
+    if MACOS:
+        r = subprocess.run(["security", "find-generic-password", *KEYCHAIN, "-w"], capture_output=True, text=True)
+        # -w prints the password plus a newline.
+        return r.stdout[:-1] if r.returncode == 0 and r.stdout else None
     r = subprocess.run(["secret-tool", "lookup", *ATTRS], capture_output=True, text=True)
     return r.stdout if r.returncode == 0 and r.stdout else None
 
 
 def store(pw):
+    if MACOS:
+        # Fed to `security -i` on stdin so the password never shows up in
+        # the process list, as it would as an argument.
+        quoted = pw.replace("\\", "\\\\").replace('"', '\\"')
+        cmd = f'add-generic-password -U {" ".join(KEYCHAIN)} -l "rbw master password" -w "{quoted}"\n'
+        subprocess.run(["security", "-i"], input=cmd, text=True, capture_output=True)
+        return
     subprocess.run(["secret-tool", "store", "--label=rbw master password", *ATTRS], input=pw, text=True)
 
 
 def clear():
+    if MACOS:
+        subprocess.run(["security", "delete-generic-password", *KEYCHAIN], capture_output=True)
+        return
     subprocess.run(["secret-tool", "clear", *ATTRS])
 
 
 def ask_real(commands):
-    """Replay the SET*/OPTION commands to pinentry-qt, GETPIN, relay its answer."""
+    """Replay the SET*/OPTION commands to the real pinentry, GETPIN, relay its answer."""
     p = subprocess.Popen([REAL], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p.stdout.readline()  # greeting
     for c in commands:

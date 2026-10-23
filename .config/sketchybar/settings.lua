@@ -11,10 +11,10 @@ HELPERS_HOME = SBAR_HOME .. "helpers/"
 
 PRESET_OPTIONS = {
   gnix = {
-    BOREDER_WIDTH = 2,
+    BOREDER_WIDTH = 0,
     HEIGHT = 36,
-    Y_OFFSET = 10,
-    MARGIN = 30,
+    Y_OFFSET = 0,
+    MARGIN = 0,
     CORNER_RADIUS = 0,
   },
   compact = {
@@ -55,8 +55,10 @@ MODULES = {
   music = { enable = false },
   disk = { enable = true },
   power_menu = { enable = true },
+  -- Off: macOS 27 draws the whole menu bar as one window, so per-icon aliases
+  -- render blank (and neither of these icons is in the menu bar anyway).
   system_tray = {
-    enable = true,
+    enable = false,
     items = {
       "Control Center,Bluetooth",
       "TextInputMenuAgent,Item-0",

@@ -18,8 +18,10 @@ SBAR.bar({
   shadow = { drawing = true },
   sticky = true,
   font_smoothing = true,
-  padding_right = PADDINGS,
-  padding_left = PADDINGS,
+  -- Wider than PADDINGS so the display's rounded corners don't clip the
+  -- outermost items now that the bar is flush with the edges.
+  padding_right = 16,
+  padding_left = 16,
   y_offset = preset_conf.Y_OFFSET,
   margin = preset_conf.MARGIN,
   notch_width = 200,
@@ -82,6 +84,33 @@ SBAR.default({
 SBAR.exec("killall stats_provider >/dev/null; stats_provider --cpu usage --memory ram_usage --network en0 --interval 1 --no-units", function()
   LOG:info("Started stats_provider_rust")
 end)
+
+-- Get out of the way while the native menu bar is revealed (mouse at the top edge).
+SBAR.exec("killall menubar_watch >/dev/null; " .. HELPERS_HOME .. "menubar_watch/bin/menubar_watch")
+
+-- Accent line along the bar's bottom edge, like the Hyprland bar (sketchybar
+-- can't border just one side). Zero layout width, so items aren't shifted;
+-- the label's own background spans its width (the bar clips the overflow).
+SBAR.add("item", "bar.underline", {
+  position = "left",
+  width = 0,
+  padding_left = -16,
+  padding_right = 0,
+  icon = { drawing = false },
+  label = {
+    string = "",
+    width = 4000,
+    padding_left = 0,
+    padding_right = 0,
+    background = {
+      drawing = true,
+      height = 2,
+      corner_radius = 0,
+      color = COLORS.lavender,
+      y_offset = -(preset_conf.HEIGHT / 2) + 1,
+    },
+  },
+})
 
 require("items")
 

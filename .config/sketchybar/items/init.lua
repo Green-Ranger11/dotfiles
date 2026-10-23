@@ -60,9 +60,8 @@ add_divider("config_info")
 -- RIGHT — system tray (menu bar extras)
 if is_enabled("system_tray") then
   safe_require("items.system_tray.system_tray")
+  add_divider("tray_info")
 end
-
-add_divider("tray_info")
 
 -- RIGHT — info
 if is_enabled("calendar") then

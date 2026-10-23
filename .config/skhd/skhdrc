@@ -11,6 +11,15 @@ alt - e              : open ~
 alt + shift - e      : open -na kitty --args --title yazi-float -o remember_window_size=no \
                        env YAZI_FLOAT=1 EDITOR=nvim yazi
 
+# Pickers from ~/.config/quickshell/mocha, run by quickshell-macos (`qs -c mac`)
+alt - d    : $HOME/.local/bin/qs -c mac ipc call launcher toggle
+alt - 0x2F : $HOME/.local/bin/qs -c mac ipc call emoji toggle     # period
+alt - 0x2C : $HOME/.local/bin/qs -c mac ipc call bitwarden toggle # slash
+alt + shift - v : $HOME/.local/bin/qs -c mac ipc call clipboard toggle
+alt + shift - b : $HOME/.local/bin/qs -c mac ipc call bluetooth toggle
+alt + shift - n : $HOME/.local/bin/qs -c mac ipc call network toggle
+alt - escape    : $HOME/.local/bin/qs -c mac ipc call power toggle
+
 # Scratchpad: toggle the nvim-scratch window, launching it if it isn't open
 # (see the scratchpad rule in yabairc)
 alt - s : yabai -m window --toggle scratch || \
@@ -27,7 +36,7 @@ cmd - m       : true
 cmd + alt - m : true
 
 # ===== Session =====
-alt - b : pmset displaysleepnow
+alt - b : $HOME/.local/bin/qs -c mac ipc call lock trigger
 
 # ===== Screenshots =====
 alt - i         : mkdir -p ~/Pictures/Screenshots && \
@@ -90,8 +99,8 @@ alt + ctrl + shift - 0x2F : yabai -m space --display east  # period
 alt + ctrl + shift - 0x2B : yabai -m space --display west  # comma
 
 # ===== Layout Controls =====
-alt - 0x2F : yabai -m space --layout bsp    # period - BSP layout
-alt - 0x2B : yabai -m space --layout stack  # comma  - Stack layout
+alt + shift - 0x2F : yabai -m space --layout bsp    # period - BSP layout
+alt + shift - 0x2B : yabai -m space --layout stack  # comma  - Stack layout
 
 # ===== Resize =====
 alt - r : yabai -m window --resize left:-50:0 2>/dev/null || \

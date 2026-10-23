@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# Launched from yabairc. Thin like Hyprland (border_size=2), catppuccin
+# lavender active / surface0 inactive. Corners stay round: macOS windows are
+# rounded, so a square border leaves gaps at the corners.
 options=(
     style=round
-    width=10.0
+    width=2.0
     hidpi=on
     active_color=0xffb4befe
     inactive_color=0xff313244

@@ -1,0 +1,26 @@
+#!/bin/sh
+# Links ~/.config/firefox (user.js, chrome/) into the default Firefox profile,
+# on macOS and Linux. Run once per machine, then restart Firefox.
+src="$HOME/.config/firefox"
+case "$(uname)" in
+    Darwin) base="$HOME/Library/Application Support/Firefox" ;;
+    *) base="$HOME/.mozilla/firefox"; [ -d "$base" ] || base="$HOME/.config/mozilla/firefox" ;;
+esac
+[ -f "$base/installs.ini" ] || [ -f "$base/profiles.ini" ] || { echo "no Firefox profiles in $base" >&2; exit 1; }
+
+# The profile the installed Firefox uses (installs.ini), else profiles.ini's default.
+rel=$(sed -n 's/^Default=//p' "$base/installs.ini" 2>/dev/null | head -1)
+[ -n "$rel" ] || rel=$(awk -F= '/^Path=/{p=$2} /^Default=1/{print p; exit}' "$base/profiles.ini")
+profile="$base/$rel"
+[ -d "$profile" ] || { echo "profile not found: $profile" >&2; exit 1; }
+
+for item in user.js chrome; do
+    target="$profile/$item"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+        mv "$target" "$target.bak.$(date +%s)"
+        echo "moved existing $item aside"
+    fi
+    ln -sfn "$src/$item" "$target"
+    echo "linked $target"
+done
+echo "Restart Firefox to apply."

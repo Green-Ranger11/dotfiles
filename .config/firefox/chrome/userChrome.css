@@ -1,0 +1,123 @@
+/* Firefox theme to match the quickshell bar: Catppuccin Mocha with the green
+ * accent, near-square corners (Theme.radius 1), and the selected tab marked
+ * with the bar's underline instead of a raised pill.
+ *
+ * It themes Firefox's default theme ("System theme — auto"), so it lives
+ * here in dotfiles instead of being an add-on. With an add-on theme enabled,
+ * only the shapes below apply.
+ *
+ * Toolbars are solid: on macOS 27 Firefox draws its window opaque, so
+ * transparent backgrounds show macOS's own tinted material, not the desktop. */
+
+:root {
+    --rig-crust: #11111b;
+    --rig-mantle: #181825;
+    --rig-base: #1e1e2e;
+    --rig-surface0: #313244;
+    --rig-surface1: #45475a;
+    --rig-overlay0: #6c7086;
+    --rig-subtext0: #a6adc8;
+    --rig-text: #cdd6f4;
+    --rig-accent: #a6e3a1;
+
+    /* How solid the toolbars are over macOS's material (100% = pure crust). */
+    --rig-toolbar-opacity: 100%;
+}
+
+/* ---- Colours (default theme only) ---------------------------------------- */
+
+:root:not([lwtheme]) {
+    color-scheme: dark !important;
+
+    --toolbox-background-color: color-mix(in srgb, var(--rig-crust) var(--rig-toolbar-opacity), transparent) !important;
+    --toolbox-background-color-inactive: color-mix(in srgb, var(--rig-crust) var(--rig-toolbar-opacity), transparent) !important;
+    --toolbox-text-color: var(--rig-text) !important;
+    --toolbox-text-color-inactive: var(--rig-subtext0) !important;
+    --toolbar-background-color: transparent !important;
+    --toolbar-text-color: var(--rig-text) !important;
+    --toolbarbutton-icon-fill: var(--rig-text) !important;
+    --toolbarbutton-icon-fill-attention: var(--rig-accent) !important;
+
+    --toolbar-field-background-color: color-mix(in srgb, var(--rig-mantle) 85%, transparent) !important;
+    --toolbar-field-text-color: var(--rig-text) !important;
+    --toolbar-field-border-color: transparent !important;
+    --toolbar-field-background-color-focus: var(--rig-mantle) !important;
+    --toolbar-field-text-color-focus: var(--rig-text) !important;
+    --toolbar-field-border-color-focus: var(--rig-accent) !important;
+    --lwt-toolbar-field-highlight: var(--rig-surface1) !important;
+    --lwt-toolbar-field-highlight-text: var(--rig-text) !important;
+
+    --panel-background-color: var(--rig-base) !important;
+    --panel-text-color: var(--rig-text) !important;
+    --panel-border-color: var(--rig-surface0) !important;
+
+    --chrome-content-separator-color: transparent !important;
+    --tabs-navbar-separator-color: transparent !important;
+    --focus-outline-color: var(--rig-accent) !important;
+    --color-accent-primary: var(--rig-accent) !important;
+
+    --newtab-background-color: var(--rig-crust) !important;
+    --newtab-background-color-secondary: var(--rig-base) !important;
+    --newtab-text-primary-color: var(--rig-text) !important;
+}
+
+/* macOS's material would sit over these colours; use them as they are. */
+:root:not([lwtheme]) #navigator-toolbox {
+    background-color: var(--toolbox-background-color) !important;
+
+    &::after {
+        appearance: none !important;
+    }
+}
+
+/* Tabs: unselected tabs sit on the toolbar; the selected one gets a faint
+ * surface and the accent underline (below). */
+:root:not([lwtheme]) .tab-background {
+    background-color: transparent !important;
+}
+:root:not([lwtheme]) .tab-background:is([selected], [multiselected]) {
+    background-color: color-mix(in srgb, var(--rig-surface0) 70%, transparent) !important;
+    background-image: none !important;
+}
+:root:not([lwtheme]) .tabbrowser-tab:not([selected]):hover .tab-background {
+    background-color: color-mix(in srgb, var(--rig-surface0) 35%, transparent) !important;
+}
+
+/* ---- Shapes (any theme) ------------------------------------------------- */
+
+:root {
+    --tab-border-radius: 2px !important;
+    --toolbarbutton-border-radius: 2px !important;
+    --urlbar-icon-border-radius: 2px !important;
+    --arrowpanel-border-radius: 2px !important;
+}
+
+/* Selected tab: flat, with an accent underline (horizontal tabs) or an
+ * accent edge (vertical tabs), like the bar's active workspace. */
+.tab-background {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+#tabbrowser-tabs:not([orient="vertical"]) .tab-background[selected] {
+    box-shadow: inset 0 -2px 0 var(--rig-accent) !important;
+}
+#tabbrowser-tabs[orient="vertical"] .tab-background[selected] {
+    box-shadow: inset 2px 0 0 var(--rig-accent) !important;
+}
+
+/* Address bar: square-ish, accent ring while focused. */
+#urlbar-background,
+#searchbar {
+    border-radius: 2px !important;
+}
+#urlbar[focused] > #urlbar-background {
+    outline: 1px solid var(--rig-accent) !important;
+    outline-offset: -1px !important;
+}
+
+/* Menus and panels: square-ish with a hairline frame, like the pickers. */
+menupopup,
+panel {
+    --panel-border-radius: 2px !important;
+}

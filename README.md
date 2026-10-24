@@ -16,9 +16,6 @@
 
 </div>
 
-One setup on Arch + Hyprland and on macOS: the same Quickshell bar and
-pickers, keybinds, terminal, editor and theme on both.
-
 ## What's inside
 
 - **[hyprland](https://github.com/hyprwm/Hyprland)** — WM ([i3](https://github.com/i3/i3) as X11 fallback)
@@ -34,10 +31,7 @@ pickers, keybinds, terminal, editor and theme on both.
 
 ### macOS
 
-- **[yabai](https://github.com/koekeishiya/yabai) + [skhd](https://github.com/koekeishiya/skhd)** — tiling WM and keybinds, laid out like Hyprland (Option stands in for Super)
-- **[JankyBorders](https://github.com/FelixKratz/JankyBorders)** — green active-window border
-- **[Laumei](https://github.com/Green-Ranger11/laumei)** — runs the Quickshell config natively: `quickshell/mac` is the mocha bar arranged around the notch, with the same pickers
-- kitty, neovim, yazi, rbw and Firefox shared with Linux
+Same setup on **[yabai](https://github.com/koekeishiya/yabai) + [skhd](https://github.com/koekeishiya/skhd)** (Option for Super), with the Quickshell config run by **[Laumei](https://github.com/Green-Ranger11/laumei)**.
 
 ## Features
 
@@ -46,8 +40,7 @@ sharp Breeze icons (green folders) across Hyprland, Quickshell, GTK, Qt/Kvantum,
 kitty and Neovim.
 
 Quickshell pickers share one look (title, search, keycap hints) and are
-toggled over IPC — `qs -p ~/.config/quickshell/mocha ipc call <name> toggle`
-(`laumei -c mac ipc call ...` on macOS). On macOS, Option replaces Super:
+toggled over IPC — `qs -p ~/.config/quickshell/mocha ipc call <name> toggle`:
 
 | Key | Picker |
 |---|---|
@@ -57,7 +50,7 @@ toggled over IPC — `qs -p ~/.config/quickshell/mocha ipc call <name> toggle`
 | `Super+Shift+N` | Wi-Fi + openfortivpn tunnels |
 | `Super+Shift+B` | Bluetooth |
 | `Super+Escape` | power menu |
-| `Super+/` | Bitwarden (rbw, unlocks from the login keyring / Keychain) |
+| `Super+/` | Bitwarden (rbw, unlocks from the login keyring) |
 
 > File manager — yazi floating, opens files in nvim
 
@@ -77,10 +70,3 @@ config checkout
 config config --local status.showUntrackedFiles no
 ~/.config/scripts/install.sh
 ```
-
-### macOS extras
-
-- **Bar and pickers:** build and install [Laumei](https://github.com/Green-Ranger11/laumei#build), then run `laumei -c mac`.
-- **yabai:** the scripting addition (Spaces, window moves) needs SIP partly disabled; see the [yabai wiki](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection).
-- **Firefox:** `~/.config/scripts/firefox-link` links `user.js` and `chrome/` into the default profile (Linux too).
-- **VPN:** put openfortivpn configs in `/etc/openfortivpn/<name>.conf`, then run `sudo ~/.config/scripts/macos/install-vpn` once. Without a config, the bar hides the VPN icon.

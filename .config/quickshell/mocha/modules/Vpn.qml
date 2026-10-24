@@ -3,23 +3,25 @@ import Quickshell
 import Quickshell.Io
 import ".."
 
-// openfortivpn@vodafone. Read the unit state directly; the toggle reuses the
-// shared vpn.sh because it carries the polkit rule and the notifications.
+// openfortivpn@vodafone, through the shared vpn.sh: it carries the polkit
+// rule and the notifications, and on macOS (no systemd) runs the tunnel itself.
 Stat {
     id: vpn
     interactive: true
+    visible: state !== "missing"
 
-    // systemctl is-active: active / activating / deactivating / inactive / failed.
-    property string state: "inactive"
+    // vpn.sh status (systemctl is-active): active / activating / deactivating / inactive / failed,
+    // or missing (no /etc/openfortivpn/vodafone.conf on this machine: hidden).
+    property string state: "missing"
     readonly property bool connected: state === "active"
     // Type=notify, so the unit sits in "activating" for the whole handshake.
     readonly property bool busy: toggle.running || Sys.vpnToggling
         || state === "activating" || state === "deactivating"
-    readonly property string unit: "openfortivpn@vodafone.service"
+    readonly property string script: Quickshell.env("HOME") + "/.config/scripts/vpn.sh"
 
     Process {
         id: probe
-        command: ["systemctl", "is-active", vpn.unit]
+        command: ["sh", vpn.script, "status"]
         stdout: StdioCollector {
             onStreamFinished: vpn.state = text.trim()
         }
@@ -36,11 +38,19 @@ Stat {
     }
 
     // openfortivpn brings ppp0 up/down; any link change re-probes at once, so
-    // toggles from the network menu show without the 10s lag.
+    // toggles from the network menu show without the 10s lag. macOS has no
+    // ip(8); its routing socket reports the same link changes (RTM_IF* lines,
+    // among route and ARP noise).
     Process {
-        running: true
-        command: ["ip", "-o", "monitor", "link"]
-        stdout: SplitParser { onRead: probe.running = true }
+        id: linkMonitor
+        readonly property bool mac: Qt.platform.os === "osx"
+        running: vpn.visible
+        command: mac ? ["route", "-n", "monitor"] : ["ip", "-o", "monitor", "link"]
+        stdout: SplitParser {
+            onRead: data => {
+                if (!linkMonitor.mac || data.startsWith("RTM_IF")) probe.running = true;
+            }
+        }
     }
 
     // cod-loading spinning while busy, oct-shield_check when up, cod-shield when down
@@ -51,7 +61,7 @@ Stat {
     valueColor: Theme.accent
 
     onClicked: {
-        toggle.command = ["sh", Quickshell.env("HOME") + "/.config/scripts/vpn.sh", "toggle"];
+        toggle.command = ["sh", vpn.script, "toggle"];
         toggle.running = true;
     }
 

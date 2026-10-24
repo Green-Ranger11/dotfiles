@@ -1,0 +1,96 @@
+#!/bin/sh
+# Root half of vpn.sh on macOS: runs openfortivpn -c /etc/openfortivpn/<name>.conf
+# in the background, the way openfortivpn@<name>.service does on Linux.
+# Installed root-owned to /usr/local/libexec/openfortivpn-ctl, with a sudoers
+# rule (see install-vpn) standing in for the Linux polkit rule.
+# Usage: openfortivpn-ctl start|stop <name>
+#
+# openfortivpn only knows /etc/resolv.conf, which macOS ignores, so the
+# tunnel's DNS is published to configd with scutil instead: split DNS for the
+# ns_suffix domains the gateway hands out, or all lookups if it hands out none.
+
+set -u
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+cmd=${1:-}
+name=${2:-}
+case $name in '' | *[!A-Za-z0-9_-]*) echo "openfortivpn-ctl: bad name: $name" >&2; exit 2 ;; esac
+
+conf=/etc/openfortivpn/$name.conf
+run=/var/run/openfortivpn
+pidf=$run/$name.pid
+log=$run/$name.log
+key=State:/Network/Service/openfortivpn-$name/DNS
+bin=/opt/homebrew/bin/openfortivpn
+[ -x "$bin" ] || bin=/usr/local/bin/openfortivpn
+
+running() { [ -f "$pidf" ] && kill -0 "$(cat "$pidf")" 2>/dev/null; }
+
+dns_up() {
+    # INFO:   Got addresses: [10.0.0.2], ns [10.0.0.53, 10.0.0.54], ns_suffix [corp.example]
+    line=$(grep -m1 'Got addresses:' "$log")
+    ns=$(printf '%s' "$line" | sed -n 's/.*, ns \[\([^]]*\)\].*/\1/p' | tr ',' ' ' | tr -s ' ')
+    sfx=$(printf '%s' "$line" | sed -n 's/.*ns_suffix \[\([^]]*\)\].*/\1/p' | tr ',;' '  ' | tr -s ' ')
+    servers=
+    for n in $ns; do [ "$n" = 0.0.0.0 ] || servers="$servers $n"; done
+    [ -n "$servers" ] || return 0
+    # An empty match domain makes the tunnel's resolver the default one.
+    match=${sfx:-'""'}
+    scutil <<SC
+d.init
+d.add ServerAddresses *$servers
+d.add SearchDomains * $sfx
+d.add SupplementalMatchDomains * $match
+set $key
+SC
+}
+
+dns_down() { printf 'remove %s\n' "$key" | scutil; }
+
+case $cmd in
+start)
+    [ -f "$conf" ] || { echo "openfortivpn-ctl: no $conf" >&2; exit 1; }
+    running && exit 0
+    mkdir -p "$run"
+    chmod 755 "$run"
+    : >"$log"
+    chmod 644 "$log"
+    nohup "$bin" -c "$conf" --set-dns=0 --pppd-use-peerdns=0 >>"$log" 2>&1 </dev/null &
+    pid=$!
+    echo "$pid" >"$pidf"
+    chmod 644 "$pidf"
+    # Block until the tunnel is up or openfortivpn gives up, like Type=notify.
+    i=0
+    while kill -0 "$pid" 2>/dev/null; do
+        if grep -q 'Tunnel is up and running' "$log"; then
+            dns_up
+            # Clean up after the tunnel, however it ends.
+            (
+                while kill -0 "$pid" 2>/dev/null; do sleep 2; done
+                dns_down
+                rm -f "$pidf"
+            ) </dev/null >/dev/null 2>&1 &
+            exit 0
+        fi
+        i=$((i + 1))
+        [ "$i" -lt 120 ] || { kill -INT "$pid"; break; }
+        sleep 0.5
+    done
+    rm -f "$pidf"
+    exit 1
+    ;;
+stop)
+    running || exit 0
+    pid=$(cat "$pidf")
+    kill -INT "$pid"
+    i=0
+    while kill -0 "$pid" 2>/dev/null && [ "$i" -lt 20 ]; do sleep 0.5; i=$((i + 1)); done
+    kill -0 "$pid" 2>/dev/null && kill -KILL "$pid"
+    dns_down
+    rm -f "$pidf"
+    ;;
+*)
+    echo "usage: openfortivpn-ctl start|stop <name>" >&2
+    exit 2
+    ;;
+esac

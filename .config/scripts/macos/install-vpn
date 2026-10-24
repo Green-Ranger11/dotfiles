@@ -1,0 +1,25 @@
+#!/bin/sh
+# Sets up vpn.sh on macOS. Run with sudo once (and again after editing
+# openfortivpn-ctl):
+#   sudo ~/.config/scripts/macos/install-vpn
+# Installs the root helper and lets the logged-in user run it without a
+# password, the job /etc/polkit-1/rules.d/50-openfortivpn.rules does on Linux.
+# Tunnel configs go in /etc/openfortivpn/<name>.conf, as on Linux.
+set -eu
+[ "$(id -u)" -eq 0 ] || { echo "run with sudo" >&2; exit 1; }
+user=${SUDO_USER:?run with sudo from your account}
+here=$(cd "$(dirname "$0")" && pwd)
+
+install -d -o root -g wheel -m 755 /usr/local/libexec /etc/openfortivpn
+install -o root -g wheel -m 755 "$here/openfortivpn-ctl" /usr/local/libexec/openfortivpn-ctl
+
+rule=$(mktemp)
+printf '%s ALL=(root) NOPASSWD: /usr/local/libexec/openfortivpn-ctl\n' "$user" >"$rule"
+visudo -cf "$rule" >/dev/null
+install -o root -g wheel -m 440 "$rule" /etc/sudoers.d/openfortivpn
+rm -f "$rule"
+
+for f in /etc/openfortivpn/*.conf; do
+    [ -e "$f" ] && chown root:wheel "$f" && chmod 600 "$f"
+done
+echo "installed; configs: $(ls /etc/openfortivpn 2>/dev/null | tr '\n' ' ')"

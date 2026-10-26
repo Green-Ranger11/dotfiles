@@ -32,6 +32,12 @@ Stop)
     [ "$kind" = permission_prompt ] && urgency=critical ;;
 esac
 
+# macOS: plain Notification Center banner (no click-to-focus there).
+if [ "$(uname)" = Darwin ]; then
+    osascript -e 'on run {t, m}' -e 'display notification m with title t' -e 'end run' "$title" "$msg" >/dev/null 2>&1
+    exit 0
+fi
+
 # notify-send --action blocks until the toast is clicked or closed, and the
 # hook has a timeout: detach, then act on the printed action name.
 setsid -f sh -c '

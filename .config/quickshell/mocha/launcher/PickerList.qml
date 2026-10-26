@@ -384,6 +384,21 @@ PanelWindow {
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: 110
                 highlightResizeDuration: 0
+                // Wheel/trackpad moves the selection, not the view: refreshes
+                // (bluetooth scan, wifi signal) restore to the selected row, so
+                // a free scroll would snap back on the next update.
+                interactive: false
+                WheelHandler {
+                    property real acc: 0
+                    onWheel: e => {
+                        acc += e.pixelDelta.y !== 0 ? e.pixelDelta.y * 120 / root.rowHeight : e.angleDelta.y;
+                        const steps = Math.trunc(acc / 120);
+                        if (steps !== 0) {
+                            acc -= steps * 120;
+                            root.moveBy(-steps);
+                        }
+                    }
+                }
 
                 // Slides between rows instead of jumping. Left edge bar
                 // matches the active-tab underline convention (Segment.qml):

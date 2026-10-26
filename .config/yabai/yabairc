@@ -84,3 +84,10 @@ yabai -m signal --add event=window_minimized action='yabai -m window --deminimiz
 "$HOME/.config/borders/bordersrc" &
 
 echo "yabai configuration loaded..."
+
+# ===== Workspaces =====
+# ws<N> labels give spaces Hyprland-style numbers; ws2 stays on the external
+# monitor (workspaces.sh). Re-run when a display or space appears.
+yabai -m signal --add label=ws-display event=display_added action="$HOME/.config/yabai/workspaces.sh"
+yabai -m signal --add label=ws-space event=space_created action="$HOME/.config/yabai/workspaces.sh"
+"$HOME/.config/yabai/workspaces.sh"

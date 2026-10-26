@@ -66,6 +66,12 @@ yabai -m rule --add app="^Laumei$" manage=off
 yabai -m rule --add title="^nvim-scratch$" scratchpad=scratch grid=6:6:1:1:4:4
 yabai -m rule --add title="^yazi-float$" manage=off grid=10:10:2:2:6:6
 
+# ===== Simulator =====
+# Xcode 27 runs the simulator inside Device Hub: keep it tiled, but in a phone-wide
+# column (its side of the split at 21.5%, the phone window's own width) instead of half the screen.
+yabai -m signal --add label=devicehub event=window_created app="^Device Hub$" \
+    action='yabai -m window $YABAI_WINDOW_ID --ratio abs:0.785'
+
 # ===== No Minimizing =====
 # Undo any minimize that gets past skhd's cmd+m block (yellow button,
 # title-bar double-click, menu item).

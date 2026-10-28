@@ -1,8 +1,8 @@
 // The mocha bar laid out for macOS: same widgets and order as the bar in
 // ../mocha/shell.qml, minus the Arch mark and what macOS can't host (Tray:
-// macOS 27 draws menu-bar items as one window; Notifications: macOS can't
-// hand them to other apps). On the built-in display the centre group splits
-// around the notch.
+// macOS 27 draws menu-bar items as one window). On the built-in display the
+// centre group splits around the notch, with the clock moved left of it so the
+// media title has room on the right.
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -55,6 +55,12 @@ PanelWindow {
             Memory {}
             Cpu {}
         }
+
+        RowLayout {
+            spacing: Theme.spacing
+            IdleInhibitor {}
+            Time {}
+        }
     }
 
     // Centre, right of the notch.
@@ -64,12 +70,6 @@ PanelWindow {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         spacing: Theme.groupSpacing
-
-        RowLayout {
-            spacing: Theme.spacing
-            IdleInhibitor {}
-            Time {}
-        }
 
         RowLayout {
             spacing: Theme.spacing
@@ -92,6 +92,7 @@ PanelWindow {
             spacing: Theme.spacing
             Volume {}
             Backlight {}
+            Notifications {}
             Battery {}
         }
 

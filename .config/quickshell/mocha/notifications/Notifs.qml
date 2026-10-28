@@ -81,7 +81,9 @@ Singleton {
                         old.dismiss();
             }
 
-            if (!root.dnd && !root.panelOpen)
+            // Laumei's copies of macOS notifications: macOS already showed a
+            // banner, so they only go to history.
+            if (!root.dnd && !root.panelOpen && !n.hints["x-laumei-notification-center"])
                 root.popups = [n].concat(root.popups);
 
             const all = server.trackedNotifications.values;

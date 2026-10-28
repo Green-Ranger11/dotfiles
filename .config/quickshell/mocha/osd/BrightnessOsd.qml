@@ -31,8 +31,10 @@ Scope {
             const p = Math.round(100 * Number(cur.text()) / m);
             if (p === root.pct) return;
             const first = root.pct < 0;   // first reading is startup, not a change
+            // Auto-brightness (macOS) drifts 1% at a time; keys and scrolling jump.
+            const jump = Math.abs(p - root.pct) >= 2;
             root.pct = p;
-            if (!first && root.osd)
+            if (!first && jump && root.osd)
                 root.osd.show(root.icons[Math.min(8, Math.floor(p / 12))], p, false);
         }
     }

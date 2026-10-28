@@ -21,12 +21,23 @@ builtin=$(osascript -l JavaScript -e 'ObjC.import("AppKit");
     $.NSScreen.screens.js.filter(s => s.localizedName.js.includes("Built-in"))
         .map(s => s.deviceDescription.objectForKey("NSScreenNumber").js)[0] || 0')
 ext=$(q --displays | jq -r --argjson b "$builtin" '[.[] | select(.id != $b)][0].index // empty')
-[ -n "$ext" ] || exit 0
-
-ws2=$(q --spaces | jq -r '.[] | select(.label == "ws2") | .display')
-if [ -z "$ws2" ]; then
-    yabai -m space --create "$ext"
-    yabai -m space "$(q --spaces --display "$ext" | jq -r 'last.index')" --label ws2
-elif [ "$ws2" != "$ext" ]; then
-    yabai -m space ws2 --display "$ext"
+if [ -n "$ext" ]; then
+    ws2=$(q --spaces | jq -r '.[] | select(.label == "ws2") | .display')
+    if [ -z "$ws2" ]; then
+        yabai -m space --create "$ext"
+        yabai -m space "$(q --spaces --display "$ext" | jq -r 'last.index')" --label ws2
+    elif [ "$ws2" != "$ext" ]; then
+        yabai -m space ws2 --display "$ext"
+    fi
 fi
+
+# Apps on fixed workspaces, like Hyprland's windowrules: chat on 1, terminal
+# and phone on 2, browser on 3. yabai turns a rule's label into a space index
+# when the rule is added, so the rules are re-added (same label replaces) once
+# spaces have moved; --apply moves windows that are already open.
+rule() { l=$1; shift; yabai -m rule --add label="ws-$l" "$@"; }
+rule discord app="^Discord$" space=ws1
+rule kitty app="^kitty$" title!="^(nvim-scratch|yazi-float)$" space=ws2
+rule phone app="^(Device Hub|Simulator|scrcpy|qemu-system.*)$" space=ws2
+rule browser app="^(Firefox|Google Chrome)$" space=ws3
+yabai -m rule --apply

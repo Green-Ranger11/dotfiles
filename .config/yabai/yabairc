@@ -72,6 +72,14 @@ yabai -m rule --add title="^yazi-float$" manage=off grid=10:10:2:2:6:6
 yabai -m signal --add label=devicehub event=window_created app="^Device Hub$" \
     action='yabai -m window $YABAI_WINDOW_ID --ratio abs:0.785'
 
+# The Android emulator's own window (qemu) sizes itself to the phone and docks its toolbar, a second window, beside
+# it; tiled, it fights yabai over the frame and goes in and out. So run it with `droid` (~/.local/bin): the emulator
+# without a window and scrcpy showing the phone in a window that tiles like the simulator, in a phone-wide column.
+# If the emulator is started with its own window anyway (Android Studio), that floats.
+yabai -m rule --add app="^qemu-system" manage=off sub-layer=above
+yabai -m signal --add label=scrcpy event=window_created app="^scrcpy$" \
+    action='yabai -m window $YABAI_WINDOW_ID --ratio abs:0.785'
+
 # ===== No Minimizing =====
 # Undo any minimize that gets past skhd's cmd+m block (yellow button,
 # title-bar double-click, menu item).
@@ -87,7 +95,9 @@ echo "yabai configuration loaded..."
 
 # ===== Workspaces =====
 # ws<N> labels give spaces Hyprland-style numbers; ws2 stays on the external
-# monitor (workspaces.sh). Re-run when a display or space appears.
+# monitor and apps go to their workspaces (workspaces.sh). Re-run when a
+# display or space appears or a display goes.
 yabai -m signal --add label=ws-display event=display_added action="$HOME/.config/yabai/workspaces.sh"
 yabai -m signal --add label=ws-space event=space_created action="$HOME/.config/yabai/workspaces.sh"
+yabai -m signal --add label=ws-display-gone event=display_removed action="$HOME/.config/yabai/workspaces.sh"
 "$HOME/.config/yabai/workspaces.sh"

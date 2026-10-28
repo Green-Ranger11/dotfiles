@@ -86,15 +86,16 @@
 /* ---- Shapes (any theme) ------------------------------------------------- */
 
 :root {
-    --tab-border-radius: 2px !important;
+    --tab-border-radius: 0 !important;
     --toolbarbutton-border-radius: 2px !important;
     --urlbar-icon-border-radius: 2px !important;
     --arrowpanel-border-radius: 2px !important;
 }
 
-/* Selected tab: flat, with an accent underline (horizontal tabs) or an
+/* Selected tab: flat and square, with an accent underline (horizontal tabs) or an
  * accent edge (vertical tabs), like the bar's active workspace. */
 .tab-background {
+    border-radius: 0 !important;
     box-shadow: none !important;
     outline: none !important;
     border: none !important;
